@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {login} from '../../ducks/userDuck'
-import "./Login.scss";
+import {signup} from '../../ducks/userDuck'
+import "./CreateUser.scss";
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -10,13 +10,16 @@ import { Field, reduxForm } from 'redux-form'
 import asyncValidate from '../../asyncValidate'
 
 
-class LoginForm extends Component {
+class CreateUserForm extends Component {
     constructor(props){
         super(props);
 
         this.state = {
             email: "" ,
-            password:""
+            password:"",
+            firstname:"",
+            lastname:"",
+            company:""
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +28,7 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
-        this.props.login( this.state )
+        this.props.signup( this.state )
         event.preventDefault();
     }
 
@@ -44,7 +47,10 @@ class LoginForm extends Component {
 
         const {
             email,
-            password
+            password,
+            firstname,
+            lastname,
+            company
         } = this.state
 
         return (
@@ -53,10 +59,31 @@ class LoginForm extends Component {
                 <div className="login-container">
                     <div className="login-form-inputs">
                          <Field
-                              label="Username"
+                              label="First Name"
                               component={renderTextField}
-                              name="email"
-                              onChange = { this.handleChange.bind( this, 'email' ) }
+                              name="firstname"
+                              onChange = { this.handleChange.bind( this, 'firstname' ) }
+                        />
+                        <br/>
+                        <Field
+                             label="Last Name"
+                             component={renderTextField}
+                             name="lastname"
+                             onChange = { this.handleChange.bind( this, 'lastname' ) }
+                       />
+                       <br/>
+                       <Field
+                            label="Company"
+                            component={renderTextField}
+                            name="company"
+                            onChange = { this.handleChange.bind( this, 'lastname' ) }
+                        />
+                        <br/>
+                        <Field
+                             label="Email"
+                             component={renderTextField}
+                             name="email"
+                             onChange = { this.handleChange.bind( this, 'email' ) }
                         />
                         <br/>
                         <Field
@@ -69,7 +96,7 @@ class LoginForm extends Component {
                         <br/>
                         <FlatButton
                             type="submit"
-                            label="LOGIN"
+                            label="SIGNUP"
                             disabled={ loadingUser || pristine || !password}
                             primary={ true }
                         />
@@ -105,7 +132,7 @@ const email = value =>
     'Invalid email address' : undefined
 const validate = values => {
     const errors = {}
-    const requiredFields = [ 'email', 'password']
+    const requiredFields = [ 'email', 'password','firstname','lastname']
     requiredFields.forEach(field => {
         if (!values[ field ]) {
             errors[ field ] = 'Required'
@@ -127,9 +154,9 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 )
 
 const form = reduxForm({
-   form: 'loginForm',
+   form: 'createuserForm',
   asyncValidate,
   validate
 });
 
-export default connect( mapStateToProps, {login})( form(LoginForm) );
+export default connect( mapStateToProps, {signup})( form(CreateUserForm) );

@@ -14,8 +14,11 @@
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "redux-form": "^6.6.3",
     "redux-promise-middleware": "^4.2.0",
-    "redux-react-session": "^1.1.2"
+    "redux-react-session": "^1.1.2",
+    "redux-thunk": "^2.2.0",
+    "socket.io-client": "^1.7.3"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
