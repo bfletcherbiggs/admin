@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
+import { reducer as formReducer } from 'redux-form'
 
-import intake from "./ducks/intakeDuck";
-import user from "./ducks/userDuck";
+// import intake from "./ducks/intakeDuck";
+import loginDuck from "./userDuck";
 
 export default combineReducers( {
-	  intake
-	, user
+	  // intake
+	loginDuck,
+	form:formReducer
 } );

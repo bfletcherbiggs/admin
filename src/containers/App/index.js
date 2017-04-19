@@ -1,23 +1,28 @@
 import React, {PropTypes} from "react";
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Link, IndexLink } from 'react-router-dom';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Link, Switch, Route } from 'react-router-dom';
 
-// import Login from './components/Login';
 import "./App.css";
 
-import router from "../router";
+import LoginPage from '../LoginPage/index'
 
 export function App( { children } ) {
 	return (
 		<div className="app">
-			{/* <Nav /> */}
+
 			<div className="top-bar-right">
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
+				<Switch>
+					<Route path="/greeting" render={() => (
+						<div>
+							<Link to="/">Log In</Link>
+							<Link to="/signup">Sign Up</Link>
+						<h1>Hello</h1>
+					</div>
+					)} />
+					<Route path="/" component={LoginPage}/>
+				</Switch>
       </div>
-			{ router }
+
 		</div>
 	);
 }
