@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {signup} from '../../ducks/userDuck'
-import "./SignUp.scss";
+import "./CreateUser.scss";
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -10,14 +10,16 @@ import { Field, reduxForm } from 'redux-form'
 import asyncValidate from '../../asyncValidate'
 
 
-class SignUpForm extends Component {
+class CreateUserForm extends Component {
     constructor(props){
         super(props);
 
         this.state = {
             email: "" ,
             password:"",
-            username:""
+            firstname:"",
+            lastname:"",
+            company:""
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +48,9 @@ class SignUpForm extends Component {
         const {
             email,
             password,
-            username
+            firstname,
+            lastname,
+            company
         } = this.state
 
         return (
@@ -55,10 +59,24 @@ class SignUpForm extends Component {
                 <div className="login-container">
                     <div className="login-form-inputs">
                          <Field
-                              label="Username"
+                              label="First Name"
                               component={renderTextField}
-                              name="username"
-                              onChange = { this.handleChange.bind( this, 'username' ) }
+                              name="firstname"
+                              onChange = { this.handleChange.bind( this, 'firstname' ) }
+                        />
+                        <br/>
+                        <Field
+                             label="Last Name"
+                             component={renderTextField}
+                             name="lastname"
+                             onChange = { this.handleChange.bind( this, 'lastname' ) }
+                       />
+                       <br/>
+                       <Field
+                            label="Company"
+                            component={renderTextField}
+                            name="company"
+                            onChange = { this.handleChange.bind( this, 'lastname' ) }
                         />
                         <br/>
                         <Field
@@ -114,7 +132,7 @@ const email = value =>
     'Invalid email address' : undefined
 const validate = values => {
     const errors = {}
-    const requiredFields = [ 'email', 'password']
+    const requiredFields = [ 'email', 'password','firstname','lastname']
     requiredFields.forEach(field => {
         if (!values[ field ]) {
             errors[ field ] = 'Required'
@@ -136,9 +154,9 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 )
 
 const form = reduxForm({
-   form: 'signupForm',
+   form: 'createuserForm',
   asyncValidate,
   validate
 });
 
-export default connect( mapStateToProps, {signup})( form(SignUpForm) );
+export default connect( mapStateToProps, {signup})( form(CreateUserForm) );
