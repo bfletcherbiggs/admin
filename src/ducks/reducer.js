@@ -3,9 +3,10 @@ import { reducer as formReducer } from 'redux-form'
 
 // import intake from "./ducks/intakeDuck";
 import loginDuck from "./userDuck";
+import messageDuck from "./messageDuck"
 
 export default combineReducers( {
-	  // intake
+	messageDuck,
 	loginDuck,
 	form:formReducer
 } );
