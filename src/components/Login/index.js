@@ -33,6 +33,10 @@ class LoginForm extends Component {
         this.setState( { [ field ]: e.target.value } )
     }
 
+    componentWillReceiveProps(nextProps) {
+      console.log(nextProps)
+    }
+
     render() {
 
         const{
@@ -88,7 +92,8 @@ function mapStateToProps(state) {
         isAuthenticated: state.loginDuck.isAuthenticated,
         errorAuthenticating: state.loginDuck.errorAuthenticating,
 		loadingUser: state.loginDuck.loadingUser,
-		loginError: state.loginDuck.loginError
+		loginError: state.loginDuck.loginError,
+        messages: state.loginDuck.messages
      };
 }
 
