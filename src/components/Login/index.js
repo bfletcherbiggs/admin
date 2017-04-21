@@ -1,14 +1,22 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import {login} from '../../ducks/userDuck'
+import {login} from '../../ducks/userDuck';
 import "./Login.scss";
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import { withRouter } from 'react-router-dom';
 import CircularProgress from 'material-ui/CircularProgress';
-import { Field, reduxForm } from 'redux-form'
-import asyncValidate from '../../asyncValidate'
+import { Field, reduxForm } from 'redux-form';
 
+const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+    <TextField
+        hintText={label}
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        {...custom}
+    />
+)
 
 class LoginForm extends Component {
     constructor(props){
@@ -33,21 +41,21 @@ class LoginForm extends Component {
         this.setState( { [ field ]: e.target.value } )
     }
 
-    componentWillReceiveProps(nextProps) {
-      console.log(nextProps)
+    componentWillReceiveProps(nextProps){
+        if( nextProps.isAuthenticated ){
+            nextProps.history.push('/admin')
+        }
     }
 
     render() {
 
         const{
-            isAuthenticated,
             loadingUser,
             pristine,
             loginError
         } =  this.props
 
         const {
-            email,
             password
         } = this.state
 
@@ -60,7 +68,7 @@ class LoginForm extends Component {
                               label="Username"
                               component={renderTextField}
                               name="email"
-                              onChange = { this.handleChange.bind( this, 'email' ) }
+                              onChange={ this.handleChange.bind( this, 'email' ) }
                         />
                         <br/>
                         <Field
@@ -87,27 +95,6 @@ class LoginForm extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        isAuthenticated: state.loginDuck.isAuthenticated,
-        errorAuthenticating: state.loginDuck.errorAuthenticating,
-		loadingUser: state.loginDuck.loadingUser,
-		loginError: state.loginDuck.loginError,
-        messages: state.loginDuck.messages
-     };
-}
-
-const required = value => value ? undefined : 'Required'
-const maxLength = max => value =>
-    value && value.length > max ? `Must be ${max} characters or less` : undefined
-const maxLength15 = maxLength(15)
-const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
-const minValue = min => value =>
-    value && value < min ? `Must be at least ${min}` : undefined
-const minValue18 = minValue(18)
-const email = value =>
-    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
-    'Invalid email address' : undefined
 const validate = values => {
     const errors = {}
     const requiredFields = [ 'email', 'password']
@@ -121,20 +108,20 @@ const validate = values => {
     }
     return errors
 }
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-    <TextField
-        hintText={label}
-        floatingLabelText={label}
-        errorText={touched && error}
-        {...input}
-        {...custom}
-    />
-)
 
 const form = reduxForm({
-   form: 'loginForm',
-  asyncValidate,
-  validate
+    form: 'loginForm',
+    validate
 });
 
-export default connect( mapStateToProps, {login})( form(LoginForm) );
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: state.loginDuck.isAuthenticated,
+        errorAuthenticating: state.loginDuck.errorAuthenticating,
+        loadingUser: state.loginDuck.loadingUser,
+        loginError: state.loginDuck.loginError,
+        messages: state.loginDuck.messages
+    }
+}
+
+export default withRouter(connect( mapStateToProps, {login})( form(LoginForm) ))

@@ -1,32 +1,47 @@
-import React, {PropTypes} from "react";
+import React, {Component} from "react";
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Link, Switch, Route } from 'react-router-dom';
-
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from "react-redux";
+import LoginPage from '../LoginPage/index'
+import AdminPage from '../AdminPage/index'
+import "../../ducks/userDuck";
 import "./App.css";
 
-import LoginPage from '../LoginPage/index'
+class App extends Component{
+    render(){
 
-export function App( { children } ) {
-	return (
-		<div className="app">
+        const{
+            isAuthenticated
+        } =  this.props
 
-			<div className="top-bar-right">
-				<Switch>
-					<Route path="/greeting" render={() => (
-						<div>
-							<Link to="/">Log In</Link>
-							<Link to="/signup">Sign Up</Link>
-						<h1>Hello</h1>
-					</div>
-					)} />
-					<Route path="/" component={LoginPage}/>
-				</Switch>
-      </div>
+        const PrivateRoute = ({ component: Component, ...rest }) => (
+            <Route {...rest} render={props => (
+                isAuthenticated ?
+                <Component {...props}/>
+                : <Redirect to="/"/>
+            )}/>
+        )
 
-		</div>
-	);
+        return (
+            <div className="app">
+                <div className="top-bar-right">
+                    <Switch>
+                        <Route exact path="/" component={LoginPage}/>
+                        <PrivateRoute path="/admin" component={AdminPage}/>
+                        <PrivateRoute path="/messages" component={AdminPage}/>
+                    </Switch>
+                </div>
+            </div>
+        );
+    }
 }
 
-injectTapEventPlugin();
+injectTapEventPlugin( );
 
-export default App;
+const mapStateToProps = (state => {
+    return {
+        isAuthenticated: state.loginDuck.isAuthenticated
+    }
+});
+
+export default connect(mapStateToProps, null)(App);

@@ -27,7 +27,6 @@ class ChatContainer extends Component {
   }
 
   componentDidMount(){
-    console.log('did mount')
     this._handleFileUpload()
     this._handleMessageEvent()
   }
@@ -46,7 +45,6 @@ class ChatContainer extends Component {
   _handleMessageEvent(){
     socket.on('chat message', (inboundMessage) => {
        this.props.createMessage({room: this.props.room, newMessage: {user: JSON.parse(inboundMessage).user, message: JSON.parse(inboundMessage).message}})
-       console.log('received message', inboundMessage)
      })
   }
 
