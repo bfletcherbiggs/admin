@@ -1,6 +1,6 @@
-import axiosLibrary from 'axios'
+import axiosLibrary from 'axios';
 const axios = axiosLibrary.create({ withCredentials: true });
-import io from "socket.io-client"
+import io from "socket.io-client";
 const socket = io('http://localhost:3001')
 
 
@@ -47,18 +47,10 @@ const socket = io('http://localhost:3001')
                     loadingUser: false,
                     loginError: action.error
                 })
-            // case GET_MESSAGE_REQUEST:
-            //     return Object.assign({}, state, {
-            //         loadingMessages: true
-            //     })
             case GET_MESSAGES:
                 return Object.assign({}, state, {
                     messages: action.messages
                 })
-            // case GET_MESSAGES_FAILURE:
-            //     return Object.assign({}, state, {
-            //         messageError: action.error
-            //     })
             case LOGOUT:
                 return Object.assign({}, state, {
                     isAuthenticated: false,
@@ -80,6 +72,10 @@ const socket = io('http://localhost:3001')
 
     function connectToSocket( dispatch ) {
         const token = JSON.parse(localStorage.getItem( 'token' ));
+        socket.on('retrieveAllMessages', data=>{
+            dispatch(getMessages(data));
+        })
+        socket.emit('fetchAllMessages')
         dispatch(socketConnected( token ));
     }
 
@@ -112,21 +108,16 @@ const socket = io('http://localhost:3001')
         }
     }
     export function login( data ) {
-        console.log( data )
         return ( dispatch ) => {
             dispatch(authRequest( ))
             axios.post( BASE_API_URL + '/login', data ).then(( response ) => {
-                console.log( response )
-                setCurrentUser( dispatch, response );
-                socket.on('messages', data => {
-                    console.log(data)
+                socket.on('messagesfetched', data => {
                     dispatch(getMessages(data))
                 })
                 socket.emit('authenticated', response.data.id)
-                // dispatch(reset('login'));
+                setCurrentUser( dispatch, response );
             }).catch(err => {
-                console.dir( err )
-                dispatch(authFailure( err.response.data ));
+                dispatch(authFailure( err ));
             });
         }
     }
@@ -138,20 +129,19 @@ const socket = io('http://localhost:3001')
     export function signup( data ) {
         return ( dispatch ) => axios.post( BASE_API_URL + '/user', data ).then(( response ) => {
             setCurrentUser( dispatch, response );
-            // dispatch(reset('signup'));
         }).catch(err => {
-            console.log( err )
             dispatch(signupFailure( err ));
         });
     }
 
-    function logOut( ) {
-        return { type: LOGOUT }
+    function logadminout(  ) {
+        return {type: LOGOUT}
     }
 
-    export function logout( router ) {
-        return ( dispatch ) => axios.get( BASE_API_URL + '/logout' ).then(( ) => {
+    export function logout() {
+        return ( dispatch ) =>
+        axios.get( BASE_API_URL + '/logout' ).then(( response ) => {
             localStorage.removeItem( 'token' );
-            dispatch(logOut( ));
+            dispatch(logadminout())
         });
     }
