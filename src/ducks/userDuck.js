@@ -3,20 +3,24 @@ const axios = axiosLibrary.create({ withCredentials: true });
 import io from "socket.io-client";
 const socket = io('http://localhost:3001')
 
-
+//Action Definitions
     const AUTH_REQUEST = "AUTH_REQUEST",
         AUTH_SUCCESS = "AUTH_SUCCESS",
         AUTH_FAILURE = "AUTH_FAILURE",
+        CHECK_AUTH_SUCCESS = "CHECK_AUTH_SUCCESS",
+        CHECK_AUTH_FAILURE = "CHECK_AUTH_FAILURE",
+        FETCH_USER_INFO = "FETCH_USER_INFO",
         GET_MESSAGES = "GET_MESSAGES",
         LOGOUT = "LOGOUT",
-        SOCKET_CONNECTED = "SOCKET_CONNECTED",
         SIGNUP_FAILURE = "SIGNUP_FAILURE",
+        SOCKET_CONNECTED = "SOCKET_CONNECTED",
         BASE_URL = "http://localhost:3001",
         BASE_API_URL = BASE_URL + "/api";
 
+//Initial State
     const initialState = {
         user: {},
-        isAuthenticated: false,
+        isAuthenticated: null,
         errorAuthenticating: false,
         loadingUser: false,
         signupErrors: [],
@@ -26,6 +30,7 @@ const socket = io('http://localhost:3001')
         messages:[]
     };
 
+//User Duck
     export default function userDuck( state = initialState, action ) {
         switch ( action.type ) {
             case AUTH_REQUEST:
@@ -45,11 +50,26 @@ const socket = io('http://localhost:3001')
                 return Object.assign({}, state, {
                     errorAuthenticating: true,
                     loadingUser: false,
-                    loginError: action.error
+                    loginError: action.error,
+                    isAuthenticated:false
+                })
+            case CHECK_AUTH_SUCCESS:
+                return Object.assign({}, state, {
+                    isAuthenticated:true
+                })
+            case CHECK_AUTH_FAILURE:
+                return Object.assign({}, state, {
+                    isAuthenticated:false
                 })
             case GET_MESSAGES:
                 return Object.assign({}, state, {
                     messages: action.messages
+                })
+            case FETCH_USER_INFO:
+                return Object.assign({}, state,{
+                    user:state.user,
+                    socket: state.socket,
+                    messages:state.messages
                 })
             case LOGOUT:
                 return Object.assign({}, state, {
@@ -70,27 +90,10 @@ const socket = io('http://localhost:3001')
         }
     }
 
-    function connectToSocket( dispatch ) {
-        const token = JSON.parse(localStorage.getItem( 'token' ));
-        socket.on('retrieveAllMessages', data=>{
-            dispatch(getMessages(data));
-        })
-        socket.emit('fetchAllMessages')
-        dispatch(socketConnected( token ));
-    }
-
-    function socketConnected( response ) {
-        return { type: SOCKET_CONNECTED, payload: response }
-    }
-
-    function setCurrentUser( dispatch, response ) {
-        localStorage.setItem('token', JSON.stringify( response ));
-        dispatch(authSuccess( response ));
-        connectToSocket( dispatch );
-    }
-
+//Dispatch Functions
     function authSuccess( response ) {
-        return { type: AUTH_SUCCESS, payload: response }
+        localStorage.setItem( 'userAuthenticated',JSON.stringify('true') );
+        return { type: AUTH_SUCCESS, payload: response.data }
     }
 
     function authRequest( ) {
@@ -101,47 +104,91 @@ const socket = io('http://localhost:3001')
         return { type: AUTH_FAILURE, error: err }
     }
 
-    function getMessages(messages) {
+    function checkAuthSuccess(){
+        return { type:CHECK_AUTH_SUCCESS }
+    }
+
+    function checkAuthFailure(){
+        return { type:CHECK_AUTH_FAILURE }
+    }
+
+    function connectToSocket( dispatch ) {
+        const token = JSON.parse(localStorage.getItem( 'token' ));
+        socket.on('retrieveAllMessages', data=>{
+            dispatch( getMessages( data ) );
+        })
+        socket.emit( 'fetchAllMessages' )
+    }
+
+    function getMessages( messages ) {
         return {
             type: GET_MESSAGES,
             messages
         }
     }
-    export function login( data ) {
-        return ( dispatch ) => {
-            dispatch(authRequest( ))
-            axios.post( BASE_API_URL + '/login', data ).then(( response ) => {
-                socket.on('messagesfetched', data => {
-                    dispatch(getMessages(data))
-                })
-                socket.emit('authenticated', response.data.id)
-                setCurrentUser( dispatch, response );
-            }).catch(err => {
-                dispatch(authFailure( err ));
-            });
-        }
+
+    function logAdminOut() {
+        return { type:LOGOUT }
+    }
+
+    function setCurrentUser( dispatch, response ) {
+        localStorage.setItem('token', JSON.stringify( response ));
+        dispatch(authSuccess( response ));
     }
 
     function signupFailure( err ) {
         return { type: SIGNUP_FAILURE, error: err }
     }
 
-    export function signup( data ) {
-        return ( dispatch ) => axios.post( BASE_API_URL + '/user', data ).then(( response ) => {
-            setCurrentUser( dispatch, response );
-        }).catch(err => {
-            dispatch(signupFailure( err ));
-        });
+    function socketConnected( data ) {
+        return { type: SOCKET_CONNECTED, payload: data }
     }
 
-    function logadminout(  ) {
-        return {type: LOGOUT}
+//Export Functions
+    export function checkUserAuth() {
+        return ( dispatch ) =>{
+            if( localStorage.getItem( 'token' ) ){
+                dispatch( checkAuthSuccess() )
+            }
+            else { dispatch( checkAuthFailure() ) }
+        }
+    }
+
+    export function login( data ) {
+        return ( dispatch ) => {
+            dispatch( authRequest() )
+            axios.post( BASE_API_URL + '/login', data )
+            .then(( response ) => {
+                    socket.on( 'messagesfetched', data => {
+                        dispatch( getMessages(data) )
+                    })
+                    socket.on('socketid',(data)=>{
+                        dispatch ( socketConnected( data ))
+                    })
+                    socket.emit( 'authenticated', response.data.id )
+                    setCurrentUser( dispatch, response );
+            })
+            .catch(err => {
+                dispatch( authFailure( err ) );
+            });
+        }
     }
 
     export function logout() {
         return ( dispatch ) =>
-        axios.get( BASE_API_URL + '/logout' ).then(( response ) => {
+        axios.get( BASE_API_URL + '/logout' )
+        .then(( response ) => {
             localStorage.removeItem( 'token' );
-            dispatch(logadminout())
+            dispatch( logAdminOut() )
+        });
+    }
+
+    export function signup( data ) {
+        return ( dispatch ) => axios.post( BASE_API_URL + '/user', data )
+        .then(( response ) => {
+            setCurrentUser( dispatch, response );
+        })
+        .catch( err => {
+            dispatch(signupFailure( err ));
         });
     }
