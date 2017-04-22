@@ -4,9 +4,10 @@ import {login} from '../../ducks/userDuck';
 import "./Login.scss";
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import CircularProgress from 'material-ui/CircularProgress';
 import { Field, reduxForm } from 'redux-form';
+import { store } from '../../store'
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
     <TextField
@@ -19,8 +20,8 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 )
 
 class LoginForm extends Component {
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
 
         this.state = {
             email: "" ,
@@ -41,15 +42,10 @@ class LoginForm extends Component {
         this.setState( { [ field ]: e.target.value } )
     }
 
-    componentWillReceiveProps(nextProps){
-        if( nextProps.isAuthenticated ){
-            nextProps.history.push('/admin')
-        }
-    }
-
     render() {
 
         const{
+            isAuthenticated,
             loadingUser,
             pristine,
             loginError
@@ -58,6 +54,12 @@ class LoginForm extends Component {
         const {
             password
         } = this.state
+
+        if( isAuthenticated ){
+            return(
+                <Redirect to='/admin'/>
+            )
+        }
 
         return (
 
@@ -115,6 +117,7 @@ const form = reduxForm({
 });
 
 function mapStateToProps(state) {
+  console.log(state)
     return {
         isAuthenticated: state.loginDuck.isAuthenticated,
         errorAuthenticating: state.loginDuck.errorAuthenticating,

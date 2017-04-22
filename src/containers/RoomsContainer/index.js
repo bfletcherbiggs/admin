@@ -1,19 +1,18 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavBarTop from '../../components/Nav/index'
-import "./MessagePage.css"
 import { withRouter } from 'react-router-dom';
+import { initiateRoomState } from '../../ducks/messageDuck'
 
-class MessagePage extends Component {
-  constructor(props) {
-    super(props)
+import "./RoomsContainer.css"
 
-     this.state = {
-       input : '',
-       imagePreviewUrl: '',
-       messages: props.messages,
-       connected: false
-     }
+class RoomsContainer extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+
+        }
 
     //  this.handleOnChange = this.handleOnChange.bind(this)
     //  this.handleOnSubmit = this.handleOnSubmit.bind(this)
@@ -21,15 +20,18 @@ class MessagePage extends Component {
     //  this._handleFileUpload = this._handleFileUpload.bind(this)
    }
 
-
   componentWillMount() {
-    // this._init()
+      this._init()
   }
 
   componentDidMount(){
     // console.log(this.props)
     // this._handleFileUpload()
     // this._handleMessageEvent()
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('room props', nextProps)
   }
 
   handleOnChange(ev) {
@@ -50,19 +52,24 @@ class MessagePage extends Component {
   // }
 
   _init(){
-    // if(!(this.state.connected)){
-    //   this.props.fetchRoom()
+        // console.log(this.props)
+      this.props.initiateRoomState()
+      console.log(this.props)
     //   socket.emit('ENTERROOMNAMEHERE', {room: this.props.room.title})
     //     this.setState({connected: true})
     // }
   }
 
+  renderRoomTiles
   render() {
 
     return (
       <div>
         <NavBarTop/>
-        <h3>HELLO</h3>
+        <aside>
+
+        </aside>
+        <h3>HELLO ROOM CONTAINER</h3>
       </div>
 
 
@@ -72,14 +79,12 @@ class MessagePage extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
+    console.log('room', state)
     return {
-        isAuthenticated: state.loginDuck.isAuthenticated,
-        errorAuthenticating: state.loginDuck.errorAuthenticating,
-        loadingUser: state.loginDuck.loadingUser,
-        loginError: state.loginDuck.loginError,
-        messages: state.loginDuck.messages
+        messages:state.messageDuck.messages,
+        user: state.loginDuck.user,
+        socket: state.loginDuck.socket
     }
 }
 
-export default withRouter(connect( mapStateToProps, {})( MessagePage ))
+export default withRouter(connect( mapStateToProps, {initiateRoomState})( RoomsContainer ))
