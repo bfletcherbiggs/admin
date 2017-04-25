@@ -2,12 +2,13 @@ import React, {Component} from "react";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
+//CONTAINERS
 import LoginPage from '../LoginPage/index';
 import AdminPage from '../AdminPage/index';
-import MessagePage from '../MessagePage/index';
 import RoomsContainer from '../RoomsContainer/index';
-import { checkUserAuth } from '../../ducks/userDuck'
-// import "../../ducks/userDuck";
+//EXPORTED FUNCTIONS
+import { checkUserAuth } from '../../ducks/authDuck';
+//CSS
 import "./App.css";
 
 
@@ -19,10 +20,10 @@ class App extends Component{
             isAuthenticated
         } =  this.props
 
-        const PrivateRoute = ({ component: Component, ...rest }) => (
+        const PrivateRoute = ( { component: Component, ...rest } ) => (
             <Route {...rest} render={props => (
                 isAuthenticated?
-                <Component {...props}/>
+                <Component { ...props }/>
                 : <Redirect to="/"/>
             )}/>
         )
@@ -31,9 +32,9 @@ class App extends Component{
             <div className="app">
                 <div className="top-bar-right">
                     <Switch>
-                        <Route exact path="/" component={LoginPage}/>
-                        <PrivateRoute path="/admin" component={AdminPage}/>
-                        <PrivateRoute path="/messages" component={RoomsContainer}/>
+                        <Route exact path="/" component={ LoginPage }/>
+                        <PrivateRoute path="/admin" component={ AdminPage }/>
+                        <PrivateRoute path="/messages" component={ RoomsContainer }/>
                     </Switch>
                 </div>
             </div>
@@ -43,10 +44,10 @@ class App extends Component{
 
 injectTapEventPlugin( );
 
-const mapStateToProps = (state => {
+const mapStateToProps = ( state => {
     return {
-        isAuthenticated: state.loginDuck.isAuthenticated
+        isAuthenticated: state.authDuck.isAuthenticated
     }
 });
 
-export default connect(mapStateToProps, { checkUserAuth })(App);
+export default connect( mapStateToProps, { checkUserAuth } )( App );

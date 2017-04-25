@@ -1,30 +1,53 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+//EXPORTED FUNCTIONS
+import { logout } from '../../ducks/authDuck';
+//MATERIAL UI
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Badge from 'material-ui/Badge';
 import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 import Profile from 'material-ui/svg-icons/action/account-circle';
 import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
-import goldsageLogo from "../../assets/logoforgroupapp.svg";
 import { grey50 } from 'material-ui/styles/colors';
-import { logout } from '../../ducks/userDuck';
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+//CSS
+import goldsageLogo from "../../assets/logoforadminapp.svg";
 import "./nav.css";
 
 class NavBarTop extends Component{
     constructor(){
         super();
 
-        this.handleClick = this.handleClick.bind(this)
+        this.handleClick = this.handleClick.bind( this )
     }
 
-    handleClick(e) {
+    handleClick( e ) {
         this.props.logout()
         e.preventDefault();
     }
 
+    componentDidMount() {
+        const badge = ReactDOM.findDOMNode( this.refs.badge )
+        badge.style.paddingRight = '12px'
+    }
+
     render(){
+        const {
+            count_messages
+        }
+        = this.props
+
+        const badgeCount = () =>{
+            return count_messages[0]
+        }
+
+        const badgeStyle = ()=>{
+            return ( count_messages[0] )?
+            { top: 12, right: 6 }
+            :{ top: 24, right: 24,display:'none' }
+        }
 
         const tapIcons = (
             <div>
@@ -33,20 +56,19 @@ class NavBarTop extends Component{
                 </IconButton>
 
                 <Badge
-                    badgeContent={10}
-                    secondary={true}
-                    badgeStyle={{top: 12, right: 12}}>
-
+                    ref="badge"
+                    badgeContent={ badgeCount() }
+                    secondary={ true }
+                    badgeStyle={ badgeStyle() }>
                     <Link to="/messages">
                         <IconButton tooltip="message" >
-                            <NotificationsIcon color={grey50}/>
+                            <NotificationsIcon color={ grey50 }/>
                         </IconButton>
                     </Link>
                 </Badge>
 
-
-                <IconButton  onClick={this.handleClick} tooltip="Logout">
-                    <Profile color={grey50} />
+                <IconButton  onClick={ this.handleClick } tooltip="Logout">
+                    <Profile color={ grey50 } />
                 </IconButton>
             </div>
          )
@@ -71,9 +93,10 @@ class NavBarTop extends Component{
     }
 };
 
-function mapStateToProps(state) {
+function mapStateToProps( state ) {
 	return {
-        isAuthenticated: state.loginDuck.isAuthenticated
+        isAuthenticated: state.authDuck.isAuthenticated,
+        count_messages: state.messageDuck.count_messages
     };
 }
 
