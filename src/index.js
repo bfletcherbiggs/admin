@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { checkUserAuth } from './ducks/userDuck'
+import { checkUserAuth } from './ducks/authDuck'
 import './index.css';
 import store from "./store";
 import App from "./containers/App/index";

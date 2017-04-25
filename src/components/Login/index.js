@@ -1,21 +1,23 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {login} from '../../ducks/userDuck';
-import "./Login.scss";
+import { withRouter, Redirect } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+//EXPORTED FUNCTIONS
+import { login } from '../../ducks/authDuck';
+//MATERIAL UI
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import { withRouter, Redirect } from 'react-router-dom';
 import CircularProgress from 'material-ui/CircularProgress';
-import { Field, reduxForm } from 'redux-form';
-import { store } from '../../store'
+//CSS
+import "./Login.css";
 
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+const renderTextField = ( { input, label, meta: { touched, error }, ...custom } ) => (
     <TextField
-        hintText={label}
-        floatingLabelText={label}
-        errorText={touched && error}
-        {...input}
-        {...custom}
+        hintText={ label }
+        floatingLabelText={ label }
+        errorText={ touched && error }
+        { ...input }
+        { ...custom }
     />
 )
 
@@ -28,17 +30,17 @@ class LoginForm extends Component {
             password:""
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind( this );
+        this.handleChange = this.handleChange.bind( this );
 
     }
 
-    handleSubmit(event) {
+    handleSubmit( event ) {
         this.props.login( this.state )
         event.preventDefault();
     }
 
-    handleChange(field, e) {
+    handleChange( field, e ) {
         this.setState( { [ field ]: e.target.value } )
     }
 
@@ -68,7 +70,7 @@ class LoginForm extends Component {
                     <div className="login-form-inputs">
                          <Field
                               label="Username"
-                              component={renderTextField}
+                              component={ renderTextField }
                               name="email"
                               onChange={ this.handleChange.bind( this, 'email' ) }
                         />
@@ -77,7 +79,7 @@ class LoginForm extends Component {
                               label="Password"
                               type="password"
                               name="password"
-                              component={renderTextField}
+                              component={ renderTextField }
                               onChange={ this.handleChange.bind( this, 'password' ) }
                         />
                         <br/>
@@ -90,7 +92,7 @@ class LoginForm extends Component {
                     </div>
                 </div>
                 { ( loadingUser )?<CircularProgress size={ 80 } thickness={ 5 } />:null }
-                { ( loginError )? <div>Username/Password is Incorrect</div>:null}
+                { ( loginError )? <div>Username/Password is Incorrect</div>:null }
             </form>
 
         );
@@ -101,11 +103,11 @@ const validate = values => {
     const errors = {}
     const requiredFields = [ 'email', 'password']
     requiredFields.forEach(field => {
-        if (!values[ field ]) {
+        if ( !values[ field ] ) {
             errors[ field ] = 'Required'
         }
     })
-    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    if ( values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test( values.email ) ) {
         errors.email = 'Invalid email address'
     }
     return errors
@@ -116,15 +118,14 @@ const form = reduxForm({
     validate
 });
 
-function mapStateToProps(state) {
-  console.log(state)
+function mapStateToProps( state ) {
     return {
-        isAuthenticated: state.loginDuck.isAuthenticated,
-        errorAuthenticating: state.loginDuck.errorAuthenticating,
-        loadingUser: state.loginDuck.loadingUser,
-        loginError: state.loginDuck.loginError,
-        messages: state.loginDuck.messages
+        isAuthenticated: state.authDuck.isAuthenticated,
+        errorAuthenticating: state.authDuck.errorAuthenticating,
+        loadingUser: state.authDuck.loadingUser,
+        loginError: state.authDuck.loginError,
+        messages: state.authDuck.messages
     }
 }
 
-export default withRouter(connect( mapStateToProps, {login})( form(LoginForm) ))
+export default withRouter( connect( mapStateToProps, { login } )( form( LoginForm ) ) )

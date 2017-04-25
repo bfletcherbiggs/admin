@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from '../../ducks/userDuck';
+import { login } from '../../ducks/authDuck';
 import Login from '../../components/Login/index';
 
 function LoginPage( ) {
@@ -11,4 +11,4 @@ function LoginPage( ) {
     );
 }
 
-export default connect(state => state, { login })( LoginPage );
+export default connect( state => state, { login })( LoginPage );

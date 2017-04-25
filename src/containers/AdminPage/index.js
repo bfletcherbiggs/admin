@@ -1,11 +1,10 @@
 import React from "react";
-import {connect} from "react-redux";
-import "./admin.css";
-import {login} from '../../ducks/userDuck'
-import {logout} from '../../ducks/userDuck'
+import { connect } from "react-redux";
 import NavBarTop from '../../components/Nav/index'
+//CSS
+import "./admin.css";
 
-export function AdminPage(props) {
+export function AdminPage( props ) {
 
     return (
         <div>
@@ -16,8 +15,8 @@ export function AdminPage(props) {
 
 }
 
-function mapStateToProps(state) {
-    return {isAuthenticated: state.loginDuck.isAuthenticated};
+function mapStateToProps( state ) {
+    return { isAuthenticated: state.authDuck.isAuthenticated };
 }
 
-export default connect(mapStateToProps, {login, logout})(AdminPage);
+export default connect( mapStateToProps, {})( AdminPage );
