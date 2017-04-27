@@ -4,10 +4,11 @@ import { Field, reduxForm } from 'redux-form';
 //EXPORTED FUNCTIONS
 import { signup } from '../../ducks/authDuck'
 //MATERIAL UI
+import ReduxSweetAlert from 'react-redux-sweetalert';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 //CSS
-import "./CreateUser.scss";
+import "./CreateUser.css";
 
 const renderTextField = ( { input,label,meta: { touched,error },...custom } ) => (
     <TextField
@@ -28,7 +29,8 @@ class CreateUserForm extends Component {
             password: "",
             firstname: "",
             lastname: "",
-            company: ""
+            company: "",
+            show:false
         }
 
         this.handleSubmit = this.handleSubmit.bind( this );
@@ -51,50 +53,53 @@ class CreateUserForm extends Component {
         const { password } = this.state
 
         return (
+            <div>
 
-            <form onSubmit={ this.handleSubmit } className="login-landing">
-                <div className="login-container">
-                    <div className="login-form-inputs">
-                        <Field
-                            label="First Name"
-                            component={ renderTextField }
-                            name="firstname"
-                            onChange={ this.handleChange.bind( this, 'firstname' ) }/>
-                        <br/>
-                        <Field
-                            label="Last Name"
-                            component={ renderTextField }
-                            name="lastname"
-                            onChange={ this.handleChange.bind( this, 'lastname' ) }/>
-                        <br/>
-                        <Field
-                            label="Company"
-                            component={ renderTextField }
-                            name="company"
-                            onChange={ this.handleChange.bind( this, 'company' ) }/>
-                        <br/>
-                        <Field
-                            label="Email"
-                            component={ renderTextField }
-                            name="email"
-                            onChange={this.handleChange.bind( this, 'email' ) }/>
-                        <br/>
-                        <Field
-                            label="Password"
-                            type="password"
-                            name="password"
-                            component={ renderTextField }
-                            onChange={this.handleChange.bind( this, 'password' ) }/>
-                        <br/>
-                        <FlatButton
-                            type="submit"
-                            label="SIGNUP"
-                            disabled={ pristine || !password }
-                            primary={ true }/>
+                <form onSubmit={ this.handleSubmit } className="login-landing">
+                    <div className="login-container">
+                        <div className="login-form-inputs">
+                            <Field
+                                label="First Name"
+                                component={ renderTextField }
+                                name="firstname"
+                                onChange={ this.handleChange.bind( this, 'firstname' ) }/>
+                            <br/>
+                            <Field
+                                label="Last Name"
+                                component={ renderTextField }
+                                name="lastname"
+                                onChange={ this.handleChange.bind( this, 'lastname' ) }/>
+                            <br/>
+                            <Field
+                                label="Company"
+                                component={ renderTextField }
+                                name="company"
+                                onChange={ this.handleChange.bind( this, 'company' ) }/>
+                            <br/>
+                            <Field
+                                label="Email"
+                                component={ renderTextField }
+                                name="email"
+                                onChange={this.handleChange.bind( this, 'email' ) }/>
+                            <br/>
+                            <Field
+                                label="Password"
+                                type="password"
+                                name="password"
+                                component={ renderTextField }
+                                onChange={this.handleChange.bind( this, 'password' ) }/>
+                            <br/>
+                            <FlatButton
+                                type="submit"
+                                label="Submit"
+                                disabled={ pristine || !password }
+                                primary={ true }
+                            />
+                        </div>
                     </div>
-                </div>
-            </form>
-
+                </form>
+                <ReduxSweetAlert />
+            </div>
         );
     }
 }
@@ -121,4 +126,4 @@ const form = reduxForm({
     validate
 });
 
-export default connect( { signup } )( form( CreateUserForm ) );
+export default connect( state => ({}), { signup } )( form( CreateUserForm ) );

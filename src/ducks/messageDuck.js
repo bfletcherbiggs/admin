@@ -1,7 +1,7 @@
 //LIBRARIES
 import _ from 'lodash';
 //EXPORTED FUNCTIONS
-import { postMessage,chatRead } from './socketDuck'
+import { postMessage,chatRead } from './socketDuck';
 
 const GET_MESSAGES = "GET_MESSAGES",
     SELECT_CHAT = 'SELECT_CHAT',
@@ -94,6 +94,8 @@ export function updateMessages( data ) {
 export function getChat( allmessages,key,adminid ) {
     let data = allmessages[ key ]
     let chatUpdateObj = { key,adminid }
-    chatRead( chatUpdateObj )
-    return { type:SELECT_CHAT,payload:data,index: key }
+    return dispatch=>{
+        chatRead( chatUpdateObj )
+        dispatch( { type:SELECT_CHAT,payload:data,index: key } )
+    }
 }
