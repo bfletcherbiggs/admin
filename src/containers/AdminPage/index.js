@@ -1,8 +1,10 @@
+//PACKAGES
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import NavBarTop from '../../components/Nav/index';
 import { Switch, Route, Link } from 'react-router-dom';
-import CreateUser from '../../components/CreateUser/index';
+//COMPONENTS
+import NavBarTop from '../../components/Nav/index';
+import AdminMain from '../AdminMain/index';
 //CSS
 import "./admin.css";
 
@@ -10,16 +12,9 @@ class AdminPage extends Component{
 
     render(){
         return (
-            <div>
+            <div className="AdminPage-main">
                 <NavBarTop/>
-                <Switch>
-                    <Route exact path="/admin" render={()=>(
-                        <Link to="/admin/createuser">
-                            <button>Create New User</button>
-                        </Link>
-                    )} />
-                    <Route path="/admin/createuser" component={ CreateUser }/>
-                </Switch>
+                <AdminMain/>
             </div>
         )
     }
@@ -27,7 +22,16 @@ class AdminPage extends Component{
 }
 
 function mapStateToProps( state ) {
-    return { isAuthenticated: state.authDuck.isAuthenticated };
+    return state;
 }
 
 export default connect( mapStateToProps, {})( AdminPage );
+
+{/* <Switch>
+    <Route exact path="/admin" render={()=>(
+        <Link to="/admin/createuser">
+            <button>Create New User</button>
+        </Link>
+    )} />
+    <Route path="/admin/createuser" component={ CreateUser }/>
+</Switch> */}

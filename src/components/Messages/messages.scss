@@ -1,0 +1,13 @@
+.messages-main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+}
+.messages-display {
+  border: 1px solid green;
+}
+.messages-input {
+  border: 1px solid black;
+}
