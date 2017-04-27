@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import { reducer as formReducer } from 'redux-form'
+import { reducer as formReducer } from 'redux-form';
+import { reducer } from 'react-redux-sweetalert';
 import authDuck from "./authDuck";
-import messageDuck from "./messageDuck"
+import messageDuck from "./messageDuck";
 
 export default combineReducers( {
 	messageDuck,
 	authDuck,
-	form:formReducer
+	form:formReducer,
+	sweetalert: reducer
 } );

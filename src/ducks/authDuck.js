@@ -1,6 +1,7 @@
 import axiosLibrary from 'axios';
 const axios = axiosLibrary.create( { withCredentials: true } );
-import { authenticate } from './socketDuck'
+import { authenticate } from './socketDuck';
+import { swal } from 'react-redux-sweetalert';
 
 //Action Definitions
     const AUTH_REQUEST = "AUTH_REQUEST",
@@ -10,6 +11,7 @@ import { authenticate } from './socketDuck'
         CHECK_AUTH_FAILURE = "CHECK_AUTH_FAILURE",
         LOGOUT = "LOGOUT",
         SIGNUP_FAILURE = "SIGNUP_FAILURE",
+        USER_CREATED = "USER_CREATED",
         SOCKET_CONNECTED = "SOCKET_CONNECTED",
         BASE_URL = "http://localhost:3001",
         BASE_API_URL = BASE_URL + "/api";
@@ -23,6 +25,7 @@ import { authenticate } from './socketDuck'
         signupErrors: [],
         loginError: null,
         socket: null,
+        usercreated:false
     };
 
 //User Duck
@@ -70,6 +73,10 @@ import { authenticate } from './socketDuck'
                     errorAuthenticating: true,
                     signupErrors: action.error
                 })
+            case USER_CREATED:
+            return Object.assign( {}, state, {
+                usercreated: true
+            })
             default:
                 return state;
         }
@@ -149,7 +156,16 @@ import { authenticate } from './socketDuck'
     export function signup( data ) {
         return ( dispatch ) => axios.post( BASE_API_URL + '/user', data )
         .then( response => {
-            setCurrentUser( dispatch, response );
+            dispatch( { type:USER_CREATED } )
+            dispatch( swal( {
+                title:'User Created Successfully',
+                type:'success',
+                animation:true,
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Create Another',
+                cancelButtonText: 'Setup Components?'
+            } ) )
         })
         .catch( err => {
             dispatch( signupFailure( err ) );

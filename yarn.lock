@@ -132,6 +132,10 @@ aria-query@^0.3.0:
   dependencies:
     ast-types-flow "0.0.7"
 
+arity-n@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/arity-n/-/arity-n-1.0.4.tgz#d9e76b11733e08569c0847ae7b39b2860b30b745"
+
 arr-diff@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/arr-diff/-/arr-diff-2.0.0.tgz#8f3b827f955a8bd669697e4a4256ac3ceae356cf"
@@ -1321,6 +1325,12 @@ component-emitter@1.2.1:
 component-inherit@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
+
+compose-function@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/compose-function/-/compose-function-3.0.3.tgz#9ed675f13cc54501d30950a486ff6a7ba3ab185f"
+  dependencies:
+    arity-n "^1.0.4"
 
 compressible@~2.0.8:
   version "2.0.10"
@@ -2778,6 +2788,10 @@ immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
 
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -3619,6 +3633,10 @@ lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
 
+lodash.pick@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+
 lodash.pickby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
@@ -3828,6 +3846,10 @@ minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
 moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
+mousetrap@^1.6.0:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/mousetrap/-/mousetrap-1.6.1.tgz#2a085f5c751294c75e7e81f6ec2545b29cbf42d9"
 
 ms@0.7.1:
   version "0.7.1"
@@ -4751,7 +4773,18 @@ react-event-listener@^0.4.5:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-redux@^5.0.4:
+react-redux-sweetalert@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-redux-sweetalert/-/react-redux-sweetalert-1.0.0.tgz#e1724393f48a62a60aaa9876800d3e217c660ccb"
+  dependencies:
+    compose-function "^3.0.3"
+    react-redux "^5.0.2"
+    sweetalert-react "^0.4.7"
+    warning "^3.0.0"
+  optionalDependencies:
+    immutable "^3.8.1"
+
+react-redux@^5.0.2, react-redux@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.4.tgz#1563babadcfb2672f57f9ceaa439fb16bf85d55b"
   dependencies:
@@ -5593,6 +5626,19 @@ svgo@^0.7.0:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
+
+sweetalert-react@^0.4.7:
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/sweetalert-react/-/sweetalert-react-0.4.9.tgz#119a445fff052a04267ca02b31b00203fe6557ea"
+  dependencies:
+    lodash.pick "^4.4.0"
+    mousetrap "^1.6.0"
+    sweetalert "^1.1.3"
+    warning "^3.0.0"
+
+sweetalert@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/sweetalert/-/sweetalert-1.1.3.tgz#d2c31ea492b22b6a8d887aea15989a238fc084ae"
 
 symbol-observable@^1.0.2, symbol-observable@^1.0.4:
   version "1.0.4"
