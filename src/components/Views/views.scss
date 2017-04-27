@@ -1,0 +1,15 @@
+.views-main {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+}
+.views-adminWorking {
+  width: 75%;
+  border: 1px solid green;
+}
+.views-compStatus {
+  width: 25%;
+  border: 1px solid orange;
+}

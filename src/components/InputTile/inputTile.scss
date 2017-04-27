@@ -1,0 +1,13 @@
+.inputTile-main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+}
+.inputTile-compSelect {
+  border: 1px solid green;
+}
+.inputTile-compDisplay {
+  border: 1px solid black;
+}
