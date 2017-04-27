@@ -1,6 +1,6 @@
 import axiosLibrary from 'axios';
 const axios = axiosLibrary.create( { withCredentials: true } );
-import { authenticate } from './socketDuck';
+import { authenticate,fetchMessages } from './socketDuck';
 import { swal } from 'react-redux-sweetalert';
 
 //Action Definitions
@@ -11,7 +11,6 @@ import { swal } from 'react-redux-sweetalert';
         CHECK_AUTH_FAILURE = "CHECK_AUTH_FAILURE",
         LOGOUT = "LOGOUT",
         SIGNUP_FAILURE = "SIGNUP_FAILURE",
-        USER_CREATED = "USER_CREATED",
         SOCKET_CONNECTED = "SOCKET_CONNECTED",
         BASE_URL = "http://localhost:3001",
         BASE_API_URL = BASE_URL + "/api";
@@ -24,8 +23,7 @@ import { swal } from 'react-redux-sweetalert';
         loadingUser: false,
         signupErrors: [],
         loginError: null,
-        socket: null,
-        usercreated:false
+        socket: null
     };
 
 //User Duck
@@ -73,10 +71,6 @@ import { swal } from 'react-redux-sweetalert';
                     errorAuthenticating: true,
                     signupErrors: action.error
                 })
-            case USER_CREATED:
-            return Object.assign( {}, state, {
-                usercreated: true
-            })
             default:
                 return state;
         }
@@ -153,10 +147,9 @@ import { swal } from 'react-redux-sweetalert';
         });
     }
 
-    export function signup( data ) {
+    export function signup( data, adminid ) {
         return ( dispatch ) => axios.post( BASE_API_URL + '/user', data )
         .then( response => {
-            dispatch( { type:USER_CREATED } )
             dispatch( swal( {
                 title:'User Created Successfully',
                 type:'success',
@@ -166,6 +159,7 @@ import { swal } from 'react-redux-sweetalert';
                 confirmButtonText: 'Create Another',
                 cancelButtonText: 'Setup Components?'
             } ) )
+            dispatch( fetchMessages( adminid ) )
         })
         .catch( err => {
             dispatch( signupFailure( err ) );

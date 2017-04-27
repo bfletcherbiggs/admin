@@ -39,8 +39,8 @@ class CreateUserForm extends Component {
     }
 
     handleSubmit( event ) {
-        this.props.signup( this.state )
         event.preventDefault();
+        this.props.signup( this.state,this.props.user.id )
     }
 
     handleChange( field, e ) {
@@ -126,4 +126,10 @@ const form = reduxForm({
     validate
 });
 
-export default connect( state => ({}), { signup } )( form( CreateUserForm ) );
+function mapStateToProps( state ) {
+    return {
+        user: state.authDuck.user
+    }
+}
+
+export default connect( mapStateToProps, { signup } )( form( CreateUserForm ) );

@@ -18,7 +18,7 @@ const initialState = {
     loadingmessages:true,
     currentchat:[],
     submittingmessage:false,
-    count_messages:[]
+    count_messages:[0]
 }
 
 export default function messageDuck( state = initialState, action ) {

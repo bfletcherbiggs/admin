@@ -11,3 +11,6 @@ export function postMessage( message ) {
 export function chatRead( chatInfo ) {
     socket.emit( 'chatread', chatInfo )
 }
+export function fetchMessages( adminId ){
+    socket.emit( 'fetchmessages', adminId )
+}
