@@ -28,10 +28,6 @@ class RoomsContainer extends Component {
         this.handleSubmit = this.handleSubmit.bind( this )
    }
 
-    handleOnChange( e ) {
-        this.setState( { input: e.target.value} )
-    }
-
     _selectActiveRoom( key ){
         this.props.getChat(
             this.props.messages,
@@ -57,17 +53,28 @@ class RoomsContainer extends Component {
         const {
             room_titles,
             currentchat,
-            activeRoomIndex
+            activeRoomIndex,
+            count_messages
           } = this.props;
 
-        const roomTime = room_titles.map( room => {
+        const roomTime = room_titles.map( ( room, idx ) => {
+           let messageCount = count_messages[idx + 1]
+           let text = room[0].firstname + " " + room[0].lastname;
             return (
                 <ListItem
-                    primaryText={ room[0].firstname + " " + room[0].lastname }
+                    primaryText={ text }
                     rightIcon={ <CommunicationChatBubble /> }
                     key={ room[0].chat_id }
                     onClick={ ()=>this._selectActiveRoom( room[0].chat_id ) }
-                />
+                >
+                   {
+                      messageCount
+                      ?
+                      <span>{messageCount}</span>
+                      :
+                      null
+                  }
+               </ListItem>
             )
         })
         const messageBox = currentchat.map( ( message, index ) => {
@@ -126,7 +133,8 @@ function mapStateToProps( state ) {
         user: state.authDuck.user,
         socket: state.authDuck.socket,
         loadingmessages: state.messageDuck.loadingmessages,
-        activeRoomIndex: state.messageDuck.activeRoomIndex
+        activeRoomIndex: state.messageDuck.activeRoomIndex,
+        count_messages: state.messageDuck.count_messages
     }
 }
 
