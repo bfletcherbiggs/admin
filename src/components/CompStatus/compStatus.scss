@@ -1,0 +1,21 @@
+.linearProgress {
+  width: 80%;
+  margin: auto;
+}
+.percentCompleted {
+  text-align: center;
+  padding-top: 20px;
+  color: white;
+}
+.compStatus-status {
+  padding-top: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 20%;
+  margin: 20px auto;
+}
+.compstatus-main {
+background-color: #0e4341;
+}

@@ -1,7 +1,7 @@
 //PACKAGES
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 //COMPONENTS
 import InputTile from '../InputTile/index';
 import Messages from '../Messages/index';
@@ -15,7 +15,7 @@ class AdminWorking extends Component{
             <div className="adminWorking-main">
               <Switch>
                   <Route exact path="/admin/components" component={ InputTile }/>
-                  <Route path="/admin/messages" component={ Messages }/>
+                  <Route path="/admin" component={ Messages }/>
               </Switch>
             </div>
         )
@@ -23,8 +23,4 @@ class AdminWorking extends Component{
 
 }
 
-function mapStateToProps( state ) {
-    return { state };
-}
-
-export default connect( mapStateToProps, {})( AdminWorking );
+export default connect( state => state, {})( AdminWorking );

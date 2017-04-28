@@ -5,7 +5,7 @@ const axios = axiosLibrary.create({withCredentials: true})
     COMP_SUCCESS = "COMP_SUCCESS",
     COMP_FAILURE = "COMP_FAILURE",
     COMP_COMPLETED = "COMP_COMPLETED",
-    BASE_URL = "http://localhost:3004/api";
+    BASE_URL = "http://localhost:3001/api";
 
   const initialState = {
     varComponentTypes: [],
@@ -14,7 +14,7 @@ const axios = axiosLibrary.create({withCredentials: true})
     errorLoadingComps: false,
   };
 
-  export default function clientDuck(state = initialState, action) {
+  export default function compDuck(state = initialState, action) {
     switch (action.type) {
       case COMP_REQUEST:
         return Object.assign({}, state, {

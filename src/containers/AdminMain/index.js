@@ -1,7 +1,8 @@
 //PACKAGES
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link } from 'react-router-dom';
+import {getComps} from '../../ducks/compDuck'
+
 //COMPONENTS
 import Users from '../../components/Users/index';
 import Views from '../../components/Views/index';
@@ -9,7 +10,9 @@ import Views from '../../components/Views/index';
 import "./adminMain.css";
 
 class AdminMain extends Component{
-
+    componentDidMount() {
+      this.props.getComps()
+    }
     render(){
         return (
             <div className="adminMain-main">
@@ -25,7 +28,7 @@ class AdminMain extends Component{
 }
 
 function mapStateToProps( state ) {
-    return state;
+    return {varComponentTypes: state.compDuck.varComponentTypes};
 }
 
-export default connect( mapStateToProps, {})( AdminMain );
+export default connect( mapStateToProps, {getComps})( AdminMain );
