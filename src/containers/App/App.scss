@@ -17,6 +17,10 @@ input:-webkit-autofill {
 
 $green: #0E4341;
 
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
 .landing {
   padding-bottom: 60px;
 }

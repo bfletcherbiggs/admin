@@ -16,7 +16,6 @@ class AdminMain extends Component{
     render(){
         return (
             <div className="adminMain-main">
-                <div className="adminMain-selectedUser">Selected User</div>
                 <div className="adminMain-working">
                     <div className="adminMain-users"><Users/></div>
                     <div className="adminMain-views"><Views/></div>
