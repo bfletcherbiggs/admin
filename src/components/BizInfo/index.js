@@ -28,7 +28,6 @@ class BizInfo extends Component {
     this.setState({[field]: e.target.value})
   }
   componentDidMount() {
-    console.log
       axios.get(BASE_URL + '/inputs')
       .then((response) => {
         const inputsFromServer = response.data[0]
@@ -61,7 +60,8 @@ class BizInfo extends Component {
     if (completeCheck) {
       componentCompleted.completed = true;
     }
-
+    console.log('componentCompleted', componentCompleted)
+    console.log('completeCheck', completeCheck)
     axios.put(BASE_URL + '/inputs', inputsToServer)
     .then((response) => {
       this.props.updateComps(componentCompleted);
@@ -132,7 +132,7 @@ class BizInfo extends Component {
             <div>
               <p className="placeholderinputs">
                 <FontIcon className="material-icons" style={iconStyles} color={cyan500}>arrow_forward</FontIcon>Contact Form Email Address</p>
-              <TextField id="businesscfea" value={businessemail} onChange={this.handleChange.bind(this, 'businessemail')} className="hovertexttest" underlineShow={false} style={inStyle}/><br/>
+              <TextField id="businessemail" value={businessemail} onChange={this.handleChange.bind(this, 'businessemail')} className="hovertexttest" underlineShow={false} style={inStyle}/><br/>
             </div>
             <div className="save-button-inputs">
 

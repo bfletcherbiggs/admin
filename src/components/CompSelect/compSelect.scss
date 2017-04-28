@@ -3,12 +3,24 @@
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
+  border-bottom: 1.5px dashed #d1d4d4;
+  padding: 20px;
 }
 .compSelect-status-point {
-    width: 33%;
+    width: 25%;
     display: flex;
-    flex-flow: column wrap;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    justify-content: center;
     align-items: center;
-    margin: 10px 0px 10px 0px;
+    margin: 15px;
+}
+.FloatingActionButton1 {
+  margin-right: 5px;
+}
+.compSelect-floating {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 175px;
 }

@@ -12,10 +12,14 @@ import Design from '../Design/index'
 //CSS AND DESIGN
 import "./compStatus.css";
 import IconButton from 'material-ui/IconButton';
+import Dashboard from 'material-ui/svg-icons/action/dashboard'
+import Print from 'material-ui/svg-icons/action/print'
 import IconComplete from 'material-ui/svg-icons/navigation/check';
 import IconNotComplete from 'material-ui/svg-icons/content/clear';
 import {grey50} from 'material-ui/styles/colors';
 import LinearProgress from 'material-ui/LinearProgress';
+import Badge from 'material-ui/Badge';
+import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 
 class CompStatus extends Component{
     constructor(props) {
@@ -31,7 +35,41 @@ class CompStatus extends Component{
             ]
         }
     }
+    printInputs() {
+            var mywindow = window.open('', 'new div', 'height=700,width=800');
+            mywindow.document.write('<html><head><title></title>');
+            mywindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" type="text/css" media="print">>');
+            mywindow.document.write(' <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons type="text/css" media="print">');
+            mywindow.document.write(' <link rel="stylesheet" href="./style.css" type="text/css" media="print">');
+            mywindow.document.write('</head><body >');
+            var billingpocPrint = document.getElementById('billingPOC').value
+            mywindow.document.write('Billing Point of Contact: <br/>');
+            mywindow.document.write(billingpocPrint);
+            mywindow.document.write('<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>');
+            mywindow.document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>');
+            mywindow.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>');
+            mywindow.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>');
+            mywindow.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>');
+            mywindow.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>');
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+            mywindow.focus();
+            setTimeout(function() {
+                mywindow.print();
+                setTimeout(function() {
+                mywindow.close();
+                }, 1500);
+            }, 1500);
+          }
+
     render(){
+        const iconStyle = {
+
+          IconButton: {
+            height: 30,
+            width: 30,
+          },
+        }
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state
         var compCount = 0;
@@ -70,14 +108,25 @@ class CompStatus extends Component{
 
         return (
             <div className="compstatus-main">
+              <div className="compStatus-selectedUser">Selected User</div>
+              <div className="compStatus-selectedCompany">Company</div>
+              <div className="compstatus-links-box" >
                 <div className="compstatus-links">
+              
                     <Link to="/admin/components">
-                        <button>Components</button>
+                    <IconButton tooltip="message" >
+                        <Dashboard color={ grey50 }/>
+                    </IconButton>
                     </Link>
                     <Link to="/admin">
-                        <button>Messages</button>
+                    <IconButton tooltip="message" >
+                        <NotificationsIcon color={ grey50 }/>
+                    </IconButton>
                     </Link>
+                  </div>
                 </div>
+
+
                 <div className="compstatus-percent">
                 <div className='percentCompleted'>
                     {percentCompleted}% Complete
@@ -89,6 +138,11 @@ class CompStatus extends Component{
                 </div>
                 <div className="compStatus-status">
                     {componentMap}
+                </div>
+                <div className="printButton">
+                  <IconButton tooltip="message" onClick={this.printInputs.bind(this)}>
+                      <Print color={ grey50 }/>
+                  </IconButton>
                 </div>
             </div>
         )

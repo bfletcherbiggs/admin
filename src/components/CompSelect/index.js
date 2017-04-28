@@ -10,6 +10,11 @@ import WebPages from '../WebPages/index'
 import Design from '../Design/index'
 //CSS AND DESIGN
 import "./compSelect.css";
+import {teal600} from 'material-ui/styles/colors'
+import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentRemove from 'material-ui/svg-icons/content/remove';
 
 class CompSelect extends Component{
     constructor(props) {
@@ -26,6 +31,19 @@ class CompSelect extends Component{
         }
     }
     render(){
+        const style = {
+          button: {
+            margin: 12,
+            fontWeight: 100
+          }
+        }
+        const floatingStyle = {
+          button: {
+            margin: 12,
+            fontWeight: 100
+          }
+        }
+
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state
         var compCount = 0;
@@ -47,15 +65,21 @@ class CompSelect extends Component{
           }
           if (check && check2) {
             return <div key={type.key} className='compSelect-status-point sPComplete'>
-              <div>{type.name}</div>
-              <div>Complete</div>
-              <div><button>Add</button><button>Remove</button></div>
+              <div className="compSelect-floating">
+                <FloatingActionButton style={floatingStyle} backgroundColor={teal600} mini={true} className="FloatingActionButton1">
+                  <ContentAdd/>
+              </FloatingActionButton>
+              <RaisedButton label={type.name} primary={false} style={style}/>
+            </div>
             </div>
           } else if (check) {
             return <div key={type.key} className='compSelect-status-point sPIncomplete'>
-              <div>{type.name}</div>
-              <div>Incomplete</div>
-              <div><button>Add</button><button>Remove</button></div>
+              <div className="compSelect-floating">
+                <FloatingActionButton style={floatingStyle} backgroundColor={teal600} mini={true} className="FloatingActionButton1">
+                  <ContentAdd/>
+              </FloatingActionButton>
+              <RaisedButton label={type.name} primary={false} style={style}/>
+            </div>
             </div>
           }
         })

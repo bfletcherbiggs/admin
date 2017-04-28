@@ -19,3 +19,44 @@
 .compstatus-main {
 background-color: #0e4341;
 }
+.compstatus-links {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  margin: 20px auto;
+  margin-bottom: 20px;
+
+}
+.compStatus-selectedUser {
+  font-weight: 300;
+  text-align: center;
+  padding-top: 20px;
+  color: #fafafa;
+  font-size: 18px;
+}
+.compStatus-selectedCompany {
+  font-weight: 300;
+  text-align: center;
+  color: #fafafa;
+  font-size: 11px;
+}
+.compstatus-links svg {
+  height: 35px !important;
+  width: 35px !important;
+}
+.printButton svg {
+  height: 35px !important;
+  width: 35px !important;
+}
+.printButton {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+}
+.compstatus-links-box {
+  width: 85%;
+  margin: auto
+}
