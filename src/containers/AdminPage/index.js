@@ -1,7 +1,6 @@
 //PACKAGES
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link } from 'react-router-dom';
 //COMPONENTS
 import NavBarTop from '../../components/Nav/index';
 import AdminMain from '../AdminMain/index';
@@ -26,12 +25,3 @@ function mapStateToProps( state ) {
 }
 
 export default connect( mapStateToProps, {})( AdminPage );
-
-{/* <Switch>
-    <Route exact path="/admin" render={()=>(
-        <Link to="/admin/createuser">
-            <button>Create New User</button>
-        </Link>
-    )} />
-    <Route path="/admin/createuser" component={ CreateUser }/>
-</Switch> */}

@@ -1,0 +1,14 @@
+.compSelect-main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.compSelect-status-point {
+    width: 33%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 0px 10px 0px;
+}

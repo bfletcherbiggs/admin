@@ -1,7 +1,6 @@
 //PACKAGES
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link } from 'react-router-dom';
 //COMPONENTS
 import CompSelect from "../CompSelect/index"
 import CompDisplay from "../CompDisplay/index"
@@ -25,8 +24,4 @@ class InputTile extends Component{
 
 }
 
-function mapStateToProps( state ) {
-    return state;
-}
-
-export default connect( mapStateToProps, {})( InputTile );
+export default connect( state => state, {})( InputTile );

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
+
 //CONTAINERS
 import LoginPage from '../LoginPage/index';
 import AdminPage from '../AdminPage/index';

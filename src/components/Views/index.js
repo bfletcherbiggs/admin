@@ -1,13 +1,11 @@
 //PACKAGES
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link } from 'react-router-dom';
 //COMPONENTS
 import CompStatus from '../CompStatus/index';
 import AdminWorking from '../AdminWorking/index';
 //CSS
 import "./views.css";
-
 class Views extends Component{
 
     render(){
@@ -25,8 +23,4 @@ class Views extends Component{
 
 }
 
-function mapStateToProps( state ) {
-    return state;
-}
-
-export default connect( mapStateToProps, {})( Views );
+export default connect( state => state, {})( Views );
