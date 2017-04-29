@@ -5,15 +5,15 @@ import { connect } from "react-redux";
 //EXPORTED FUNCTIONS
 import { logout } from '../../ducks/authDuck';
 //MATERIAL UI
-import AppBar from 'material-ui/AppBar';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
-import Badge from 'material-ui/Badge';
-import NotificationsIcon from 'material-ui/svg-icons/communication/message';
+import AddClientIcon from 'material-ui/svg-icons/social/person-add';
 import Profile from 'material-ui/svg-icons/action/account-circle';
-import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
 import { grey50 } from 'material-ui/styles/colors';
+import FlatButton from 'material-ui/FlatButton';
 //CSS
-import goldsageLogo from "../../assets/logoforadminapp.svg";
+
+import IntakeLogo from "../../assets/intakelogo.png";
 import "./nav.css";
 
 class NavBarTop extends Component{
@@ -28,66 +28,33 @@ class NavBarTop extends Component{
         e.preventDefault();
     }
 
-    componentDidMount() {
-        const badge = ReactDOM.findDOMNode( this.refs.badge )
-        badge.style.paddingRight = '12px'
-    }
-
     render(){
-        const {
-            count_messages
-        }
-        = this.props
-
-        const badgeCount = () =>{
-            return count_messages[0]
-        }
-
-        const badgeStyle = ()=>{
-            return ( count_messages[0] )?
-            { top: 12, right: 6 }
-            :{ top: 24, right: 24,display:'none' }
-        }
-
-        const tapIcons = (
-            <div>
-                <IconButton tooltip="Watson chat" >
-                    <WatsonIcon color={ grey50 } />
-                </IconButton>
-
-                <Badge
-                    ref="badge"
-                    badgeContent={ badgeCount() }
-                    secondary={ true }
-                    badgeStyle={ badgeStyle() }>
-                    <Link to="/messages">
-                        <IconButton tooltip="message" >
-                            <NotificationsIcon color={ grey50 }/>
-                        </IconButton>
-                    </Link>
-                </Badge>
-
-                <IconButton  onClick={ this.handleClick } tooltip="Logout">
-                    <Profile color={ grey50 } />
-                </IconButton>
-            </div>
-         )
 
         return(
             <div>
-                <AppBar style={ { backgroundColor: '#0E4341' } }
-                    iconElementRight={ tapIcons }
-                    showMenuIconButton={ false }
-                    title={
-                        <Link to="/admin">
-                            <img
-              				    alt="javascript logo"
-              					className="nav-goldsage-logo"
-              					src={ goldsageLogo }
-              				/>
-                        </Link>
-                    }
-                />
+                <Toolbar style={ { backgroundColor: '#003044', height: 85 } }>
+              <ToolbarGroup firstChild={ true }>
+                  <Link to="/client">
+                      <img alt="javascript logo" className="nav-goldsage-logo" src={ IntakeLogo }/>
+
+                  </Link>
+              </ToolbarGroup>
+              <ToolbarGroup>
+                      <Link to="/addclient">
+                          <IconButton >
+                              <AddClientIcon color={ grey50 }/>
+                    </IconButton>
+                      </Link>
+                  <Link to="/" onClick={ this.handleClick }>
+                      <FlatButton
+                          label="LOGOUT"
+                          primary={ true }
+                          labelStyle={ { grey50 } }
+                          style={ { color: grey50 } }
+                      />
+                  </Link>
+              </ToolbarGroup>
+          </Toolbar>
             </div>
         )
     }

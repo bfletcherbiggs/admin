@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import LoginPage from '../LoginPage/index';
 import AdminPage from '../AdminPage/index';
 import RoomsContainer from '../RoomsContainer/index';
+import CreateUserForm from '../../components/CreateUser/index';
 //EXPORTED FUNCTIONS
 import { checkUserAuth } from '../../ducks/authDuck';
 //CSS
@@ -36,6 +37,8 @@ class App extends Component{
                         <Route exact path="/" component={ LoginPage }/>
                         <PrivateRoute path="/admin" component={ AdminPage }/>
                         <PrivateRoute path="/messages" component={ RoomsContainer }/>
+                        <PrivateRoute path="/addclient" component={ CreateUserForm }/>
+
                     </Switch>
                 </div>
             </div>
