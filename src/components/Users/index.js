@@ -1,31 +1,79 @@
-//PACKAGES
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+//EXPORTED FUNCTIONS
+import { getChat } from '../../ducks/messageDuck'
 //COMPONENTS
-
+import Search from '../../components/Search/index'
+//MATERIAL UI
+import { ListItem } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
 //CSS
 import "./users.css";
 
 class Users extends Component{
+   constructor() {
+      super()
 
-    render(){
-        return (
+      this._selectActiveRoom = this._selectActiveRoom.bind( this )
+   }
+
+   _selectActiveRoom( key ){
+      this.props.getChat(
+         this.props.messages,
+         key,
+         this.props.user.id
+      )
+   }
+
+   render(){
+
+      const {
+         filter_room_titles,
+         count_messages
+      } = this.props;
+
+      const roomTime = filter_room_titles.map( ( room, idx ) => {
+         let messageCount = count_messages[ idx + 1 ]
+         let text = room[ 0 ].firstname + " " + room[ 0 ].lastname + " - " + room[0].company;
+         return (
+            <ListItem
+               primaryText={ text }
+               key={ room[ 0 ].chat_id }
+               onClick={ () => this._selectActiveRoom( room[ 0 ].chat_id ) }
+            >
+               {
+                  messageCount
+                  ?
+                  <span>{ messageCount }</span>
+                  :
+                  null
+               }
+            </ListItem>
+         )
+      })
+
+      return (
+         <div>
+            <Search/>
             <div className="users-main">
-                Users Component
-                <ul>
-                  <li>User 1</li>
-                  <li>User 2</li>
-                  <li>User 3</li>
-                  <li>User 4</li>
-                </ul>
+               <Subheader>Current Users</Subheader>
+                  { roomTime }
+               <Divider />
             </div>
-        )
-    }
-
+         </div>
+      )
+   }
 }
 
-function mapStateToProps( state ) {
-    return state;
+const mapStateToProps = state => {
+   return {
+      filter_room_titles:state.messageDuck.filter_room_titles,
+      messages:state.messageDuck.messages,
+      user: state.authDuck.user,
+      count_messages: state.messageDuck.count_messages
+   }
 }
 
-export default connect( mapStateToProps, {})( Users );
+export default withRouter( connect( mapStateToProps, { getChat } )( Users ) )

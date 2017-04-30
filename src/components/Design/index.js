@@ -8,9 +8,10 @@ import SaveButton from 'material-ui/svg-icons/file/cloud-upload';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import {updateComps} from '../../ducks/compDuck'
-import axiosLibrary from 'axios'
+import axiosLibrary from 'axios';
+import { APISERVERPATH } from '../../config.json'
 const axios = axiosLibrary.create({withCredentials: true})
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = APISERVERPATH;
 
 class Design extends Component {
   constructor() {
@@ -26,7 +27,6 @@ class Design extends Component {
     this.setState({[field]: e.target.value})
   }
   componentDidMount() {
-    console.log
       axios.get(BASE_URL + '/inputs')
       .then((response) => {
         const inputsFromServer = response.data[0]
@@ -37,7 +37,6 @@ class Design extends Component {
           })
       })
       .catch(err => {
-          console.log(err)
       });
   }
   saveInputs(e) {
@@ -60,7 +59,6 @@ class Design extends Component {
     .then((response) => {
       this.props.updateComps(componentCompleted);
       }).catch(err => {
-        console.log(err)
       });
 
     e.preventDefault()

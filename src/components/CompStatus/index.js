@@ -84,21 +84,21 @@ class CompStatus extends Component{
         }
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state
-        var compCount = 0;
-        var compCount1 = 0;
+        let compCount = 0;
+        let compCount1 = 0;
         const componentMap = componentTypes.map((type, index) => {
-          var check = false
-          var check2 = false;
-          for (var comp in varComponentTypes.data) {
+        let check = false
+        let check2 = false;
+        for (let comp in varComponentTypes.data) {
             if (varComponentTypes.data[comp].compName === type.name) {
-              check = true;
-              compCount1 += 1;
-              type.statusName = varComponentTypes.data[comp].statusName
-              type.key = varComponentTypes.data[comp].id
-              if (varComponentTypes.data[comp].completed === true) {
-                compCount += 1;
-                check2 = true;
-              }
+                check = true;
+                compCount1 += 1;
+                type.statusName = varComponentTypes.data[comp].statusName
+                type.key = varComponentTypes.data[comp].id
+                if (varComponentTypes.data[comp].completed === true) {
+                    compCount += 1;
+                    check2 = true;
+                }
             }
           }
           var statusPoints;
@@ -120,8 +120,9 @@ class CompStatus extends Component{
                   </a>
           }
         })
-        var percentCompleted = Math.floor((compCount / compCount1) * 100);
 
+        var percentCompleted = Math.floor((compCount / compCount1) * 100);
+      
         return (
             <div className="compstatus-main">
               <div className="compStatus-selectedUser">Selected User</div>

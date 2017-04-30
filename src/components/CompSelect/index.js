@@ -2,15 +2,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 //COMPONENTS
-import SocialInputs from '../SocialInputs/index'
-import LogoUpload from '../LogoUpload/index'
-import BizInfo from '../BizInfo/index'
-import BillInfo from '../BillInfo/index'
-import WebPages from '../WebPages/index'
-import Design from '../Design/index'
+import SocialInputs from '../SocialInputs/index';
+import LogoUpload from '../LogoUpload/index';
+import BizInfo from '../BizInfo/index';
+import BillInfo from '../BillInfo/index';
+import WebPages from '../WebPages/index';
+import Design from '../Design/index';
 //CSS AND DESIGN
 import "./compSelect.css";
-import {teal600} from 'material-ui/styles/colors'
+import { teal600 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -22,16 +22,18 @@ const axios = axiosLibrary.create({withCredentials: true})
 const BASE_URL = "http://localhost:3001/api";
 
 class CompSelect extends Component{
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             componentTypes: [
+
                 {component: < SocialInputs />, name: 'SocialInputs', tooltip: 'SocialInputs'},
                 {component: < LogoUpload />, name: 'LogoUpload', tooltip: 'LogoUpload'},
                 {component: < BizInfo />, name: 'BizInfo', tooltip: 'BizInfo'},
                 {component: < BillInfo />, name: 'BillInfo', tooltip: 'BillInfo'},
                 {component: < WebPages />, name: 'WebPages', tooltip: 'WebPages'},
                 {component: < Design />, name: 'Design', tooltip: 'Design'}
+
             ]
         }
     }
@@ -108,15 +110,14 @@ class CompSelect extends Component{
 
         return (
             <div className="compSelect-main">
-                    {componentMap}
+                    { componentMap }
             </div>
         )
     }
-
 }
 
 function mapStateToProps( state ) {
-    return {varComponentTypes: state.compDuck.varComponentTypes};
+    return { varComponentTypes: state.compDuck.varComponentTypes };
 }
 
 export default connect( mapStateToProps, {addComps, removeComps})( CompSelect );

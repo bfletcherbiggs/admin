@@ -1,10 +1,11 @@
-import axiosLibrary from 'axios'
+import axiosLibrary from 'axios';
+import { APISERVERPATH } from '../config.json';
 const axios = axiosLibrary.create({withCredentials: true})
 
   const INPUT_REQUEST = "INPUT_REQUEST",
     INPUT_SUCCESS = "INPUT_SUCCESS",
     INPUT_FAILURE = "INPUT_FAILURE",
-    BASE_URL = "http://localhost:3004/api";
+    BASE_URL = APISERVERPATH;
 
   const initialState = {
     inputReturnValues: {},
@@ -65,7 +66,6 @@ const axios = axiosLibrary.create({withCredentials: true})
         dispatch(InputSuccess(response))
       }).catch(err => {
         if(err){
-        console.log(err)
         dispatch(InputFailure(err.response.data))
         }
       });
@@ -79,7 +79,6 @@ const axios = axiosLibrary.create({withCredentials: true})
         dispatch(InputSuccess(response))
       }).catch(err => {
         if(err){
-        console.log(err)
         dispatch(InputFailure(err.response.data))
         }
       });

@@ -8,9 +8,10 @@ import {red500, cyan500} from 'material-ui/styles/colors';
 import SaveButton from 'material-ui/svg-icons/file/cloud-upload';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import axiosLibrary from 'axios'
+import axiosLibrary from 'axios';
+import { APISERVERPATH } from '../../config.json'
 const axios = axiosLibrary.create({withCredentials: true})
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = APISERVERPATH;
 
 class SocialInputs extends Component {
     constructor() {
@@ -44,7 +45,6 @@ class SocialInputs extends Component {
             })
         })
         .catch(err => {
-            console.log(err)
         });
     }
 
@@ -69,7 +69,6 @@ class SocialInputs extends Component {
     .then((response) => {
       this.props.updateComps(componentCompleted);
       }).catch(err => {
-        console.log(err)
       });
 
     e.preventDefault()
