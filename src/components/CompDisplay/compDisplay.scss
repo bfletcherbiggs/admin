@@ -1,0 +1,13 @@
+.compDisplay-display {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+.compDisplay-main {
+  height: 100%;
+   margin-top: 20px;
+   overflow: scroll;
+
+}
