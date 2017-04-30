@@ -20,7 +20,6 @@ class Users extends Component{
    }
 
    _selectActiveRoom( key ){
-      console.log(key)
       this.props.getChat(
          this.props.messages,
          key,

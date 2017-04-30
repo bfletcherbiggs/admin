@@ -61,8 +61,6 @@ class BizInfo extends Component {
     if (completeCheck) {
       componentCompleted.completed = true;
     }
-    console.log('componentCompleted', componentCompleted)
-    console.log('completeCheck', completeCheck)
     axios.put(BASE_URL + '/inputs', inputsToServer)
     .then((response) => {
       this.props.updateComps(componentCompleted);
