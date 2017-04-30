@@ -2,21 +2,25 @@
 import _ from 'lodash';
 //EXPORTED FUNCTIONS
 import { postMessage,chatRead } from './socketDuck';
+import { reset } from 'redux-form';
 
 const GET_MESSAGES = "GET_MESSAGES",
     SELECT_CHAT = 'SELECT_CHAT',
     SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS',
-    SEND_MESSAGE_PENDING = 'SEND_MESSAGE_PENDING';
+    SEND_MESSAGE_PENDING = 'SEND_MESSAGE_PENDING',
+    FILTER_ROOMS = 'FILTER_ROOMS';
 
 const initialState = {
     messages:[{}],
     activeRoomIndex: null,
     room_titles:[],
+    filter_room_titles:[],
     users:[],
     loadingmessages:true,
     currentchat:[],
     submittingmessage:false,
-    count_messages:[0]
+    count_messages:[0],
+    userid:null
 }
 
 export default function messageDuck( state = initialState, action ) {
@@ -27,6 +31,7 @@ export default function messageDuck( state = initialState, action ) {
                     messages: action.messages,
                     loadingmessage:false,
                     room_titles:[],
+                    filter_room_titles:[],
                     count_messages:[]
                 })
             }
@@ -34,6 +39,12 @@ export default function messageDuck( state = initialState, action ) {
                 let room_titles = []
                 _.each( action.messages, message => {
                     room_titles.push( _.uniqBy( message, 'user_id' ) )
+                })
+                _.each( room_titles, room => {
+                    delete room[ 0 ].message
+                    delete room[ 0 ].timestamp
+                    delete room[ 0 ].read
+                    delete room[ 0 ].type
                 })
                 let count_messages = []
                 _.each( action.messages, messagegroup => {
@@ -54,14 +65,22 @@ export default function messageDuck( state = initialState, action ) {
                     messages: action.messages,
                     loadingmessage:false,
                     room_titles:room_titles,
+                    filter_room_titles:room_titles,
                     count_messages:count_messages,
                     currentchat:currentchat
                 })
             }
+        case FILTER_ROOMS:
+            let filteredRooms = Object.assign( {}, state.room_titles )
+            filteredRooms = action.filter
+            return Object.assign( {}, state, {
+                filter_room_titles:filteredRooms
+            } )
         case SELECT_CHAT:
             return Object.assign( {}, state,{
                 currentchat:action.payload,
-                activeRoomIndex: action.index
+                activeRoomIndex: action.index,
+                userid:action.userid
             })
         case SEND_MESSAGE_PENDING:
             return Object.assign( {}, state,{
@@ -89,11 +108,22 @@ export function getMessages( messages ) {
 export function sendMessage( adminid, userid, message, index ){
     let messagebody = { adminid, userid, message, index }
     postMessage( messagebody )
-    return { type: SEND_MESSAGE_PENDING }
+    return dispatch => {
+        dispatch( reset( 'messageForm' ) )
+        dispatch( { type: SEND_MESSAGE_PENDING } )
+    }
 }
 
 export function updateMessages( data ) {
-    return { type:SEND_MESSAGE_SUCCESS, payload:data }
+    return dispatch => {
+        dispatch( { type:SEND_MESSAGE_SUCCESS, payload:data } )
+    }
+}
+
+export function filterUsers ( searchArr ) {
+    return dispatch => {
+        dispatch( { type:FILTER_ROOMS, filter:searchArr } )
+    }
 }
 
 export function getChat( allmessages, key, adminid ) {
@@ -101,6 +131,6 @@ export function getChat( allmessages, key, adminid ) {
     let chatUpdateObj = { key, adminid }
     return dispatch => {
         chatRead( chatUpdateObj )
-        dispatch( { type:SELECT_CHAT, payload:data, index: key } )
+        dispatch( { type:SELECT_CHAT, payload:data, index: key, userid:data[0].user_id } )
     }
 }
