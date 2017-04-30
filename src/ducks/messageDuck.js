@@ -9,8 +9,6 @@ const GET_MESSAGES = "GET_MESSAGES",
     SEND_MESSAGE_PENDING = 'SEND_MESSAGE_PENDING';
 
 const initialState = {
-    userID: '',
-    adminID: '',
     messages:[{}],
     activeRoomIndex: null,
     room_titles:[],
@@ -25,7 +23,7 @@ export default function messageDuck( state = initialState, action ) {
     switch ( action.type ) {
         case GET_MESSAGES:
             if ( !action.messages ){
-                return Object.assign({}, state, {
+                return Object.assign( {}, state, {
                     messages: action.messages,
                     loadingmessage:false,
                     room_titles:[],
@@ -45,11 +43,19 @@ export default function messageDuck( state = initialState, action ) {
                     ))
                 })
                 count_messages.unshift( _.sum( count_messages ) )
+                let currentchat = Object.assign( [], state.currentchat )
+                if(state.activeRoomIndex){
+                    currentchat = action.messages[ state.activeRoomIndex ]
+                }
+                else{
+                    currentchat=[]
+                }
                 return Object.assign( {}, state, {
                     messages: action.messages,
                     loadingmessage:false,
                     room_titles:room_titles,
-                    count_messages:count_messages
+                    count_messages:count_messages,
+                    currentchat:currentchat
                 })
             }
         case SELECT_CHAT:
@@ -63,7 +69,7 @@ export default function messageDuck( state = initialState, action ) {
             })
         case SEND_MESSAGE_SUCCESS:
             let newMessages = Object.assign( {}, state.messages )
-            newMessages[ state.activeRoomIndex ] = newMessages[ state.activeRoomIndex ].concat( action.payload[0] )
+            newMessages[ state.activeRoomIndex ] = newMessages[ state.activeRoomIndex ].concat( action.payload[ 0 ] )
             return Object.assign( {}, state,{
                 submittingmessage:false,
                 currentchat:state.currentchat.concat( action.payload ),
@@ -75,27 +81,26 @@ export default function messageDuck( state = initialState, action ) {
 }
 
 export function getMessages( messages ) {
-    return {
-        type: GET_MESSAGES,
-        messages
+    return dispatch => {
+        dispatch( { type: GET_MESSAGES,messages } )
     }
 }
 
-export function sendMessage( adminid,userid,message,index ){
-    let messagebody = { adminid,userid,message,index }
+export function sendMessage( adminid, userid, message, index ){
+    let messagebody = { adminid, userid, message, index }
     postMessage( messagebody )
     return { type: SEND_MESSAGE_PENDING }
 }
 
 export function updateMessages( data ) {
-    return { type:SEND_MESSAGE_SUCCESS,payload:data }
+    return { type:SEND_MESSAGE_SUCCESS, payload:data }
 }
 
-export function getChat( allmessages,key,adminid ) {
+export function getChat( allmessages, key, adminid ) {
     let data = allmessages[ key ]
-    let chatUpdateObj = { key,adminid }
-    return dispatch=>{
+    let chatUpdateObj = { key, adminid }
+    return dispatch => {
         chatRead( chatUpdateObj )
-        dispatch( { type:SELECT_CHAT,payload:data,index: key } )
+        dispatch( { type:SELECT_CHAT, payload:data, index: key } )
     }
 }

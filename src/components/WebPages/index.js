@@ -9,9 +9,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import {connect} from "react-redux";
 import {updateComps} from '../../ducks/compDuck'
-import axiosLibrary from 'axios'
+import axiosLibrary from 'axios';
+import { APISERVERPATH } from '../../config.json'
+
 const axios = axiosLibrary.create({withCredentials: true})
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = APISERVERPATH;
 
 class WebPages extends Component {
   constructor() {
@@ -36,7 +38,6 @@ class WebPages extends Component {
           })
       })
       .catch(err => {
-          console.log(err)
       });
   }
   addInputs() {
@@ -80,7 +81,6 @@ class WebPages extends Component {
     .then((response) => {
       this.props.updateComps(componentCompleted);
       }).catch(err => {
-        console.log(err)
       });
 
     e.preventDefault()

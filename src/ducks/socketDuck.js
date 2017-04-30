@@ -1,7 +1,7 @@
 import { socket } from '../socket-listeners';
 
-export function authenticate( userId ) {
-    socket.emit( 'authenticated', userId )
+export function authenticate( adminId ) {
+    socket.emit( 'authenticated', adminId )
 }
 
 export function postMessage( message ) {

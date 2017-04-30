@@ -2,6 +2,7 @@ import axiosLibrary from 'axios';
 const axios = axiosLibrary.create( { withCredentials: true } );
 import { authenticate,fetchMessages } from './socketDuck';
 import { swal } from 'react-redux-sweetalert';
+import { APISERVERPATH } from '../config.json'
 
 //Action Definitions
     const AUTH_REQUEST = "AUTH_REQUEST",
@@ -12,8 +13,7 @@ import { swal } from 'react-redux-sweetalert';
         LOGOUT = "LOGOUT",
         SIGNUP_FAILURE = "SIGNUP_FAILURE",
         SOCKET_CONNECTED = "SOCKET_CONNECTED",
-        BASE_URL = "http://localhost:3001",
-        BASE_API_URL = BASE_URL + "/api";
+        BASE_API_URL = APISERVERPATH;
 
 //Initial State
     const initialState = {
@@ -110,11 +110,12 @@ import { swal } from 'react-redux-sweetalert';
         return { type: SIGNUP_FAILURE, error: err }
     }
 
+//Export Functions
+
     export function socketConnected( data ) {
         return { type: SOCKET_CONNECTED, payload: data }
     }
 
-//Export Functions
     export function checkUserAuth() {
         return ( dispatch => {
             if( localStorage.getItem( 'token' ) ){

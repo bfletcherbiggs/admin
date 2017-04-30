@@ -9,9 +9,10 @@ import SaveButton from 'material-ui/svg-icons/file/cloud-upload';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import {updateComps} from '../../ducks/compDuck'
-import axiosLibrary from 'axios'
+import axiosLibrary from 'axios';
+import { APISERVERPATH } from '../../config.json';
 const axios = axiosLibrary.create({withCredentials: true})
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = APISERVERPATH;
 
 class BizInfo extends Component {
   constructor() {
@@ -40,7 +41,7 @@ class BizInfo extends Component {
           })
       })
       .catch(err => {
-          console.log(err)
+
       });
   }
 
@@ -66,7 +67,6 @@ class BizInfo extends Component {
     .then((response) => {
       this.props.updateComps(componentCompleted);
       }).catch(err => {
-        console.log(err)
       });
 
     e.preventDefault()

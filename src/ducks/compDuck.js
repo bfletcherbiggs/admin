@@ -1,11 +1,13 @@
-import axiosLibrary from 'axios'
-const axios = axiosLibrary.create({withCredentials: true})
+import axiosLibrary from 'axios';
+import { APISERVERPATH } from '../config.json';
+const axios = axiosLibrary.create({withCredentials: true});
+
 
   const COMP_REQUEST = "COMP_REQUEST",
     COMP_SUCCESS = "COMP_SUCCESS",
     COMP_FAILURE = "COMP_FAILURE",
     COMP_COMPLETED = "COMP_COMPLETED",
-    BASE_URL = "http://localhost:3001/api";
+    BASE_URL = APISERVERPATH;
 
   const initialState = {
     varComponentTypes: [],
@@ -37,11 +39,12 @@ const axios = axiosLibrary.create({withCredentials: true})
         })
       case COMP_COMPLETED:
         var completedArr = {}
-        Object.assign(completedArr, state.varComponentTypes)
-        completedArr.data.map(function(comp){
+        Object.assign( completedArr, state.varComponentTypes )
+        completedArr.data.map( comp => {
           if (comp.compName === action.payload.component) {
-            comp.completed = action.payload.completed
+            return comp.completed = action.payload.completed
           }
+          return comp
         })
         return Object.assign({}, state, {
           varComponentTypes: completedArr
@@ -84,7 +87,6 @@ const axios = axiosLibrary.create({withCredentials: true})
       dispatch(compComplete(data))
       axios.put(BASE_URL + '/comps', data).then((response) => {
       }).catch(err => {
-        console.log(err)
         dispatch(compFailure(err.response.data))
       });
   }
