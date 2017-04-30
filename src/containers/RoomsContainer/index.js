@@ -13,6 +13,7 @@ import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 //EXPORTED FUNCTIONS
 import { getChat,sendMessage } from '../../ducks/messageDuck'
+import { chatRead } from '../../ducks/socketDuck'
 //CSS
 import "./RoomsContainer.css"
 
@@ -39,8 +40,8 @@ class RoomsContainer extends Component {
     handleSubmit( e ) {
         e.preventDefault();
         this.props.sendMessage(
-            this.props.currentchat[0].user_id,
-            this.props.currentchat[0].admin_id,
+            this.props.currentchat[ 0 ].user_id,
+            this.props.currentchat[ 0 ].admin_id,
             this.state.message,
             this.props.activeRoomIndex
         )
@@ -58,19 +59,19 @@ class RoomsContainer extends Component {
           } = this.props;
 
         const roomTime = room_titles.map( ( room, idx ) => {
-           let messageCount = count_messages[idx + 1]
-           let text = room[0].firstname + " " + room[0].lastname;
+           let messageCount = count_messages[ idx + 1 ]
+           let text = room[ 0 ].firstname + " " + room[ 0 ].lastname;
             return (
                 <ListItem
                     primaryText={ text }
                     rightIcon={ <CommunicationChatBubble /> }
-                    key={ room[0].chat_id }
-                    onClick={ ()=>this._selectActiveRoom( room[0].chat_id ) }
+                    key={ room[ 0 ].chat_id }
+                    onClick={ () => this._selectActiveRoom( room[ 0 ].chat_id ) }
                 >
                    {
                       messageCount
                       ?
-                      <span>{messageCount}</span>
+                      <span>{ messageCount }</span>
                       :
                       null
                   }
@@ -80,16 +81,16 @@ class RoomsContainer extends Component {
         const messageBox = currentchat.map( ( message, index ) => {
             if( message.type==='user' ){
                 return(
-                    <div className="message-container user" key={index}>
-                        <h1>{message.message}</h1>
-                        <h2>{moment(message.timestamp).format("MMM Do YY")}</h2>
+                    <div className="message-container user" key={ index }>
+                        <h1>{ message.message }</h1>
+                        <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2>
                     </div>
                 )
             }
             return(
-                <div className="message-container" key={index}>
-                  <h1>{message.message}</h1>
-                  <h2>{moment(message.timestamp).format("MMM Do YY")}</h2>
+                <div className="message-container" key={ index }>
+                  <h1>{ message.message }</h1>
+                  <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2>
                 </div>
             )
         })
@@ -111,10 +112,10 @@ class RoomsContainer extends Component {
                               onChange={ this.handleChange.bind( this, 'message' ) }
                           />
                           <FlatButton
-                              type="submit"
-                              label="Send"
-                              disabled={ !activeRoomIndex }
-                              primary={ true }
+                             type="submit"
+                             label="Send"
+                             disabled={ !activeRoomIndex }
+                             primary={ true }
                           />
                       </form>
                     </div>
@@ -138,4 +139,4 @@ function mapStateToProps( state ) {
     }
 }
 
-export default withRouter( connect( mapStateToProps, { getChat,sendMessage } )( RoomsContainer ) )
+export default withRouter( connect( mapStateToProps, { getChat,sendMessage,chatRead } )( RoomsContainer ) )

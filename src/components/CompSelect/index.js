@@ -28,36 +28,42 @@ class CompSelect extends Component{
     render(){
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state
-        var compCount = 0;
-        var compCount1 = 0;
-        const componentMap = componentTypes.map((type, index) => {
-          var check = false
-          var check2 = false;
-          for (var comp in varComponentTypes.data) {
-            if (varComponentTypes.data[comp].compName === type.name) {
-              check = true;
-              compCount1 += 1;
-              type.statusName = varComponentTypes.data[comp].statusName
-              type.key = varComponentTypes.data[comp].id
-              if (varComponentTypes.data[comp].completed === true) {
-                compCount += 1;
-                check2 = true;
-              }
+        let compCount = 0;
+        let compCount1 = 0;
+        const componentMap = componentTypes.map( (type, index) => {
+            let check = false
+            let check2 = false;
+            for (let comp in varComponentTypes.data) {
+                if (varComponentTypes.data[comp].compName === type.name) {
+                    check = true;
+                    compCount1 += 1;
+                    type.statusName = varComponentTypes.data[comp].statusName
+                    type.key = varComponentTypes.data[comp].id
+                    if (varComponentTypes.data[comp].completed === true) {
+                        compCount += 1;
+                        check2 = true;
+                    }
+                }
             }
-          }
-          if (check && check2) {
-            return <div key={type.key} className='compSelect-status-point sPComplete'>
-              <div>{type.name}</div>
-              <div>Complete</div>
-              <div><button>Add</button><button>Remove</button></div>
-            </div>
-          } else if (check) {
-            return <div key={type.key} className='compSelect-status-point sPIncomplete'>
-              <div>{type.name}</div>
-              <div>Incomplete</div>
-              <div><button>Add</button><button>Remove</button></div>
-            </div>
-          }
+            if ( check && check2 ) {
+                return (
+                    <div key={type.key} className='compSelect-status-point sPComplete'>
+                        <div>{type.name}</div>
+                        <div>Complete</div>
+                        <div><button>Add</button><button>Remove</button></div>
+                    </div>
+                )
+            }
+            else if ( check ) {
+                return (
+                    <div key={type.key} className='compSelect-status-point sPIncomplete'>
+                        <div>{type.name}</div>
+                        <div>Incomplete</div>
+                        <div><button>Add</button><button>Remove</button></div>
+                    </div>
+                )
+            }
+            return ( check )
         })
 
         return (

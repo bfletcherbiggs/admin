@@ -34,38 +34,43 @@ class CompStatus extends Component{
     render(){
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state
-        var compCount = 0;
-        var compCount1 = 0;
+        let compCount = 0;
+        let compCount1 = 0;
         const componentMap = componentTypes.map((type, index) => {
-          var check = false
-          var check2 = false;
-          for (var comp in varComponentTypes.data) {
+        let check = false
+        let check2 = false;
+        for (let comp in varComponentTypes.data) {
             if (varComponentTypes.data[comp].compName === type.name) {
-              check = true;
-              compCount1 += 1;
-              type.statusName = varComponentTypes.data[comp].statusName
-              type.key = varComponentTypes.data[comp].id
-              if (varComponentTypes.data[comp].completed === true) {
-                compCount += 1;
-                check2 = true;
-              }
+                check = true;
+                compCount1 += 1;
+                type.statusName = varComponentTypes.data[comp].statusName
+                type.key = varComponentTypes.data[comp].id
+                if (varComponentTypes.data[comp].completed === true) {
+                    compCount += 1;
+                    check2 = true;
+                }
             }
-          }
-          var statusPoints;
-          if (check && check2) {
-            return <div key={type.key} className='status-point sPComplete'>
-              <IconButton tooltip={type.statusName} tooltipPosition="top-center">
-                <IconComplete color={grey50}/>
-              </IconButton>
-            </div>
-          } else if (check) {
-            return <div key={type.key} className='status-point sPIncomplete'>
-              <IconButton tooltip={type.statusName} tooltipPosition="top-center">
-                <IconNotComplete color={grey50}/>
-              </IconButton>
-            </div>
-          }
-        })
+        }
+        if ( check && check2 ) {
+            return (
+                <div key={type.key} className='status-point sPComplete'>
+                    <IconButton tooltip={type.statusName} tooltipPosition="top-center">
+                        <IconComplete color={grey50}/>
+                    </IconButton>
+                </div>
+            )
+        }
+        else if ( check ) {
+            return (
+                <div key={type.key} className='status-point sPIncomplete'>
+                    <IconButton tooltip={type.statusName} tooltipPosition="top-center">
+                        <IconNotComplete color={grey50}/>
+                    </IconButton>
+                </div>
+            )
+        }
+        return ( check )
+    })
         var percentCompleted = Math.floor((compCount / compCount1) * 100);
 
         return (
