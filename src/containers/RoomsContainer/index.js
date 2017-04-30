@@ -13,7 +13,6 @@ import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 //EXPORTED FUNCTIONS
 import { getChat,sendMessage } from '../../ducks/messageDuck'
-import { chatRead } from '../../ducks/socketDuck'
 //CSS
 import "./RoomsContainer.css"
 
@@ -40,8 +39,8 @@ class RoomsContainer extends Component {
     handleSubmit( e ) {
         e.preventDefault();
         this.props.sendMessage(
-            this.props.currentchat[ 0 ].user_id,
             this.props.currentchat[ 0 ].admin_id,
+            this.props.currentchat[ 0 ].user_id,
             this.state.message,
             this.props.activeRoomIndex
         )
@@ -52,13 +51,14 @@ class RoomsContainer extends Component {
 
     render() {
         const {
+            filter_room_titles,
             room_titles,
             currentchat,
             activeRoomIndex,
             count_messages
           } = this.props;
 
-        const roomTime = room_titles.map( ( room, idx ) => {
+        const roomTime = filter_room_titles.map( ( room, idx ) => {
            let messageCount = count_messages[ idx + 1 ]
            let text = room[ 0 ].firstname + " " + room[ 0 ].lastname;
             return (
@@ -135,8 +135,9 @@ function mapStateToProps( state ) {
         socket: state.authDuck.socket,
         loadingmessages: state.messageDuck.loadingmessages,
         activeRoomIndex: state.messageDuck.activeRoomIndex,
-        count_messages: state.messageDuck.count_messages
+        count_messages: state.messageDuck.count_messages,
+        filter_room_titles:state.messageDuck.filter_room_titles
     }
 }
 
-export default withRouter( connect( mapStateToProps, { getChat,sendMessage,chatRead } )( RoomsContainer ) )
+export default withRouter( connect( mapStateToProps, { getChat,sendMessage } )( RoomsContainer ) )
