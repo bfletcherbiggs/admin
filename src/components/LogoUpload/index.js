@@ -117,6 +117,7 @@ class LogoUpload extends Component {
     return (
       <main className="input-tile">
         <Paper style={pstyle} zDepth={1}>
+          <a name="LogoUpload"></a>
           <div id="fileup">
             <div className="input-header-title">Upload Your Logo</div>
             <div className="input-description">Prefer Vector but accept these files: .jpeg .pdf .ai .psd .png .svg

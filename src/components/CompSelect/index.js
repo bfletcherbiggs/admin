@@ -15,20 +15,50 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
+//API CALLS
+import {addComps, removeComps} from '../../ducks/compDuck'
+import axiosLibrary from 'axios'
+const axios = axiosLibrary.create({withCredentials: true})
+const BASE_URL = "http://localhost:3001/api";
 
 class CompSelect extends Component{
     constructor(props) {
         super(props);
         this.state = {
             componentTypes: [
-                {component: < SocialInputs />, name: 'SocialInputs'},
-                {component: < LogoUpload />, name: 'LogoUpload'},
-                {component: < BizInfo />, name: 'BizInfo'},
-                {component: < BillInfo />, name: 'BillInfo'},
-                {component: < WebPages />, name: 'WebPages'},
-                {component: < Design />, name: 'Design'}
+                {component: < SocialInputs />, name: 'SocialInputs', tooltip: 'SocialInputs'},
+                {component: < LogoUpload />, name: 'LogoUpload', tooltip: 'LogoUpload'},
+                {component: < BizInfo />, name: 'BizInfo', tooltip: 'BizInfo'},
+                {component: < BillInfo />, name: 'BillInfo', tooltip: 'BillInfo'},
+                {component: < WebPages />, name: 'WebPages', tooltip: 'WebPages'},
+                {component: < Design />, name: 'Design', tooltip: 'Design'}
             ]
         }
+    }
+
+    addComponent(componentIndex, e) {
+
+      //TODO change user ID and project ID
+        const componentToAdd = {
+            created_at: 'now()',
+            updated_at: 'now()',
+            user_id: 2,
+            compName: this.state.componentTypes[componentIndex].name,
+            statusName: this.state.componentTypes[componentIndex].tooltip,
+            completed: false,
+            project_id: 2
+        }
+        this.props.addComps(componentToAdd)
+        e.preventDefault()
+
+    }
+    removeComponent(componentIndex, e) {
+        const componentToDelete = {
+            compName: this.state.componentTypes[componentIndex].name,
+            user_id: 2
+        }
+        this.props.removeComps(componentToDelete)
+        e.preventDefault()
     }
     render(){
         const style = {
@@ -46,36 +76,28 @@ class CompSelect extends Component{
 
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state
-        var compCount = 0;
-        var compCount1 = 0;
+
         const componentMap = componentTypes.map((type, index) => {
-          var check = false
-          var check2 = false;
-          for (var comp in varComponentTypes.data) {
-            if (varComponentTypes.data[comp].compName === type.name) {
-              check = true;
-              compCount1 += 1;
-              type.statusName = varComponentTypes.data[comp].statusName
-              type.key = varComponentTypes.data[comp].id
-              if (varComponentTypes.data[comp].completed === true) {
-                compCount += 1;
-                check2 = true;
+          type.key = index
+          var compIncluded = false;
+            for (var comp in varComponentTypes.data) {
+              if (varComponentTypes.data[comp].compName === type.name) {
+                compIncluded = true;
               }
             }
-          }
-          if (check && check2) {
+          if (compIncluded) {
             return <div key={type.key} className='compSelect-status-point sPComplete'>
               <div className="compSelect-floating">
-                <FloatingActionButton style={floatingStyle} backgroundColor={teal600} mini={true} className="FloatingActionButton1">
-                  <ContentAdd/>
+                <FloatingActionButton style={floatingStyle} onClick={this.removeComponent.bind(this, [type.key])} backgroundColor={teal600} mini={true} className="FloatingActionButton1">
+                  <ContentRemove/>
               </FloatingActionButton>
               <RaisedButton label={type.name} primary={false} style={style}/>
             </div>
             </div>
-          } else if (check) {
+          } else {
             return <div key={type.key} className='compSelect-status-point sPIncomplete'>
               <div className="compSelect-floating">
-                <FloatingActionButton style={floatingStyle} backgroundColor={teal600} mini={true} className="FloatingActionButton1">
+                <FloatingActionButton style={floatingStyle} onClick={this.addComponent.bind(this, [type.key])} backgroundColor={teal600} mini={true} className="FloatingActionButton1">
                   <ContentAdd/>
               </FloatingActionButton>
               <RaisedButton label={type.name} primary={false} style={style}/>
@@ -97,4 +119,4 @@ function mapStateToProps( state ) {
     return {varComponentTypes: state.compDuck.varComponentTypes};
 }
 
-export default connect( mapStateToProps, {})( CompSelect );
+export default connect( mapStateToProps, {addComps, removeComps})( CompSelect );

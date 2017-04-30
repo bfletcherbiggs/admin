@@ -161,6 +161,7 @@ class WebPages extends Component {
     return (
       <main className="input-tile">
         <Paper style={pstyle} zDepth={1}>
+          <a name="WebPages"></a>
           <div >
             <div className="input-header-title">Website Pages Content</div>
             <div className="input-description">Enter your Page Title & Text Content for that Page. Add as many pages as you need.</div>

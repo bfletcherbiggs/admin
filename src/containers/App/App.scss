@@ -16,10 +16,15 @@ input:-webkit-autofill {
 }
 
 $green: #0E4341;
+html {
 
-html, body {
-  height: 100%;
+}
+body {
   font-family: 'Roboto', sans-serif;
+}
+.app {
+
+
 }
 .landing {
   padding-bottom: 60px;
@@ -68,15 +73,11 @@ padding-top: 10px;
   background-size: cover;
   background-color: #0E4341;
   min-height: 100vh;
-
 }
 .input-tile {
   width: 50%;
-  // margin: auto;
   padding-left: 4px;
   padding-bottom: 50px;
-
-
 }
 .hovertexttest{
 margin: 0 27px;
