@@ -138,8 +138,8 @@ class LogoUpload extends Component {
                                 labelPosition="before"
                                 icon={< UploadButton />}
                                 style={styles.button}
-                                backgroundColor="#1C333D" l
-                                abelColor="#FFFFFF"
+                                backgroundColor="#1C333D"
+                                labelColor="#FFFFFF"
                                 buttonStyle={{ fontWeight: 100 }}
                                 containerElement="label"
                                 onTouchTap={this.handleTouchTap}
