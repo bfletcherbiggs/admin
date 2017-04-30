@@ -103,6 +103,7 @@ class BizInfo extends Component {
     return (
       <main className="input-tile">
         <Paper style={pstyle} zDepth={1}>
+          <a name="BizInfo"></a>
           <div >
             <div className="input-header-title">General Business Info</div>
             <div className="input-description">Provide your business information for website.</div>

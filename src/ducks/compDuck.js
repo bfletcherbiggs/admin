@@ -2,19 +2,18 @@ import axiosLibrary from 'axios';
 import { APISERVERPATH } from '../config.json';
 const axios = axiosLibrary.create({withCredentials: true});
 
-
   const COMP_REQUEST = "COMP_REQUEST",
     COMP_SUCCESS = "COMP_SUCCESS",
     COMP_FAILURE = "COMP_FAILURE",
     COMP_COMPLETED = "COMP_COMPLETED",
     BASE_URL = APISERVERPATH;
 
-  const initialState = {
-    varComponentTypes: [],
-    loadingComps: false,
-    compsLoaded: false,
-    errorLoadingComps: false,
-  };
+const initialState = {
+  varComponentTypes: [],
+  loadingComps: false,
+  compsLoaded: false,
+  errorLoadingComps: false,
+};
 
   export default function compDuck(state = initialState, action) {
     switch (action.type) {
@@ -53,41 +52,64 @@ const axios = axiosLibrary.create({withCredentials: true});
         return state;
     }
   }
+}
 
-  function compSuccess(response) {
-    return {type: COMP_SUCCESS, payload: response}
-  }
+function compSuccess(response) {
+  return {type: COMP_SUCCESS, payload: response}
+}
 
-  function compRequest() {
-    return {type: COMP_REQUEST}
-  }
+function compRequest() {
+  return {type: COMP_REQUEST}
+}
 
-  function compFailure(err) {
-    return {type: COMP_FAILURE, error: err}
-  }
-  function compComplete(response) {
-    return {type: COMP_COMPLETED, payload: response}
-  }
+function compFailure(err) {
+  return {type: COMP_FAILURE, error: err}
+}
+function compComplete(response) {
+  return {type: COMP_COMPLETED, payload: response}
+}
 
-  export function getComps() {
-    return (dispatch) => {
-      dispatch(compRequest())
-      axios.get(BASE_URL + '/comps').then((response) => {
-        dispatch(compSuccess(response))
-      }).catch(err => {
-        if (err.response) {
-        dispatch(compFailure(err.response.data))
-      }
-      });
+export function getComps() {
+  return (dispatch) => {
+    dispatch(compRequest())
+    axios.get(BASE_URL + '/comps').then((response) => {
+      dispatch(compSuccess(response))
+    }).catch(err => {
+      if (err.response) {
+      dispatch(compFailure(err.response.data))
     }
+    });
   }
+}
 
-  export function updateComps(data) {
-    return (dispatch) => {
-      dispatch(compComplete(data))
-      axios.put(BASE_URL + '/comps', data).then((response) => {
-      }).catch(err => {
-        dispatch(compFailure(err.response.data))
-      });
+export function updateComps(data) {
+  return (dispatch) => {
+    dispatch(compComplete(data))
+    axios.put(BASE_URL + '/comps', data).then((response) => {
+    }).catch(err => {
+      dispatch(compFailure(err.response.data))
+    });
+  }
+}
+
+export function addComps(data) {
+  return (dispatch) => {
+    dispatch(compRequest())
+    axios.post(BASE_URL + '/comps', data).then((response) => {
+      dispatch(compSuccess(response))
+    }).catch(err => {
+      dispatch(compFailure(err.response.data))
+    });
+  }
+}
+
+export function removeComps(data) {
+  return (dispatch) => {
+    dispatch(compRequest())
+    axios.delete(BASE_URL + '/comps', { params: data }).then((response) => {
+      dispatch(compSuccess(response))
+    }).catch(err => {
+      dispatch(compFailure(err.response.data))
+    });
   }
 }

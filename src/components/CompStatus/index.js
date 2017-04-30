@@ -38,13 +38,25 @@ class CompStatus extends Component{
     printInputs() {
             var mywindow = window.open('', 'new div', 'height=700,width=800');
             mywindow.document.write('<html><head><title></title>');
-            mywindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" type="text/css" media="print">>');
-            mywindow.document.write(' <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons type="text/css" media="print">');
-            mywindow.document.write(' <link rel="stylesheet" href="./style.css" type="text/css" media="print">');
-            mywindow.document.write('</head><body >');
-            var billingpocPrint = document.getElementById('billingPOC').value
+            mywindow.document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" type="text/css" media="print">');
+            mywindow.document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons type="text/css" media="print">');
+            mywindow.document.write('<link rel="stylesheet" href="./style.css" type="text/css" media="print">');
+            mywindow.document.write('</head><body>');
+            var billingPocPrint = document.getElementById('billingPOC').value
             mywindow.document.write('Billing Point of Contact: <br/>');
-            mywindow.document.write(billingpocPrint);
+            mywindow.document.write(billingPocPrint+'<br/>');
+            var billingPhonenumberPrint = document.getElementById('billingphonenumber').value
+            mywindow.document.write('Billing Phone Number: <br/>');
+            mywindow.document.write(billingPhonenumberPrint+'<br/>');
+            var billingEmailPrint = document.getElementById('billingemail').value
+            mywindow.document.write('Billing Email: <br/>');
+            mywindow.document.write(billingEmailPrint+'<br/>');
+            var billingAddPrint = document.getElementById('billingadd').value
+            var billingCityPrint = document.getElementById('billingcity').value
+            var billingStatePrint = document.getElementById('billingstate').value
+            var billingZipPrint = document.getElementById('billingzip').value
+            mywindow.document.write('Billing Address: <br/>');
+            mywindow.document.write(billingAddPrint+'<br/>'+billingCityPrint+', '+billingStatePrint+' '+billingZipPrint+'<br/>');
             mywindow.document.write('<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>');
             mywindow.document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>');
             mywindow.document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>');
@@ -54,12 +66,12 @@ class CompStatus extends Component{
             mywindow.document.write('</body></html>');
             mywindow.document.close();
             mywindow.focus();
-            setTimeout(function() {
-                mywindow.print();
-                setTimeout(function() {
-                mywindow.close();
-                }, 1500);
-            }, 1500);
+            // setTimeout(function() {
+            //     mywindow.print();
+            //     setTimeout(function() {
+            //     mywindow.close();
+            //     }, 1500);
+            // }, 1500);
           }
 
     render(){
@@ -88,36 +100,35 @@ class CompStatus extends Component{
                     check2 = true;
                 }
             }
-        }
-        if ( check && check2 ) {
-            return (
-                <div key={type.key} className='status-point sPComplete'>
-                    <IconButton tooltip={type.statusName} tooltipPosition="top-center">
+          }
+          var statusPoints;
+          if (check && check2) {
+            return <a href={"#"+type.name}>
+                    <div key={type.key} className='status-point sPComplete'>
+                      <IconButton tooltip={type.statusName} tooltipPosition="top-center">
                         <IconComplete color={grey50}/>
-                    </IconButton>
-                </div>
-            )
-        }
-        else if ( check ) {
-            return (
-                <div key={type.key} className='status-point sPIncomplete'>
-                    <IconButton tooltip={type.statusName} tooltipPosition="top-center">
+                      </IconButton>
+                    </div>
+                  </a>
+          } else if (check) {
+            return <a href={"#"+type.name}>
+                    <div key={type.key} className='status-point sPComplete'>
+                      <IconButton tooltip={type.statusName} tooltipPosition="top-center">
                         <IconNotComplete color={grey50}/>
-                    </IconButton>
-                </div>
-            )
-        }
-        return ( check )
-    })
-        var percentCompleted = Math.floor((compCount / compCount1) * 100);
+                      </IconButton>
+                    </div>
+                  </a>
+          }
+        })
 
+        var percentCompleted = Math.floor((compCount / compCount1) * 100);
+      
         return (
             <div className="compstatus-main">
               <div className="compStatus-selectedUser">Selected User</div>
               <div className="compStatus-selectedCompany">Company</div>
               <div className="compstatus-links-box" >
                 <div className="compstatus-links">
-              
                     <Link to="/admin/components">
                     <IconButton tooltip="message" >
                         <Dashboard color={ grey50 }/>

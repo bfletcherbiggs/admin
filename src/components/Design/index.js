@@ -94,7 +94,9 @@ class Design extends Component {
     return (
       <main className="input-tile">
         <Paper style={pstyle} zDepth={1}>
+          <a name="Design"></a>
           <div >
+
             <div className="input-header-title">Design</div>
             <div className="input-description">These questions are designed to help us with our design and build process.</div>
 

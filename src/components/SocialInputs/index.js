@@ -109,6 +109,7 @@ class SocialInputs extends Component {
 
       <main className="input-tile">
         <Paper style={pstyle} zDepth={1}>
+          <a name="SocialInputs"></a>
           <div >
             <div className="input-header-title">Social Media Links</div>
             <div className="input-description">Find your social network links and copy and paste them below.</div>

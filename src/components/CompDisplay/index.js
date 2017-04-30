@@ -29,11 +29,7 @@ class CompDisplay extends Component{
         }
 
     }
-    componentWillReceiveProps(nextProps) {
-    }
-    componentDidMount() {
-
-    }
+    
     render(){
         const {varComponentTypes} = this.props;
         const {componentTypes} = this.state

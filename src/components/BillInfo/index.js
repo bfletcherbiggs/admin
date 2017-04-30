@@ -41,7 +41,7 @@ class BillInfo extends Component {
           this.setState({
               billingpoc: inputsFromServer.billingpoc,
               billingphonenumber: inputsFromServer.billingphonenumber,
-              billingemai: inputsFromServer.billingemai,
+              billingemail: inputsFromServer.billingemail,
               billingadd: inputsFromServer.billingadd,
               billingcity: inputsFromServer.billingcity,
               billingstate: inputsFromServer.billingstate,
@@ -114,6 +114,7 @@ class BillInfo extends Component {
     return (
       <main className="input-tile">
         <Paper style={pstyle} zDepth={1}>
+          <a name="BillInfo"></a>
           <div >
             <div className="input-header-title">Billing Information</div>
             <div className="input-description">This is for Goldsage Billing Contact Info and payment processing</div>
