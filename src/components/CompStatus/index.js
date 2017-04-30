@@ -103,16 +103,16 @@ class CompStatus extends Component{
           }
           var statusPoints;
           if (check && check2) {
-            return <a href={"#"+type.name}>
-                    <div key={type.key} className='status-point sPComplete'>
+            return <a href={"#"+type.name} key={type.key} >
+                    <div className='status-point sPComplete'>
                       <IconButton tooltip={type.statusName} tooltipPosition="top-center">
                         <IconComplete color={grey50}/>
                       </IconButton>
                     </div>
                   </a>
           } else if (check) {
-            return <a href={"#"+type.name}>
-                    <div key={type.key} className='status-point sPComplete'>
+            return <a href={"#"+type.name} key={type.key} >
+                    <div className='status-point sPComplete'>
                       <IconButton tooltip={type.statusName} tooltipPosition="top-center">
                         <IconNotComplete color={grey50}/>
                       </IconButton>
@@ -122,7 +122,7 @@ class CompStatus extends Component{
         })
 
         var percentCompleted = Math.floor((compCount / compCount1) * 100);
-      
+
         return (
             <div className="compstatus-main">
               <div className="compStatus-selectedUser">Selected User</div>

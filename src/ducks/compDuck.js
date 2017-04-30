@@ -52,7 +52,7 @@ const initialState = {
         return state;
     }
   }
-}
+
 
 function compSuccess(response) {
   return {type: COMP_SUCCESS, payload: response}
