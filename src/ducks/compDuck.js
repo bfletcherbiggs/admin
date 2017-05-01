@@ -69,10 +69,10 @@ function compComplete( response ) {
     return { type: COMP_COMPLETED, payload: response }
 }
 
-export function getComps() {
+export function getComps(data) {
     return dispatch => {
         dispatch( compRequest() )
-        axios.get( BASE_URL + '/comps' )
+        axios.get( BASE_URL + '/comps' , {params: data})
         .then( response => {
             dispatch( compSuccess( response ) )
         })

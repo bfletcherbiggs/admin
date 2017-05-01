@@ -11,7 +11,10 @@ import './adminMain.css';
 class AdminMain extends Component{
 
     componentDidMount() {
-        this.props.getComps()
+        const userId = {userId: this.props.userid}
+        if (userId.userId) {
+            this.props.getComps(userId)
+        }
     }
     render(){
         return (
@@ -26,7 +29,10 @@ class AdminMain extends Component{
 }
 
 const mapStateToProps = state => {
-    return { varComponentTypes: state.compDuck.varComponentTypes };
+    return {
+        varComponentTypes: state.compDuck.varComponentTypes,
+        userid: state.messageDuck.userid
+    };
 }
 
 export default connect( mapStateToProps, { getComps } )( AdminMain );

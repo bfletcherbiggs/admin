@@ -38,15 +38,14 @@ class CompSelect extends Component{
     }
 
     addComponent( componentIndex, e ) {
-      //TODO change user ID and project ID
         const componentToAdd = {
             created_at: 'now()',
             updated_at: 'now()',
-            user_id: 2,
+            user_id: this.props.userid,
             compName: this.state.componentTypes[ componentIndex ].name,
             statusName: this.state.componentTypes[ componentIndex ].tooltip,
             completed: false,
-            project_id: 2
+            project_id: this.props.userid
         }
         this.props.addComps( componentToAdd )
         e.preventDefault()
@@ -55,7 +54,7 @@ class CompSelect extends Component{
     removeComponent( componentIndex, e ) {
         const componentToDelete = {
             compName: this.state.componentTypes[ componentIndex ].name,
-            user_id: 2
+            user_id: this.props.userid
         }
         this.props.removeComps( componentToDelete )
         e.preventDefault()
@@ -131,7 +130,8 @@ class CompSelect extends Component{
 }
 
 const mapStateToProps = state => {
-    return { varComponentTypes: state.compDuck.varComponentTypes };
+    return { varComponentTypes: state.compDuck.varComponentTypes,
+    userid: state.messageDuck.userid };
 }
 
 export default connect( mapStateToProps, { addComps, removeComps })( CompSelect );

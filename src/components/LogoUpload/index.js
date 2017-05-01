@@ -31,9 +31,11 @@ class LogoUpload extends Component {
         e.preventDefault()
         let componentCompleted = {
             component: "LogoUpload",
-            completed: true
+            completed: true,
+            userId: this.props.userid
         }
-        return axios.get( BASE_URL + '/inputs/upload' )
+        let userId = { userId: this.props.userid }
+        return axios.get( BASE_URL + '/inputs/upload',  { params: userId }  )
         .then( response => {
             let ACCESS_TOKEN = response.data.dropboxkey;
             let dbx = new Dropbox( { accessToken: ACCESS_TOKEN } );
@@ -55,7 +57,8 @@ class LogoUpload extends Component {
     }
 
     componentDidMount() {
-        return axios.get( BASE_URL + '/inputs/upload' )
+        let userId = { userId: this.props.userid }
+        return axios.get( BASE_URL + '/inputs/upload',  { params: userId }  )
         .then( response => {
             let ACCESS_TOKEN = response.data.dropboxkey;
             let dbx = new Dropbox( { accessToken: ACCESS_TOKEN } );
@@ -163,5 +166,7 @@ class LogoUpload extends Component {
         )
     }
 }
-
-export default connect( state => state, { updateComps } )( LogoUpload );
+const mapStateToProps = state => {
+    return { userid: state.messageDuck.userid };
+}
+export default connect( mapStateToProps, { updateComps } )( LogoUpload );

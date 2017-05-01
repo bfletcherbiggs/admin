@@ -35,7 +35,8 @@ class BizInfo extends Component {
     }
 
     componentDidMount() {
-        axios.get( BASE_URL + '/inputs' )
+        let userId = { userId: this.props.userid }
+        axios.get( BASE_URL + '/inputs', { params: userId } )
         .then( response => {
             const inputsFromServer = response.data[ 0 ]
             this.setState( {
@@ -52,13 +53,17 @@ class BizInfo extends Component {
     saveInputs( e ) {
         let componentCompleted = {
             component: "BizInfo",
-            completed: false
+            completed: false,
+            userId: this.props.userid
         }
-        const inputsToServer = this.state;
+        const inputsToServer = {
+          inputs: Object.assign({}, this.state),
+          userId: this.props.userid
+        }
 
         let completeCheck = true;
-        for ( let stateCheck in inputsToServer ) {
-            if ( !inputsToServer[ stateCheck ] ) {
+        for ( let stateCheck in inputsToServer.inputs ) {
+            if ( !inputsToServer.inputs[ stateCheck ] ) {
                 completeCheck = false;
             }
         }
@@ -204,5 +209,7 @@ class BizInfo extends Component {
 
     }
 }
-
-export default connect( state => state, { setInputs, getInputs, updateComps } )( BizInfo )
+const mapStateToProps = state => {
+    return { userid: state.messageDuck.userid };
+}
+export default connect( mapStateToProps, { setInputs, getInputs, updateComps } )( BizInfo )

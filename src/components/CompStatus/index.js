@@ -23,7 +23,7 @@ import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 class CompStatus extends Component{
     constructor() {
         super()
-        
+
         this.state = {
             componentTypes: [
                 { component: < SocialInputs />, name: 'SocialInputs' },
