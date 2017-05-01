@@ -5,10 +5,10 @@ import { postMessage,chatRead } from './socketDuck';
 import { reset } from 'redux-form';
 
 const GET_MESSAGES = "GET_MESSAGES",
-    SELECT_CHAT = 'SELECT_CHAT',
-    SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS',
-    SEND_MESSAGE_PENDING = 'SEND_MESSAGE_PENDING',
-    FILTER_ROOMS = 'FILTER_ROOMS';
+      SELECT_CHAT = 'SELECT_CHAT',
+      SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS',
+      SEND_MESSAGE_PENDING = 'SEND_MESSAGE_PENDING',
+      FILTER_ROOMS = 'FILTER_ROOMS';
 
 const initialState = {
     messages:[{}],
@@ -33,29 +33,29 @@ export default function messageDuck( state = initialState, action ) {
                     room_titles:[],
                     filter_room_titles:[],
                     count_messages:[]
-                })
+                } )
             }
             else{
                 let room_titles = []
                 _.each( action.messages, message => {
                     room_titles.push( _.uniqBy( message, 'user_id' ) )
-                })
+                } )
                 _.each( room_titles, room => {
                     delete room[ 0 ].message
                     delete room[ 0 ].timestamp
                     delete room[ 0 ].read
                     delete room[ 0 ].type
-                })
+                } )
                 let count_messages = []
                 _.each( action.messages, messagegroup => {
                     count_messages.push( _.sumBy( messagegroup, message =>
                         message.read===false && message.type==='user'
                         ?1:0
-                    ))
-                })
+                    ) )
+                } )
                 count_messages.unshift( _.sum( count_messages ) )
                 let currentchat = Object.assign( [], state.currentchat )
-                if(state.activeRoomIndex){
+                if( state.activeRoomIndex ){
                     currentchat = action.messages[ state.activeRoomIndex ]
                 }
                 else{
@@ -68,7 +68,7 @@ export default function messageDuck( state = initialState, action ) {
                     filter_room_titles:room_titles,
                     count_messages:count_messages,
                     currentchat:currentchat
-                })
+                } )
             }
         case FILTER_ROOMS:
             let filteredRooms = Object.assign( {}, state.room_titles )
@@ -77,23 +77,23 @@ export default function messageDuck( state = initialState, action ) {
                 filter_room_titles:filteredRooms
             } )
         case SELECT_CHAT:
-            return Object.assign( {}, state,{
+            return Object.assign( {}, state, {
                 currentchat:action.payload,
                 activeRoomIndex: action.index,
                 userid:action.userid
-            })
+            } )
         case SEND_MESSAGE_PENDING:
-            return Object.assign( {}, state,{
+            return Object.assign( {}, state, {
                 submittingmessage:true
-            })
+            } )
         case SEND_MESSAGE_SUCCESS:
             let newMessages = Object.assign( {}, state.messages )
             newMessages[ state.activeRoomIndex ] = newMessages[ state.activeRoomIndex ].concat( action.payload[ 0 ] )
-            return Object.assign( {}, state,{
+            return Object.assign( {}, state, {
                 submittingmessage:false,
                 currentchat:state.currentchat.concat( action.payload ),
                 messages:newMessages
-            })
+            } )
         default:
             return state;
     }
@@ -109,8 +109,8 @@ export function sendMessage( adminid, userid, message, index ){
     let messagebody = { adminid, userid, message, index }
     postMessage( messagebody )
     return dispatch => {
-        dispatch( reset( 'messageForm' ) )
         dispatch( { type: SEND_MESSAGE_PENDING } )
+        dispatch( reset( 'messageForm' ) )
     }
 }
 
@@ -131,6 +131,6 @@ export function getChat( allmessages, key, adminid ) {
     let chatUpdateObj = { key, adminid }
     return dispatch => {
         chatRead( chatUpdateObj )
-        dispatch( { type:SELECT_CHAT, payload:data, index: key, userid:data[0].user_id } )
+        dispatch( { type:SELECT_CHAT, payload:data, index: key, userid:data[ 0 ].user_id } )
     }
 }

@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 //EXPORTED FUNCTIONS
 import { logout } from '../../ducks/authDuck';
 //MATERIAL UI
@@ -13,8 +13,8 @@ import Profile from 'material-ui/svg-icons/action/account-circle';
 import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
 import { grey50 } from 'material-ui/styles/colors';
 //CSS
-import goldsageLogo from "../../assets/logoforadminapp.svg";
-import "./nav.css";
+import goldsageLogo from '../../assets/logoforadminapp.svg';
+import './nav.css';
 
 class NavBarTop extends Component{
     constructor(){
@@ -44,7 +44,7 @@ class NavBarTop extends Component{
         }
 
         const badgeStyle = ()=>{
-            return ( count_messages[0] )?
+            return ( count_messages[ 0 ] )?
             { top: 12, right: 6 }
             :{ top: 24, right: 24,display:'none' }
         }
@@ -93,11 +93,11 @@ class NavBarTop extends Component{
     }
 };
 
-function mapStateToProps( state ) {
+const mapStateToProps = state => {
 	return {
         isAuthenticated: state.authDuck.isAuthenticated,
         count_messages: state.messageDuck.count_messages
-    };
+    }
 }
 
-export default connect( mapStateToProps, {logout})( NavBarTop );
+export default connect( mapStateToProps, { logout })( NavBarTop );

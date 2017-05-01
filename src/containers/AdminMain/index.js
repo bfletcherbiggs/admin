@@ -1,17 +1,17 @@
 //PACKAGES
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {getComps} from '../../ducks/compDuck'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getComps } from '../../ducks/compDuck';
 //COMPONENTS
 import Users from '../../components/Users/index';
 import Views from '../../components/Views/index';
 //CSS
-import "./adminMain.css";
+import './adminMain.css';
 
 class AdminMain extends Component{
+
     componentDidMount() {
-      this.props.getComps()
+        this.props.getComps()
     }
     render(){
         return (
@@ -23,11 +23,10 @@ class AdminMain extends Component{
             </div>
         )
     }
-
 }
 
-function mapStateToProps( state ) {
-    return {varComponentTypes: state.compDuck.varComponentTypes};
+const mapStateToProps = state => {
+    return { varComponentTypes: state.compDuck.varComponentTypes };
 }
 
-export default connect( mapStateToProps, {getComps})( AdminMain );
+export default connect( mapStateToProps, { getComps } )( AdminMain );

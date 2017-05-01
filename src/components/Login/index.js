@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 //EXPORTED FUNCTIONS
@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 //CSS
-import "./Login.css";
+import './Login.css';
 
 const renderTextField = ( { input, label, meta: { touched, error }, ...custom } ) => (
     <TextField
@@ -32,12 +32,11 @@ class LoginForm extends Component {
 
         this.handleSubmit = this.handleSubmit.bind( this );
         this.handleChange = this.handleChange.bind( this );
-
     }
 
-    handleSubmit( event ) {
+    handleSubmit( e ) {
         this.props.login( this.state )
-        event.preventDefault();
+        e.preventDefault();
     }
 
     handleChange( field, e ) {
@@ -58,13 +57,12 @@ class LoginForm extends Component {
         } = this.state
 
         if( isAuthenticated ){
-            return(
+            return (
                 <Redirect to='/admin'/>
             )
         }
 
         return (
-
             <form onSubmit={ this.handleSubmit } className="login-landing" >
                 <div className="login-container">
                     <div className="login-form-inputs">
@@ -86,7 +84,7 @@ class LoginForm extends Component {
                         <FlatButton
                             type="submit"
                             label="LOGIN"
-                            disabled={ loadingUser || pristine || !password}
+                            disabled={ loadingUser || pristine || !password }
                             primary={ true }
                         />
                     </div>
@@ -94,15 +92,14 @@ class LoginForm extends Component {
                 { ( loadingUser )?<CircularProgress size={ 80 } thickness={ 5 } />:null }
                 { ( loginError )? <div>Username/Password is Incorrect</div>:null }
             </form>
-
-        );
+        )
     }
 }
 
 const validate = values => {
     const errors = {}
     const requiredFields = [ 'email', 'password']
-    requiredFields.forEach(field => {
+    requiredFields.forEach( field => {
         if ( !values[ field ] ) {
             errors[ field ] = 'Required'
         }
@@ -113,12 +110,12 @@ const validate = values => {
     return errors
 }
 
-const form = reduxForm({
+const form = reduxForm( {
     form: 'loginForm',
     validate
-});
+} );
 
-function mapStateToProps( state ) {
+const mapStateToProps = state => {
     return {
         isAuthenticated: state.authDuck.isAuthenticated,
         errorAuthenticating: state.authDuck.errorAuthenticating,
