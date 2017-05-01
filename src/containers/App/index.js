@@ -1,17 +1,14 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from "react-redux";
-
+import { connect } from 'react-redux';
 //CONTAINERS
 import LoginPage from '../LoginPage/index';
 import AdminPage from '../AdminPage/index';
-import RoomsContainer from '../RoomsContainer/index';
 //EXPORTED FUNCTIONS
 import { checkUserAuth } from '../../ducks/authDuck';
 //CSS
-import "./App.css";
-
+import './App.css';
 
 class App extends Component{
 
@@ -35,20 +32,19 @@ class App extends Component{
                     <Switch>
                         <Route exact path="/" component={ LoginPage }/>
                         <PrivateRoute path="/admin" component={ AdminPage }/>
-                        <PrivateRoute path="/messages" component={ RoomsContainer }/>
                     </Switch>
                 </div>
             </div>
-        );
+        )
     }
 }
 
 injectTapEventPlugin( );
 
-const mapStateToProps = ( state => {
+const mapStateToProps = state => {
     return {
         isAuthenticated: state.authDuck.isAuthenticated
     }
-});
+}
 
 export default connect( mapStateToProps, { checkUserAuth } )( App );

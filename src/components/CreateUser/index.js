@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 //EXPORTED FUNCTIONS
 import { signup } from '../../ducks/authDuck'
@@ -8,7 +8,7 @@ import ReduxSweetAlert from 'react-redux-sweetalert';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 //CSS
-import "./CreateUser.css";
+import './CreateUser.css';
 
 const renderTextField = ( { input,label,meta: { touched,error },...custom } ) => (
     <TextField
@@ -35,7 +35,6 @@ class CreateUserForm extends Component {
 
         this.handleSubmit = this.handleSubmit.bind( this );
         this.handleChange = this.handleChange.bind( this );
-
     }
 
     handleSubmit( event ) {
@@ -44,7 +43,7 @@ class CreateUserForm extends Component {
     }
 
     handleChange( field, e ) {
-        this.setState( { [ field ]: e.target.value } )
+        this.setState( { [ field ] : e.target.value } )
     }
 
     render( ) {
@@ -54,7 +53,6 @@ class CreateUserForm extends Component {
 
         return (
             <div>
-
                 <form onSubmit={ this.handleSubmit } className="login-landing">
                     <div className="login-container">
                         <div className="login-form-inputs">
@@ -80,7 +78,7 @@ class CreateUserForm extends Component {
                                 label="Email"
                                 component={ renderTextField }
                                 name="email"
-                                onChange={this.handleChange.bind( this, 'email' ) }/>
+                                onChange={ this.handleChange.bind( this, 'email' ) }/>
                             <br/>
                             <Field
                                 label="Password"
@@ -104,14 +102,12 @@ class CreateUserForm extends Component {
     }
 }
 
-
-
 const validate = values => {
     const errors = {}
     const requiredFields = [ 'email', 'password', 'firstname', 'lastname' ]
     requiredFields.forEach( field => {
-        if ( !values[field] ) {
-            errors[field] = 'Required'
+        if ( !values[ field ] ) {
+            errors[ field ] = 'Required'
         }
     })
     if ( values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test( values.email ) ) {
@@ -121,12 +117,12 @@ const validate = values => {
 }
 
 
-const form = reduxForm({
+const form = reduxForm( {
     form: 'createuserForm',
     validate
-});
+} );
 
-function mapStateToProps( state ) {
+const mapStateToProps = state => {
     return {
         user: state.authDuck.user
     }
