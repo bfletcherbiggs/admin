@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //EXPORTED FUNCTIONS
 import { getChat } from '../../ducks/messageDuck';
+import { getComps } from '../../ducks/compDuck';
 //COMPONENTS
 import Search from '../../components/Search/index';
 //MATERIAL UI
@@ -25,6 +26,8 @@ class Users extends Component{
             key,
             this.props.user.id
         )
+        let userId = {userId: this.props.messages[key][0].user_id}
+        this.props.getComps(userId)
     }
 
     render(){
@@ -76,4 +79,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default withRouter( connect( mapStateToProps, { getChat } )( Users ) )
+export default withRouter( connect( mapStateToProps, { getChat, getComps } )( Users ) )

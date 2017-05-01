@@ -33,7 +33,8 @@ class WebPages extends Component {
     }
 
     componentDidMount() {
-        axios.get( BASE_URL + '/inputs' )
+        let userId = { userId: this.props.userid }
+        axios.get( BASE_URL + '/inputs', { params: userId } )
         .then( response => {
             const inputsFromServer = response.data[ 0 ]
             this.setState( {
@@ -67,20 +68,15 @@ class WebPages extends Component {
     saveInputs( e ) {
         let componentCompleted = {
             component: "WebPages",
-            completed: false
+            completed: true,
+            userId: this.props.userid
         }
-        const inputsToServer = {
+        let inputs = {
             websites: JSON.stringify( this.state.dynamicText )
         }
-
-        let completeCheck = true;
-        for ( let stateCheck in inputsToServer ) {
-            if ( !inputsToServer[ stateCheck ] ) {
-                completeCheck = false;
-            }
-        }
-        if ( completeCheck ) {
-            componentCompleted.completed = true;
+        const inputsToServer = {
+            inputs: inputs,
+            userId: this.props.userid
         }
 
         axios.put( BASE_URL + '/inputs', inputsToServer )
@@ -210,5 +206,7 @@ class WebPages extends Component {
         )
     }
 }
-
-export default connect( state => state, { updateComps } )( WebPages );
+const mapStateToProps = state => {
+    return { userid: state.messageDuck.userid };
+}
+export default connect( mapStateToProps, { updateComps } )( WebPages );
