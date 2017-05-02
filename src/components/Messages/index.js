@@ -57,21 +57,28 @@ class Messages extends Component{
             if( message.type==='user' ){
                 return(
                     <div className="message-container user" key={ index }>
+                        <h3>User - { moment( message.timestamp ).format( "MMM Do YY" ) }</h3>
+                        <div className="user-message">
                         <h1>{ message.message }</h1>
-                        <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2>
+                        {/* <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2> */}
+                        </div>
                     </div>
                 )
             }
             return (
-                <div className="message-container" key={ index }>
+                <div className="message-container admin" key={ index }>
+                    <h3>Admin - { moment( message.timestamp ).format( "MMM Do YY" ) }</h3>
+                    <div className="admin-message">
                     <h1>{ message.message }</h1>
-                    <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2>
+                    {/* <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2> */}
+                    </div>
                 </div>
             )
         })
 
         return (
             <div className="messages-main">
+              <h2>Message Inbox</h2>
                 { messageBox }
                 <form onSubmit={ this.handleSubmit } className="message-input">
                     <Field

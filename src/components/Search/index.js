@@ -57,14 +57,16 @@ class Search extends Component{
         const{ searchstring } = this.state
 
         return (
-            <form onSubmit={ this.handleSubmit }>
-                <Field
-                    label="Search Users"
-                    name="searchstring"
-                    component={ renderTextField }
-                    onChange={ this.handleChange.bind( this, 'searchstring' ) }
-                />
-            </form>
+          <div className="searchBar">
+              <form onSubmit={ this.handleSubmit }>
+                  <Field
+                      label="Search Users"
+                      name="searchstring"
+                      component={ renderTextField }
+                      onChange={ this.handleChange.bind( this, 'searchstring' ) }
+                  />
+              </form>
+          </div>
         )
     }
 }
