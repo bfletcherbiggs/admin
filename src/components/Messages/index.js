@@ -62,21 +62,38 @@ class Messages extends Component{
             if( message.type === 'user' ){
                 return(
                     <div className="message-outside" key={ index }>
-                        {
-                            index > 0
-                            &&
-                            arr[ index-1 ].type
-                            &&
-                            arr[ index-1 ].type !== message.type
-                            &&
-                            <div className="bottomLine"></div>
-                        }
                         <Row top="xs" className="message-container">
                             <Col xs={ 1 }>
-                                <img src={ userImg }/>
+                                {
+                                    index > 0
+                                    &&
+                                    arr[ index-1 ].type
+                                    &&
+                                    arr[ index-1 ].type !== message.type
+                                    &&
+                                    <img src={ userImg }/>
+                                }
+                                {
+                                    index === 0
+                                    &&
+                                    <img src={ userImg }/>
+                                }
                             </Col>
                             <Col xs={ 11 } className="message-name">
                                 {
+                                    index > 0
+                                    &&
+                                    arr[ index-1 ].type
+                                    &&
+                                    arr[ index-1 ].type !== message.type
+                                    &&
+                                    message.firstname
+                                    + ' ' +
+                                    message.lastname
+                                }
+                                {
+                                    index === 0
+                                    &&
                                     message.firstname
                                     + ' ' +
                                     message.lastname
@@ -99,21 +116,38 @@ class Messages extends Component{
             }
             return (
                 <div className="message-outside" key={ index }>
-                    {
-                        index > 0
-                        &&
-                        arr[ index-1 ].type
-                        &&
-                        arr[ index-1 ].type !== message.type
-                        &&
-                        <div className="bottomLine"></div>
-                    }
                     <Row top="xs" className="message-container">
                         <Col xs={ 1 } className="message-image">
-                            <img src={ adminImg }/>
+                            {
+                                index > 0
+                                &&
+                                arr[ index-1 ].type
+                                &&
+                                arr[ index-1 ].type !== message.type
+                                &&
+                                <img src={ adminImg }/>
+                            }
+                            {
+                                index === 0
+                                &&
+                                <img src={ adminImg }/>
+                            }
                         </Col>
                         <Col xs={ 11 } className="message-name">
                             {
+                                index > 0
+                                &&
+                                arr[ index-1 ].type
+                                &&
+                                arr[ index-1 ].type !== message.type
+                                &&
+                                user.firstname
+                                + ' ' +
+                                user.lastname
+                            }
+                            {
+                                index === 0
+                                &&
                                 user.firstname
                                 + ' ' +
                                 user.lastname

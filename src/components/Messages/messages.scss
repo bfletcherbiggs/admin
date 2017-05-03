@@ -17,11 +17,13 @@
     .message-outside {
         margin: 8px 15px;
 
-        .message-container {
+    .message-container {
+
             .message-image {
                 @include flex-column();
                 color: blue;
             }
+
             img {
                 width: 40px;
                 height: 40px;
@@ -53,10 +55,7 @@
 
 .bottomLine {
     // height: 10px;
-    border-top: .5px solid ##7F7F7F;
+    border-top: .5px solid #7F7F7F;
     clear: both;
     width: 90%;
-}
-
-.message-outside
 }
