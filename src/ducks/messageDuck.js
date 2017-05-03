@@ -40,12 +40,6 @@ export default function messageDuck( state = initialState, action ) {
                 _.each( action.messages, message => {
                     room_titles.push( _.uniqBy( message, 'user_id' ) )
                 } )
-                _.each( room_titles, room => {
-                    delete room[ 0 ].message
-                    delete room[ 0 ].timestamp
-                    delete room[ 0 ].read
-                    delete room[ 0 ].type
-                } )
                 let count_messages = []
                 _.each( action.messages, messagegroup => {
                     count_messages.push( _.sumBy( messagegroup, message =>

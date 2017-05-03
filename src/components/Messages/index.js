@@ -7,10 +7,14 @@ import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
+import {Row, Col} from 'react-flexbox-grid'
 //EXPORTED FUNCTIONS
 import { sendMessage } from '../../ducks/messageDuck'
-//CSS
+//CSS AND ASSETS
 import './messages.css';
+import userImg from '../../assets/user1600.png'
+import adminImg from '../../assets/goldsageAvatar.png'
+
 
 const renderTextField = ( { input, label, meta: { touched, error }, ...custom } ) => (
     <TextField
@@ -52,26 +56,37 @@ class Messages extends Component{
             currentchat,
             activeRoomIndex
         } = this.props;
-
-        const messageBox = currentchat.map( ( message, index ) => {
+        const messageBox = currentchat.map( ( message, index, arr ) => {
             if( message.type==='user' ){
                 return(
-                    <div className="message-container user" key={ index }>
-                        <h3>User - { moment( message.timestamp ).format( "MMM Do YY" ) }</h3>
-                        <div className="user-message">
-                        <h1>{ message.message }</h1>
-                        {/* <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2> */}
-                        </div>
+                    <div className="message-outside" key={index}>
+                        {index > 0 && arr[index-1].type && (arr[index-1].type !== message.type) &&
+                        <div className="bottomLine"></div>}
+                        <Row top="xs" className="message-container">
+                            <Col xs={1}><img src={userImg}/></Col>
+                            <Col xs={11} className="message-name">{message.firstname} {message.lastname}&nbsp;&nbsp;
+                                <span className="message-time">&nbsp; { moment( message.timestamp ).format( "HH:mm A - MMM DD YYYY" ) }</span>
+                                    <Row className="message-text">
+                                        { message.message }
+                                    </Row>
+                          </Col>
+                        </Row>
                     </div>
                 )
             }
             return (
-                <div className="message-container admin" key={ index }>
-                    <h3>Admin - { moment( message.timestamp ).format( "MMM Do YY" ) }</h3>
-                    <div className="admin-message">
-                    <h1>{ message.message }</h1>
-                    {/* <h2>{ moment( message.timestamp ).format( "MMM Do YY" ) }</h2> */}
-                    </div>
+                <div className="message-outside" key={index}>
+                    {index > 0 && arr[index-1].type && (arr[index-1].type !== message.type) &&
+                    <div className="bottomLine"></div>}
+                    <Row top="xs" className="message-container">
+                        <Col xs={1} className="message-image"><img src={adminImg}/></Col>
+                        <Col xs={11} className="message-name">Admin {message.admin_id}&nbsp;&nbsp;
+                            <span className="message-time">&nbsp; { moment( message.timestamp ).format( "HH:mm A - MMM DD YYYY" ) }</span>
+                                <Row className="message-text">
+                                    { message.message }
+                                </Row>
+                        </Col>
+                    </Row>
                 </div>
             )
         })
