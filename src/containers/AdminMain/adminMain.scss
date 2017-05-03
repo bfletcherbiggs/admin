@@ -2,6 +2,9 @@
 
 .adminMain-main {
     height: calc(100vh - 100px);
+    width: 100vw;
+    overflow: hidden;
+
     .adminMain-working {
         height:100%;
         > div{
@@ -21,7 +24,7 @@
     background-color: $sidebar;
 }
 .adminMain-views {
-    box-shadow: 0 5px 5px grey;
+    // box-shadow: 0 5px 5px grey;
 }
 // .adminMain-views {
 //   display: flex;

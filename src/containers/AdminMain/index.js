@@ -22,13 +22,13 @@ class AdminMain extends Component{
         return (
             <div className="adminMain-main">
                 <Row className="adminMain-working">
-                    <Col xs={ 2 }>
+                    <Col xs={ 3 }>
                         <div className="adminMain-users"><Users/></div>
                     </Col>
-                    <Col xs={ 8 }>
+                    <Col xs={ 6 }>
                         <div className="adminMain-views"><AdminWorking/></div>
                     </Col>
-                    <Col xs={ 2 }>
+                    <Col xs={ 3 }>
                         <div className="adminMain-compStatus"><CompStatus/></div>
                     </Col>
                 </Row>

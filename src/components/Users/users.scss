@@ -2,7 +2,7 @@
 
 .users-container {
     @include flex-column();
-    overflow: scroll;
+    overflow-y: overlay;
 
     .users-main {
         flex-basis: 100%;
