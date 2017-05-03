@@ -18,8 +18,9 @@
 }
 .compstatus-main {
 background-color: #004767;
-// height: calc(100vh - 84px);
+overflow-y: auto;
 margin-top: 1px;
+padding-right:5px;
 }
 .compstatus-links {
   display: flex;

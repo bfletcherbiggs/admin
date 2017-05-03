@@ -1,41 +1,46 @@
 .messages-main {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  color: #333333;
-  height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    overflow-y: auto;
+    color: #333333;
+    height: 100%;
 }
+
 .message-outside {
-    width: 100%;
     margin: 15px;
 }
+
 .message-container {
-  margin-top: 10px;
+    margin: 5px 0 0;
 }
+
 .message-name {
-  font-size: 20px;
-  font-weight:500;
+    font-size: 20px;
+    font-weight: 500;
 }
+
 .message-time {
-  font-size: 15px;
-  color: #C0C0C0;
+    font-size: 15px;
+    color: #C0C0C0;
 }
+
 .message-text {
-  padding-left: 10px;
-  padding-top: 5px;
-  font-weight: 300;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-weight: 300;
 }
+
 .bottomLine {
-  height: 10px;
-  border-top: 1px solid #C0C0C0;
-  clear:both;
-  width: 75%;
+    height: 10px;
+    border-top: 1px solid #C0C0C0;
+    clear: both;
+    width: 75%;
 }
-.message-outside img{
-  width: 40px;
-  height: 40px;
-  border: 1px solid #c0c0c0;
-  border-radius: 3px;
+
+.message-outside img {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #c0c0c0;
+    border-radius: 3px;
 }
