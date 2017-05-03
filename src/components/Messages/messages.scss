@@ -1,46 +1,62 @@
+@import "../../containers/App/App.scss";
+
 .messages-main {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     overflow-y: auto;
-    color: #333333;
+    color: $primary;
     height: 100%;
+    padding: 20px 0;
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 35px;
+        font-weight: 300;
+    }
+    .message-outside {
+        margin: 8px 15px;
+
+        .message-container {
+            .message-image {
+                @include flex-column();
+                color: blue;
+            }
+            img {
+                width: 40px;
+                height: 40px;
+                border: 1px solid #c0c0c0;
+                border-radius: 3px;
+            }
+        }
+    }
 }
 
-.message-outside {
-    margin: 15px;
-}
-
-.message-container {
-    margin: 5px 0 0;
-}
 
 .message-name {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.message-time {
     font-size: 15px;
-    color: #C0C0C0;
+    font-weight: 500;
+    span {
+        margin-left: 5px;
+        font-size: 12px;
+        color: #7F7F7F;
+        font-weight: 200;
+    }
 }
 
 .message-text {
     padding-left: 10px;
     padding-top: 5px;
     font-weight: 300;
+    font-size: 20px;
 }
 
 .bottomLine {
-    height: 10px;
-    border-top: 1px solid #C0C0C0;
+    // height: 10px;
+    border-top: .5px solid ##7F7F7F;
     clear: both;
-    width: 75%;
+    width: 90%;
 }
 
-.message-outside img {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #c0c0c0;
-    border-radius: 3px;
+.message-outside
 }

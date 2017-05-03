@@ -1,68 +1,63 @@
-.linearProgress {
-  width: 80%;
-  margin: auto;
-}
-.percentCompleted {
-  text-align: center;
-  padding-top: 20px;
-  color: white;
-}
-.compStatus-status {
-  padding-top: 20px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  width: 20%;
-  margin: 20px auto;
-}
-.compstatus-main {
-background-color: #004767;
-overflow-y: auto;
-margin-top: 1px;
-padding-right:5px;
-}
-.compstatus-links {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-around;
-  margin: 20px auto;
-  margin-bottom: 20px;
+@import "../../containers/App/App.scss";
 
+.compStatus-main {
+    background-color: $sidebar2;
+    overflow-y: auto;
+    padding-right: 5px;
+
+    .compStatus-selectedUser {
+        font-weight: 300;
+        text-align: center;
+        padding-top: 20px;
+        color: white;
+        font-size: 18px;
+    }
+
+    .compStatus-selectedCompany {
+        font-weight: 300;
+        text-align: center;
+        color: white;
+        font-size: 11px;
+    }
+
+    .compStatus-links-box {
+        width: 85%;
+        margin:auto;
+
+        .compStatus-links {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px auto;
+
+            svg {
+                height: 35px !important;
+                width: 35px !important;
+            }
+        }
+    }
+    .compStatus-status {
+        padding-top: 20px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: flex-start;
+    }
 }
-.compStatus-selectedUser {
-  font-weight: 300;
-  text-align: center;
-  padding-top: 20px;
-  color: #fafafa;
-  font-size: 18px;
+
+.linearProgress {
+    width: 80%;
+
+    div {
+        div {
+            margin-left: 0;
+        }
+    }
 }
-.compStatus-selectedCompany {
-  font-weight: 300;
-  text-align: center;
-  color: #fafafa;
-  font-size: 11px;
-}
-.compstatus-links svg {
-  height: 35px !important;
-  width: 35px !important;
-}
-.printButton svg {
-  height: 35px !important;
-  width: 35px !important;
-}
-.printButton {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0px 25px 25px 0px;
-}
-.compstatus-links-box {
-  width: 85%;
-  margin: auto
+
+.percentCompleted {
+    text-align: center;
+    padding-top: 20px;
+    color: white;
 }
