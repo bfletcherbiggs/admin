@@ -103,7 +103,6 @@ class CompStatus extends Component{
                     }
                 }
             }
-            let statusPoints;
             if ( check && check2 ) {
                 return (
                     <a href={ "#"+type.name } key={ type.key } >
