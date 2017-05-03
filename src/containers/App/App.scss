@@ -1,100 +1,109 @@
-$lime: #b0eb00;
-$bright-red: #b30015;
-$dark-blue: #2a00b3;
-$deep-cerulean: #0077b3;
-$bondi-blue: #00b0b3;
-$cyan: #24fbff;
-$heliotrope: #8a7dff;
-$silver-chalice: #a6a6a6;
-$scorpion: #595959;
-$tundora: #444;
-$mine-shaft: #363636;
-$cod-gray: #111;
 $green: #0E4341;
+$primary: #003044;
+$accent: #D67428;
+$darkblue: #032434;
+
+$loginlanding:"../../assets/loginbackground.png";
+$logopath:'../../assets/intakenewlogo.png';
+$logologin:'../../assets/intakelogin.png';
+
+@mixin border-radius( $radius ) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin flex-column(){
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
+@mixin flex-row(){
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+}
+
+@mixin backgroundcover( $url ) {
+    background: url($url) center center no-repeat /cover;
+}
+
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
+
 .landing {
-  padding-bottom: 60px;
+    padding-bottom: 60px;
 }
+
 .input-tile-landing {
-  width: 800px;
-  margin: auto;
-  text-align: left;
-  margin-bottom: 60px;
+    width: 800px;
+    margin: auto;
+    text-align: left;
+    margin-bottom: 60px;
 }
 
-.login-container {
-  width: 100vw;
-  height:100vh;
-  display:flex;
-  flex-flow: column nowrap;
-}
-
-.login-form-inputs {
-  text-align: center;
-  height:50%;
-  width:50%;
-}
 #delete-page {
-  font-weight: 300;
-  font-size: 15px;
-  text-align: right;
-  white-space: nowrap;
-  color: #BDBDBD;
-}
-#delete-page:hover{
-  color: #F44336;
-}
-.flex-delete-div{
-display: flex;
-flex-flow: row nowrap;
-padding-bottom: 10px;
-padding-top: 10px;
-}
-.left-flex-delete{
-  flex-basis: 100%;
-
+    font-weight: 300;
+    font-size: 15px;
+    text-align: right;
+    white-space: nowrap;
+    color: #BDBDBD;
 }
 
-.login-landing {
-  background: url("../../assets/loginbackground.png") center center no-repeat;
-  background-size: cover;
-  background-color: #0E4341;
-  min-height: 100vh;
+#delete-page:hover {
+    color: #F44336;
 }
+
+.flex-delete-div {
+    display: flex;
+    flex-flow: row nowrap;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.left-flex-delete {
+    flex-basis: 100%;
+}
+
 .input-tile {
-  width: 50%;
-  padding-left: 4px;
-  padding-bottom: 50px;
+    width: 50%;
+    padding-left: 4px;
+    padding-bottom: 50px;
 }
-.hovertexttest{
-margin: 0 27px;
-border-left: 1.5px dashed #D1D4D4;
-width: 80%;
 
+.hovertexttest {
+    margin: 0 27px;
+    border-left: 1.5px dashed #D1D4D4;
+    width: 80%;
 }
-.hovertexttest:hover{
-outline: 1.5px dashed #D1D4D4;
-font-weight: 300;
+
+.hovertexttest:hover {
+    outline: 1.5px dashed #D1D4D4;
+    font-weight: 300;
 }
-.placeholderinputs{
-  font-weight: 300;
-  font-size: 15px;
+
+.placeholderinputs {
+    font-weight: 300;
+    font-size: 15px;
 }
 
 .input-header-title {
-font-size: 30px;
-text-align: left;
-font-weight: 300;
-color: $green;
+    font-size: 30px;
+    text-align: left;
+    font-weight: 300;
+    color: $green;
 }
-.input-description{
-font-weight: 300;
 
+.input-description {
+    font-weight: 300;
 }
