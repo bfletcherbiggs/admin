@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //EXPORTED FUNCTIONS
 import { logout } from '../../ducks/authDuck';
 //MATERIAL UI
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Badge from 'material-ui/Badge';
@@ -12,8 +13,10 @@ import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 import Profile from 'material-ui/svg-icons/action/account-circle';
 import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
 import { grey50 } from 'material-ui/styles/colors';
+import FlatButton from 'material-ui/FlatButton';
+
 //CSS
-import goldsageLogo from "../../assets/logoforadminapp.svg";
+import IntakeLogo from "../../assets/intakenewlogo.png";
 import "./nav.css";
 
 class NavBarTop extends Component{
@@ -74,21 +77,24 @@ class NavBarTop extends Component{
          )
 
         return(
-            <div>
-                <AppBar style={ { backgroundColor: '#0E4341' } }
-                    iconElementRight={ tapIcons }
-                    showMenuIconButton={ false }
-                    title={
-                        <Link to="/admin">
-                            <img
-              				    alt="javascript logo"
-              					className="nav-goldsage-logo"
-              					src={ goldsageLogo }
-              				/>
-                        </Link>
-                    }
-                />
-            </div>
+          <Toolbar style={ { backgroundColor: '#003044', height: 80 } }>
+            <ToolbarGroup firstChild={ true }>
+                <Link to="/admin">
+                    <img alt="javascript logo" className="nav-goldsage-logo" src={ IntakeLogo }/>
+                </Link>
+            </ToolbarGroup>
+            <ToolbarGroup>
+                <Link to="/" onClick={ this.handleClick }>
+                    <FlatButton
+                        label="LOGOUT"
+                        primary={ true }
+                        labelStyle={ { grey50 } }
+                        style={ { color: grey50 } }
+                    />
+                </Link>
+            </ToolbarGroup>
+        </Toolbar>
+
         )
     }
 };
