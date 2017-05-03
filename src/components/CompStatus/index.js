@@ -23,7 +23,7 @@ import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 class CompStatus extends Component{
     constructor() {
         super()
-        
+
         this.state = {
             componentTypes: [
                 { component: < SocialInputs />, name: 'SocialInputs' },
@@ -103,7 +103,6 @@ class CompStatus extends Component{
                     }
                 }
             }
-            let statusPoints;
             if ( check && check2 ) {
                 return (
                     <a href={ "#"+type.name } key={ type.key } >
