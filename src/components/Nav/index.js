@@ -12,6 +12,7 @@ import Badge from 'material-ui/Badge';
 import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 import Profile from 'material-ui/svg-icons/action/account-circle';
 import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
+import AddUser from 'material-ui/svg-icons/social/person-add';
 import { grey50, grey600 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 //CSS
@@ -58,6 +59,15 @@ class NavBarTop extends Component{
             fontSize: 18,
             fontWeight: 400
         }
+        const istyles ={
+            marginRight: 25,
+            mediumIcon: {
+                width: 48,
+                height: 48,
+                padding: 30
+          },
+
+        }
 
         return(
           <Toolbar style={ toolbarStyle } className="nav-bar-admin">
@@ -67,6 +77,11 @@ class NavBarTop extends Component{
                 </Link>
             </ToolbarGroup>
             <ToolbarGroup lastChild={true} style={ toolbarGroupRight }>
+                <Link to="/admin/adduser">
+                    <IconButton>
+                        <AddUser color={grey50} iconStyle={istyles.mediumIcon}/>
+                    </IconButton>
+                </Link>
                 <Link to="/" onClick={ this.handleClick }>
                     <FlatButton
                         label="LOGOUT"
