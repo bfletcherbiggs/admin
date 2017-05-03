@@ -11,6 +11,7 @@ $tundora: #444;
 $mine-shaft: #363636;
 $cod-gray: #111;
 $green: #0E4341;
+$intake-blue: #003044;
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
@@ -61,9 +62,8 @@ padding-top: 10px;
   flex-basis: 100%;
 
 }
-
 .login-landing {
-  background: url("../../assets/loginbackground.png") center center no-repeat;
+  background: url("../../assets/loginbackground.jpg") center center no-repeat;
   background-size: cover;
   background-color: #0E4341;
   min-height: 100vh;
