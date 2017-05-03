@@ -1,41 +1,41 @@
 .messages-main {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  height: calc(100vh - 110px);
+  justify-content: flex-start;
+  height: calc(100vh - 86px);
   overflow-x: hidden;
   overflow-y: scroll;
   color: #333333;
 }
-.messages-main h2 {
-  margin: 20px auto;
+.message-outside {
+    width: 100%;
+    margin: 15px;
 }
-
-.user {
-  text-align: right;
-  margin: 20px;
-  margin-bottom: 10px;
-  padding: 10px;
+.message-container {
+  margin-top: 10px;
 }
-.admin-message {
-  border: 1px solid #333333;
-  border-radius: 10px;
-  float:left;
-  width: 50%;
-  padding: 20px;
+.message-name {
+  font-size: 20px;
+  font-weight:500;
 }
-.user-message {
-  border: 1px solid #333333;
-  border-radius: 10px;
-  float:right;
-  width: 50%;
-  padding: 20px;
+.message-time {
+  font-size: 15px;
+  color: #C0C0C0;
 }
-.admin {
-  text-align: left;
-  margin: 20px;
-
-  padding: 10px;
-
+.message-text {
+  padding-left: 10px;
+  padding-top: 5px;
+  font-weight: 300;
+}
+.bottomLine {
+  height: 10px;
+  border-top: 1px solid #C0C0C0;
+  clear:both;
+  width: 75%;
+}
+.message-outside img{
+  width: 40px;
+  height: 40px;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
 }

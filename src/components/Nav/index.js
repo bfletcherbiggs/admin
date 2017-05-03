@@ -32,8 +32,8 @@ class NavBarTop extends Component{
     }
 
     componentDidMount() {
-        const badge = ReactDOM.findDOMNode( this.refs.badge )
-        badge.style.paddingRight = '12px'
+        // const badge = ReactDOM.findDOMNode( this.refs.badge )
+        // // badge.style.paddingRight = '12px'
     }
 
     render(){
@@ -52,30 +52,6 @@ class NavBarTop extends Component{
             :{ top: 24, right: 24,display:'none' }
         }
 
-        const tapIcons = (
-            <div>
-                <IconButton tooltip="Watson chat" >
-                    <WatsonIcon color={ grey50 } />
-                </IconButton>
-
-                <Badge
-                    ref="badge"
-                    badgeContent={ badgeCount() }
-                    secondary={ true }
-                    badgeStyle={ badgeStyle() }>
-                    <Link to="/messages">
-                        <IconButton tooltip="message" >
-                            <NotificationsIcon color={ grey50 }/>
-                        </IconButton>
-                    </Link>
-                </Badge>
-
-                <IconButton  onClick={ this.handleClick } tooltip="Logout">
-                    <Profile color={ grey50 } />
-                </IconButton>
-            </div>
-         )
-
         return(
           <Toolbar style={ { backgroundColor: '#003044', height: 80 } }>
             <ToolbarGroup firstChild={ true }>
@@ -83,7 +59,7 @@ class NavBarTop extends Component{
                     <img alt="javascript logo" className="nav-goldsage-logo" src={ IntakeLogo }/>
                 </Link>
             </ToolbarGroup>
-            <ToolbarGroup>
+            <ToolbarGroup lastChild={true} >
                 <Link to="/" onClick={ this.handleClick }>
                     <FlatButton
                         label="LOGOUT"
