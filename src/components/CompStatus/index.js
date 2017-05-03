@@ -136,12 +136,12 @@ class CompStatus extends Component{
                 <div className="compstatus-links-box" >
                     <div className="compstatus-links">
                         <Link to="/admin/components">
-                            <IconButton tooltip="message" >
+                            <IconButton tooltip="Components" >
                                 <Dashboard color={ grey50 }/>
                             </IconButton>
                         </Link>
                         <Link to="/admin">
-                            <IconButton tooltip="message" >
+                            <IconButton tooltip="Messages" >
                                 <NotificationsIcon color={ grey50 }/>
                             </IconButton>
                         </Link>

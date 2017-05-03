@@ -1,4 +1,5 @@
 $green: #0E4341;
+$intake-blue: #003044;
 $primary: #003044;
 $accent: #D67428;
 $darkblue: #032434;
@@ -31,7 +32,6 @@ $logologin:'../../assets/intakelogin.png';
 @mixin backgroundcover( $url ) {
     background: url($url) center center no-repeat /cover;
 }
-
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset;
