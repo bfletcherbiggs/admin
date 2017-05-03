@@ -3,6 +3,7 @@ $intake-blue: #003044;
 $primary: #003044;
 $accent: #D67428;
 $darkblue: #032434;
+$sidebar: rgba(204, 240, 255, 0.15);
 
 $loginlanding:"../../assets/loginbackground.png";
 $logopath:'../../assets/intakenewlogo.png';
@@ -29,8 +30,12 @@ $logologin:'../../assets/intakelogin.png';
     align-content: center;
 }
 
+@mixin backgroundcontain ( $url ) {
+    background: url( $url ) center center no-repeat /contain;
+}
+
 @mixin backgroundcover( $url ) {
-    background: url($url) center center no-repeat /cover;
+    background: url( $url ) center center no-repeat /cover;
 }
 
 input:-webkit-autofill {

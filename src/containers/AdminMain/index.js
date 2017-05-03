@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getComps } from '../../ducks/compDuck';
 //COMPONENTS
+import CompStatus from '../../components/CompStatus/index';
 import Users from '../../components/Users/index';
-import Views from '../../components/Views/index';
+import AdminWorking from '../../components/AdminWorking/index';
 //CSS
 import './adminMain.css';
+import { Grid, Row, Col, Box } from 'react-flexbox-grid';
 
 class AdminMain extends Component{
 
@@ -19,10 +21,17 @@ class AdminMain extends Component{
     render(){
         return (
             <div className="adminMain-main">
-                <div className="adminMain-working">
-                    <div className="adminMain-users"><Users/></div>
-                    <div className="adminMain-views"><Views/></div>
-                </div>
+                <Row className="adminMain-working">
+                    <Col xs={ 2 }>
+                        <div className="adminMain-users"><Users/></div>
+                    </Col>
+                    <Col xs={ 8 }>
+                        <div className="adminMain-views"><AdminWorking/></div>
+                    </Col>
+                    <Col xs={ 2 }>
+                        <div className="adminMain-compStatus"><CompStatus/></div>
+                    </Col>
+                </Row>
             </div>
         )
     }

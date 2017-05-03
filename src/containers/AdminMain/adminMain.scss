@@ -1,16 +1,49 @@
-.adminMain-working {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: stretch;
+@import "../App/App.scss";
+
+.adminMain-main {
+    height: calc(100vh - 100px);
+    .adminMain-working {
+        height:100%;
+        > div{
+            height:100%;
+            padding:0;
+            > div{
+                height:100%;
+                > div {
+                    height:100%;
+                }
+            }
+        }
+    }
 }
 
+.adminMain-users {
+    background-color: $sidebar;
+}
 .adminMain-views {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: stretch;
-  width: 100%;
+    box-shadow: 0 5px 5px grey;
 }
-.adminMain-selectedUser {
-  text-align: center;
-}
+// .adminMain-views {
+//   display: flex;
+//   flex-flow: row nowrap;
+//   align-items: stretch;
+//   width: 100%;
+// }
+// .adminMain-selectedUser {
+//   text-align: center;
+// }
+// .views-main {
+//   display: flex;
+//   flex-flow: row nowrap;
+//   justify-content: space-between;
+//   align-items: stretch;
+//   width: 100%;
+// }
+// .views-adminWorking {
+//   width: 75%;
+//
+// }
+// .views-compStatus {
+//   width: 25%;
+//
+// }

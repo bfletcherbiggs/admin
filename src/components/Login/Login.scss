@@ -1,7 +1,7 @@
 @import "../../containers/App/App.scss";
 
 .login-landing {
-    @include backgroundcover($loginlanding)
+    @include backgroundcover( $loginlanding )
     min-height: 100vh;
 
     .login-container {
@@ -17,7 +17,7 @@
 
             .row:nth-child(1) {
                 div {
-                    @include backgroundcover($logologin);
+                    @include backgroundcontain( $logologin );
                     height:5vh;
                 }
             }

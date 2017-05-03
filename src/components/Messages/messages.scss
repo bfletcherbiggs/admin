@@ -2,10 +2,10 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  height: calc(100vh - 86px);
   overflow-x: hidden;
   overflow-y: scroll;
   color: #333333;
+  height: 100%;
 }
 .message-outside {
     width: 100%;
