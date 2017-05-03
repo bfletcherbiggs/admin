@@ -3,11 +3,39 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: stretch;
-  width: 100%;
+  height: calc(100vh - 110px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  color: #333333;
 }
-.messages-display {
+.messages-main h2 {
+  margin: 20px auto;
+}
 
+.user {
+  text-align: right;
+  margin: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
-.messages-input {
+.admin-message {
+  border: 1px solid #333333;
+  border-radius: 10px;
+  float:left;
+  width: 50%;
+  padding: 20px;
+}
+.user-message {
+  border: 1px solid #333333;
+  border-radius: 10px;
+  float:right;
+  width: 50%;
+  padding: 20px;
+}
+.admin {
+  text-align: left;
+  margin: 20px;
+
+  padding: 10px;
 
 }

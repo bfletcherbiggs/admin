@@ -1,27 +1,16 @@
 //PACKAGES
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from 'react';
 //COMPONENTS
 import NavBarTop from '../../components/Nav/index';
 import AdminMain from '../AdminMain/index';
 //CSS
-import "./admin.css";
+import './admin.css';
 
-class AdminPage extends Component{
-
-    render(){
-        return (
-            <div className="AdminPage-main">
-                <NavBarTop/>
-                <AdminMain/>
-            </div>
-        )
-    }
-
+export default function AdminPage () {
+    return (
+        <div className="AdminPage-main">
+            <NavBarTop/>
+            <AdminMain/>
+        </div>
+    )
 }
-
-function mapStateToProps( state ) {
-    return state;
-}
-
-export default connect( mapStateToProps, {})( AdminPage );

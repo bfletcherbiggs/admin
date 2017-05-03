@@ -18,6 +18,7 @@
 }
 .compstatus-main {
 background-color: #0e4341;
+height: calc(100vh - 110px);
 }
 .compstatus-links {
   display: flex;
@@ -54,7 +55,10 @@ background-color: #0e4341;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: flex-end;
-  padding: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0px 25px 25px 0px;
 }
 .compstatus-links-box {
   width: 85%;

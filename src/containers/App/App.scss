@@ -10,21 +10,14 @@ $scorpion: #595959;
 $tundora: #444;
 $mine-shaft: #363636;
 $cod-gray: #111;
+$green: #0E4341;
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
-$green: #0E4341;
-html {
-
-}
 body {
   font-family: 'Roboto', sans-serif;
-}
-.app {
-
-
 }
 .landing {
   padding-bottom: 60px;
@@ -37,15 +30,16 @@ body {
 }
 
 .login-container {
-  background-color: white;
-  width: 400px;
-  margin: auto;
-  margin-top: 90px;
-  padding: 45px;
+  width: 100vw;
+  height:100vh;
+  display:flex;
+  flex-flow: column nowrap;
 }
 
 .login-form-inputs {
   text-align: center;
+  height:50%;
+  width:50%;
 }
 #delete-page {
   font-weight: 300;
