@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 //CONTAINERS
 import LoginPage from '../LoginPage/index';
 import AdminPage from '../AdminPage/index';
+import CreateUserForm from '../../components/CreateUser/index';
 //EXPORTED FUNCTIONS
 import { checkUserAuth } from '../../ducks/authDuck';
 //CSS
