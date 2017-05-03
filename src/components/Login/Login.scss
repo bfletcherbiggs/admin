@@ -1,1 +1,26 @@
- @import "../../containers/App/App.scss";
+@import "../../containers/App/App.scss";
+
+.login-landing {
+    @include backgroundcover($loginlanding)
+    min-height: 100vh;
+
+    .login-container {
+        height: 100vh;
+        @include flex-column();
+
+        .login-form-inputs {
+            padding: 20px;
+            opacity:.9;
+            text-align: center;
+            background: white;
+            @include border-radius(3px);
+
+            .row:nth-child(1) {
+                div {
+                    @include backgroundcover($logologin);
+                    height:5vh;
+                }
+            }
+        }
+    }
+}

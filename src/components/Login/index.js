@@ -6,10 +6,11 @@ import { Field, reduxForm } from 'redux-form';
 import { login } from '../../ducks/authDuck';
 //MATERIAL UI
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 //CSS
 import './Login.css';
+import { Grid, Row, Col, Box } from 'react-flexbox-grid';
 
 const renderTextField = ( { input, label, meta: { touched, error }, ...custom } ) => (
     <TextField
@@ -56,6 +57,17 @@ class LoginForm extends Component {
             password
         } = this.state
 
+        const loginInput = {
+            fontSize: 20,
+        }
+        const pwdDiv = {
+            marginBottom: 30,
+            marginTop:-30
+        }
+        const inputDiv = {
+            marginBottom: 30
+        }
+
         if( isAuthenticated ){
             return (
                 <Redirect to='/admin'/>
@@ -64,33 +76,49 @@ class LoginForm extends Component {
 
         return (
             <form onSubmit={ this.handleSubmit } className="login-landing" >
-                <div className="login-container">
-                    <div className="login-form-inputs">
-                         <Field
-                              label="Username"
-                              component={ renderTextField }
-                              name="email"
-                              onChange={ this.handleChange.bind( this, 'email' ) }
-                        />
-                        <br/>
-                        <Field
-                              label="Password"
-                              type="password"
-                              name="password"
-                              component={ renderTextField }
-                              onChange={ this.handleChange.bind( this, 'password' ) }
-                        />
-                        <br/>
-                        <FlatButton
-                            type="submit"
-                            label="LOGIN"
-                            disabled={ loadingUser || pristine || !password }
-                            primary={ true }
-                        />
+                <Grid fluid>
+                    <div className="login-container">
+                        <Row>
+                            <Col type="row" s={ 12 } md={ 3 } className="login-form-inputs">
+                                <Row>
+                                    <Col xs={ 12 } md={ 6 }></Col>
+                                </Row>
+                                <Field
+                                      label="Username"
+                                      fullWidth={ true }
+                                      component={ renderTextField }
+                                      name="email"
+                                      style={ inputDiv }
+                                      inputStyle={ loginInput }
+                                      onChange={ this.handleChange.bind( this, 'email' ) }
+                                />
+                                <Field
+                                      label="Password"
+                                      fullWidth={ true }
+                                      type="password"
+                                      name="password"
+                                      className="login-style"
+                                      style={ pwdDiv }
+                                      inputStyle={ loginInput }
+                                      component={ renderTextField }
+                                      onChange={ this.handleChange.bind( this, 'password' ) }
+                                />
+                                <br/>
+                                <Row>
+                                    <RaisedButton
+                                        fullWidth={ true }
+                                        type="submit"
+                                        label="LOGIN"
+                                        disabled={ loadingUser || pristine || !password }
+                                        primary={ true }
+                                    />
+                                </Row>
+                            </Col>
+                        </Row>
                     </div>
-                </div>
-                { ( loadingUser )?<CircularProgress size={ 80 } thickness={ 5 } />:null }
-                { ( loginError )? <div>Username/Password is Incorrect</div>:null }
+                    { ( loadingUser )?<CircularProgress size={ 80 } thickness={ 5 } />:null }
+                    { ( loginError )? <div>Username/Password is Incorrect</div>:null }
+                </Grid>
             </form>
         )
     }
