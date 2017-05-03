@@ -12,7 +12,7 @@ import {Row, Col} from 'react-flexbox-grid'
 import { sendMessage } from '../../ducks/messageDuck'
 //CSS AND ASSETS
 import './messages.css';
-import userImg from '../../assets/user1600.png'
+import userImg from '../../assets/avatarchatuser.png'
 import adminImg from '../../assets/goldsageAvatar.png'
 
 
@@ -54,37 +54,81 @@ class Messages extends Component{
 
         const {
             currentchat,
-            activeRoomIndex
+            activeRoomIndex,
+            user
         } = this.props;
+
         const messageBox = currentchat.map( ( message, index, arr ) => {
-            if( message.type==='user' ){
+            if( message.type === 'user' ){
                 return(
-                    <div className="message-outside" key={index}>
-                        {index > 0 && arr[index-1].type && (arr[index-1].type !== message.type) &&
-                        <div className="bottomLine"></div>}
+                    <div className="message-outside" key={ index }>
+                        {
+                            index > 0
+                            &&
+                            arr[ index-1 ].type
+                            &&
+                            arr[ index-1 ].type !== message.type
+                            &&
+                            <div className="bottomLine"></div>
+                        }
                         <Row top="xs" className="message-container">
-                            <Col xs={1}><img src={userImg}/></Col>
-                            <Col xs={11} className="message-name">{message.firstname} {message.lastname}&nbsp;&nbsp;
-                                <span className="message-time">&nbsp; { moment( message.timestamp ).format( "HH:mm A - MMM DD YYYY" ) }</span>
-                                    <Row className="message-text">
-                                        { message.message }
-                                    </Row>
-                          </Col>
+                            <Col xs={ 1 }>
+                                <img src={ userImg }/>
+                            </Col>
+                            <Col xs={ 11 } className="message-name">
+                                {
+                                    message.firstname
+                                    + ' ' +
+                                    message.lastname
+                                }
+                                <span className="message-time">
+                                    { moment (
+                                        message.timestamp
+                                    )
+                                    .format (
+                                        "HH:mm A - MMM DD YYYY"
+                                    ) }
+                                </span>
+                                <Row className="message-text">
+                                    { message.message }
+                                </Row>
+                            </Col>
                         </Row>
                     </div>
                 )
             }
             return (
-                <div className="message-outside" key={index}>
-                    {index > 0 && arr[index-1].type && (arr[index-1].type !== message.type) &&
-                    <div className="bottomLine"></div>}
+                <div className="message-outside" key={ index }>
+                    {
+                        index > 0
+                        &&
+                        arr[ index-1 ].type
+                        &&
+                        arr[ index-1 ].type !== message.type
+                        &&
+                        <div className="bottomLine"></div>
+                    }
                     <Row top="xs" className="message-container">
-                        <Col xs={1} className="message-image"><img src={adminImg}/></Col>
-                        <Col xs={11} className="message-name">Admin {message.admin_id}&nbsp;&nbsp;
-                            <span className="message-time">&nbsp; { moment( message.timestamp ).format( "HH:mm A - MMM DD YYYY" ) }</span>
-                                <Row className="message-text">
-                                    { message.message }
-                                </Row>
+                        <Col xs={ 1 } className="message-image">
+                            <img src={ adminImg }/>
+                        </Col>
+                        <Col xs={ 11 } className="message-name">
+                            {
+                                user.firstname
+                                + ' ' +
+                                user.lastname
+                            }
+                            <span className="message-time">
+                                { moment (
+                                    message.timestamp
+                                )
+                                .format (
+                                    "HH:mm A - MMM DD YYYY"
+                                ) }
+                            </span>
+                            <Row className="message-text">
+                                { message.message }
+                            </Row>
                         </Col>
                     </Row>
                 </div>
@@ -93,14 +137,15 @@ class Messages extends Component{
 
         return (
             <div className="messages-main">
-              <h2>Message Inbox</h2>
+              <h2>Inbox</h2>
                 { messageBox }
                 <form onSubmit={ this.handleSubmit } className="message-input">
                     <Field
                         label="Type a Message"
                         name="message"
                         component={ renderTextField }
-                        onChange={ this.handleChange.bind( this, 'message' ) }
+                        onChange={ this.handleChange
+                            .bind( this, 'message' ) }
                     />
                     <FlatButton
                         type="submit"
@@ -122,7 +167,8 @@ const mapStateToProps = state => {
     return {
         currentchat:state.messageDuck.currentchat,
         messages:state.messageDuck.messages,
-        activeRoomIndex: state.messageDuck.activeRoomIndex
+        activeRoomIndex: state.messageDuck.activeRoomIndex,
+        user: state.authDuck.user
     }
 }
 

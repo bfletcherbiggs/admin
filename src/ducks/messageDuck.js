@@ -20,7 +20,8 @@ const initialState = {
     currentchat:[],
     submittingmessage:false,
     count_messages:[0],
-    userid:null
+    userid:null,
+    client:[]
 }
 
 export default function messageDuck( state = initialState, action ) {
@@ -32,7 +33,8 @@ export default function messageDuck( state = initialState, action ) {
                     loadingmessage:false,
                     room_titles:[],
                     filter_room_titles:[],
-                    count_messages:[]
+                    count_messages:[],
+                    client:[]
                 } )
             }
             else{
@@ -71,10 +73,13 @@ export default function messageDuck( state = initialState, action ) {
                 filter_room_titles:filteredRooms
             } )
         case SELECT_CHAT:
+            let client = Object.assign( {}, state.client )
+            client = _.uniqBy( action.payload, 'user_id' )
             return Object.assign( {}, state, {
                 currentchat:action.payload,
                 activeRoomIndex: action.index,
-                userid:action.userid
+                userid:action.userid,
+                client: client
             } )
         case SEND_MESSAGE_PENDING:
             return Object.assign( {}, state, {

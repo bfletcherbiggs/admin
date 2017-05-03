@@ -83,7 +83,7 @@ class CompStatus extends Component{
             },
         }
 
-        const { varComponentTypes } = this.props;
+        const { varComponentTypes, client } = this.props;
         const { componentTypes } = this.state;
 
         let compCount = 0;
@@ -130,11 +130,23 @@ class CompStatus extends Component{
         let percentCompleted = Math.floor( ( compCount / compCount1 ) * 100 );
 
         return (
-            <div className="compstatus-main">
-                <div className="compStatus-selectedUser">Selected User</div>
-                <div className="compStatus-selectedCompany">Company</div>
-                <div className="compstatus-links-box" >
-                    <div className="compstatus-links">
+            <div className="compStatus-main">
+                <div className="compStatus-selectedUser">
+                    {
+                        !client[ 0 ]
+                        ?null
+                        :client[ 0 ] .firstname + ' ' + client[ 0 ].lastname
+                    }
+                </div>
+                <div className="compStatus-selectedCompany">
+                    {
+                        !client[ 0 ]
+                        ?null
+                        :client[ 0 ].company
+                    }
+                </div>
+                <div className="compStatus-links-box" >
+                    <div className="compStatus-links">
                         <Link to="/admin/components">
                             <IconButton tooltip="Components" >
                                 <Dashboard color={ grey50 }/>
@@ -145,32 +157,36 @@ class CompStatus extends Component{
                                 <NotificationsIcon color={ grey50 }/>
                             </IconButton>
                         </Link>
+                        <div className="printButton">
+                            <IconButton tooltip="Print" onClick={ this.printInputs.bind( this ) }>
+                                <Print color={ grey50 }/>
+                            </IconButton>
+                        </div>
                     </div>
                 </div>
-                <div className="compstatus-percent">
+                <div className="compStatus-percent">
                     <div className='percentCompleted'>
                         { percentCompleted }% Complete
                     </div>
                     <br/>
                     <div className="linearProgress">
-                        <LinearProgress mode="determinate" value={percentCompleted}/>
+                        <LinearProgress mode="determinate" value={ percentCompleted } style={ { marginLeft:0 } }/>
                     </div>
                 </div>
                 <div className="compStatus-status">
                     {componentMap}
                 </div>
-                <div className="printButton">
-                    <IconButton tooltip="message" onClick={this.printInputs.bind(this)}>
-                        <Print color={ grey50 }/>
-                    </IconButton>
-                </div>
+
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { varComponentTypes: state.compDuck.varComponentTypes };
+    return {
+        varComponentTypes: state.compDuck.varComponentTypes,
+        client: state.messageDuck.client
+    }
 }
 
 export default connect( mapStateToProps, {} )( CompStatus );
