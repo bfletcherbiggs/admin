@@ -58,9 +58,11 @@ class Users extends Component{
         })
 
         return (
-            <div>
+            <div className="users-container">
                 <Search/>
+
                 <div className="users-main">
+                    <Divider />
                     <Subheader>Current Users</Subheader>
                     { roomTime }
                     <Divider />

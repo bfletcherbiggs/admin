@@ -12,7 +12,7 @@ import Badge from 'material-ui/Badge';
 import NotificationsIcon from 'material-ui/svg-icons/communication/message';
 import Profile from 'material-ui/svg-icons/action/account-circle';
 import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
-import { grey50 } from 'material-ui/styles/colors';
+import { grey50, grey600 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 //CSS
 import IntakeLogo from "../../assets/intakenewlogo.png";
@@ -27,13 +27,8 @@ class NavBarTop extends Component{
     }
 
     handleClick( e ) {
-        this.props.logout()
         e.preventDefault();
-    }
-
-    componentDidMount() {
-        // const badge = ReactDOM.findDOMNode( this.refs.badge )
-        // // badge.style.paddingRight = '12px'
+        this.props.logout();
     }
 
     render(){
@@ -42,30 +37,43 @@ class NavBarTop extends Component{
         }
         = this.props
 
-        const badgeCount = () =>{
-            return count_messages[0]
+        const toolbarStyle = {
+            backgroundColor: "#003044",
+            height: 100,
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            width: '100vw'
         }
-
-        const badgeStyle = ()=>{
-            return ( count_messages[ 0 ] )?
-            { top: 12, right: 6 }
-            :{ top: 24, right: 24,display:'none' }
+        const toolbarGroupLeft = {
+            marginLeft: 0
+        }
+        const toolbarGroupRight = {
+            marginRight: 20
+        }
+        const logoutButton = {
+            color: grey50,
+            border: '1px solid grey50'
+        }
+        const logoutButtonContent = {
+            fontSize: 18,
+            fontWeight: 400
         }
 
         return(
-          <Toolbar style={ { backgroundColor: '#003044', height: 80 } }>
-            <ToolbarGroup firstChild={ true }>
+          <Toolbar style={ toolbarStyle } className="nav-bar-admin">
+            <ToolbarGroup firstChild={ true } style={ toolbarGroupLeft }>
                 <Link to="/admin">
                     <img alt="javascript logo" className="nav-goldsage-logo" src={ IntakeLogo }/>
                 </Link>
             </ToolbarGroup>
-            <ToolbarGroup lastChild={true} >
+            <ToolbarGroup lastChild={true} style={ toolbarGroupRight }>
                 <Link to="/" onClick={ this.handleClick }>
                     <FlatButton
                         label="LOGOUT"
+                        hoverColor = { grey600 }
                         primary={ true }
-                        labelStyle={ { grey50 } }
-                        style={ { color: grey50 } }
+                        labelStyle={ logoutButtonContent }
+                        style={ logoutButton }
                     />
                 </Link>
             </ToolbarGroup>

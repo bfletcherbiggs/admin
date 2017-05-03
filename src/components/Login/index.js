@@ -81,7 +81,7 @@ class LoginForm extends Component {
                         <Row>
                             <Col type="row" s={ 12 } md={ 3 } className="login-form-inputs">
                                 <Row>
-                                    <Col xs={ 12 } md={ 6 }></Col>
+                                    <Col xs={ 12 }></Col>
                                 </Row>
                                 <Field
                                       label="Username"

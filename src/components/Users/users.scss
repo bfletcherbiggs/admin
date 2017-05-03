@@ -1,4 +1,11 @@
-.users-main {
-  border-right: 1.5px dashed #d1d4d4;
-  height: calc(100vh - 158px);
+@import "../../containers/App/App.scss";
+
+.users-container {
+    @include flex-column();
+    overflow: scroll;
+
+    .users-main {
+        flex-basis: 100%;
+        margin: 0 10px;
+    }
 }

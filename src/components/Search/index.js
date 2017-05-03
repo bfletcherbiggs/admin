@@ -56,12 +56,22 @@ class Search extends Component{
         const{ room_titles } = this.props
         const{ searchstring } = this.state
 
+        const inputdivStyle = {
+            display: 'flex',
+            flexFlow: 'column nowrap',
+            padding: '0 5px',
+            width: 'auto'
+        }
+
         return (
           <div className="searchBar">
               <form onSubmit={ this.handleSubmit }>
                   <Field
                       label="Search Users"
                       name="searchstring"
+                      fullWidth = { true }
+                      underlineShow = { false }
+                      style={ inputdivStyle }
                       component={ renderTextField }
                       onChange={ this.handleChange.bind( this, 'searchstring' ) }
                   />
