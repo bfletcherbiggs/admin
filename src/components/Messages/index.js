@@ -50,6 +50,11 @@ class Messages extends Component{
         this.setState( { [ field ] : e.target.value } )
     }
 
+    componentDidUpdate() {
+        const objDiv = document.querySelector( '.messages-main' )
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
     render(){
 
         const {
@@ -103,7 +108,7 @@ class Messages extends Component{
                                         message.timestamp
                                     )
                                     .format (
-                                        "HH:mm A - MMM DD YYYY"
+                                        "h:mm A - MMM DD YYYY"
                                     ) }
                                 </span>
                                 <Row className="message-text">
@@ -157,7 +162,7 @@ class Messages extends Component{
                                     message.timestamp
                                 )
                                 .format (
-                                    "HH:mm A - MMM DD YYYY"
+                                    "h:mm A - MMM DD YYYY"
                                 ) }
                             </span>
                             <Row className="message-text">
@@ -171,23 +176,29 @@ class Messages extends Component{
 
         return (
             <div className="messages-main">
-              <h2>Inbox</h2>
-                { messageBox }
-                <form onSubmit={ this.handleSubmit } className="message-input">
-                    <Field
-                        label="Type a Message"
-                        name="message"
-                        component={ renderTextField }
-                        onChange={ this.handleChange
-                            .bind( this, 'message' ) }
-                    />
-                    <FlatButton
-                        type="submit"
-                        label="Send"
-                        disabled={ !activeRoomIndex }
-                        primary={ true }
-                    />
-                </form>
+                <h2>Inbox</h2>
+                    { messageBox }
+                <Row className="message-input-container">
+                    <Col xs={ 12 }>
+                        <form onSubmit={ this.handleSubmit } className="message-input">
+                            <Field
+                                label="Type a Message"
+                                name="message"
+                                component={ renderTextField }
+                                onChange={ this.handleChange
+                                    .bind( this, 'message' ) }
+                            />
+                            <div className="message-btn-container">
+                                <FlatButton
+                                    type="submit"
+                                    label="Send"
+                                    disabled={ !activeRoomIndex }
+                                    primary={ true }
+                                />
+                            </div>
+                        </form>
+                    </Col>
+                </Row>
             </div>
         )
     }

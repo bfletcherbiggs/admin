@@ -79,9 +79,9 @@ class LoginForm extends Component {
                 <Grid fluid>
                     <div className="login-container">
                         <Row>
-                            <Col type="row" xs={ 12 } md={ 3 } className="login-form-inputs">
+                            <Col type="row" sm={ 12 } md={ 3 } className="login-form-inputs">
                                 <Row>
-                                    <Col xs={ 12 }></Col>
+                                    <Col sm={ 12 }></Col>
                                 </Row>
                                 <Field
                                       label="Username"
