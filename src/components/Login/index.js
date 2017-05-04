@@ -70,7 +70,7 @@ class LoginForm extends Component {
 
         if( isAuthenticated ){
             return (
-                <Redirect to='/admin'/>
+                <Redirect to='/admin/welcome'/>
             )
         }
 

@@ -1,6 +1,7 @@
 import axiosLibrary from 'axios';
 const axios = axiosLibrary.create( { withCredentials: true } );
 import { authenticate,fetchMessages } from './socketDuck';
+import { reset } from 'redux-form';
 import { swal } from 'react-redux-sweetalert';
 import { APISERVERPATH } from '../config.json';
 
@@ -51,7 +52,10 @@ export default function authDuck( state = initialState, action ) {
             } )
         case CHECK_AUTH_SUCCESS:
             return Object.assign( {}, state, {
-                isAuthenticated:true
+                isAuthenticated:true,
+                user:action.payload,
+                loadingUser: false,
+                errorAuthenticating: false
             } )
         case CHECK_AUTH_FAILURE:
             return Object.assign( {}, state, {
@@ -89,8 +93,8 @@ function authFailure( err ) {
     return { type: AUTH_FAILURE, error: err }
 }
 
-function checkAuthSuccess(){
-    return { type:CHECK_AUTH_SUCCESS }
+function checkAuthSuccess( data ){
+    return { type:CHECK_AUTH_SUCCESS, payload: data }
 }
 
 function checkAuthFailure(){
@@ -118,7 +122,9 @@ export function socketConnected( data ) {
 export function checkUserAuth() {
     return dispatch => {
         if( localStorage.getItem( 'token' ) ){
-            dispatch( checkAuthSuccess() )
+            let id = JSON.parse( localStorage.getItem( 'token' ) ).id
+            authenticate( id )
+            dispatch( checkAuthSuccess( JSON.parse( localStorage.getItem( 'token' ) ) ) )
         }
         else { dispatch( checkAuthFailure() ) }
     }
@@ -150,7 +156,6 @@ export function logout() {
 
 export function signup( data, adminid ) {
     return dispatch => {
-        // console.log(location)
         axios.post( BASE_API_URL + '/user', data )
         .then( response => {
             dispatch( swal( {
@@ -161,12 +166,18 @@ export function signup( data, adminid ) {
                 showConfirmButton: true,
                 confirmButtonText: 'Create Another',
                 cancelButtonText: 'Setup Components?',
-                onCancel: ()=>{this.transitionTo('/admin')}
+                closeOnConfirm: true,
+                allowOutsideClick: true,
+                onCancel: () => {
+                    history.back()
+                },
+                onConfirm: () => { dispatch( reset( 'createuserForm' ) ) },
+                onOutsideClick: () => { dispatch( reset( 'createuserForm' ) ) }
             } ) )
-            dispatch( fetchMessages( adminid ) )
         })
         .catch( err => {
             dispatch( signupFailure( err ) );
         })
+        dispatch( fetchMessages( adminid ) )
     }
 }

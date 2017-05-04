@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 //EXPORTED FUNCTIONS
-import { signup } from '../../ducks/authDuck'
+import { signup } from '../../ducks/authDuck';
 //MATERIAL UI
 import ReduxSweetAlert from 'react-redux-sweetalert';
 import RaisedButton from 'material-ui/RaisedButton';
