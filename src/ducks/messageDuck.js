@@ -57,6 +57,7 @@ export default function messageDuck( state = initialState, action ) {
                 else{
                     currentchat=[]
                 }
+                console.log(currentchat)
                 return Object.assign( {}, state, {
                     messages: action.messages,
                     loadingmessage:false,

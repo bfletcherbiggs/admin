@@ -3,9 +3,32 @@
 .users-container {
     @include flex-column();
     overflow-y: overlay;
+    color: $primary;
 
     .users-main {
         flex-basis: 100%;
         margin: 0 10px;
+    }
+    .user-list-item{
+        div{
+            div{
+                @include flex-row();
+                justify-content: flex-end;
+                text-align: right;
+                width:100%;
+                span{
+                    @include flex-row()
+                    @include border-radius(25px)
+                    padding: 2px;
+                    width: 30px;
+                    border: 1px solid $primary;
+                    background-color: $primary;
+                    color: white;
+                }
+                div{
+                    flex-basis:100%;
+                }
+            }
+        }
     }
 }

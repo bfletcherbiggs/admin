@@ -43,6 +43,7 @@ class Users extends Component{
             return (
                 <ListItem
                     primaryText={ text }
+                    className="user-list-item"
                     key={ room[ 0 ].chat_id }
                     onClick={ () => this._selectActiveRoom( room[ 0 ].chat_id ) }
                 >
