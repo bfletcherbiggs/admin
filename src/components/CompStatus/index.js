@@ -76,13 +76,6 @@ class CompStatus extends Component{
     }
 
     render(){
-        const iconStyle = {
-            IconButton: {
-                height: 30,
-                width: 30
-            },
-        }
-
         const { varComponentTypes, client } = this.props;
         const { componentTypes } = this.state;
 
@@ -125,6 +118,7 @@ class CompStatus extends Component{
                     </a>
                 )
             }
+            return null
         })
 
         let percentCompleted = Math.floor( ( compCount / compCount1 ) * 100 );
@@ -135,7 +129,7 @@ class CompStatus extends Component{
                     {
                         !client[ 0 ]
                         ?null
-                        :client[ 0 ] .firstname + ' ' + client[ 0 ].lastname
+                        :client[ 0 ].firstname + ' ' + client[ 0 ].lastname
                     }
                 </div>
                 <div className="compStatus-selectedCompany">

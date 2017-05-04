@@ -1,6 +1,5 @@
 //PACKAGES
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 //COMPONENTS
 import InputTile from '../InputTile/index';
@@ -12,8 +11,8 @@ export default function AdminWorking () {
     return (
         <div className="adminWorking-main">
             <Switch>
-                <Route exact path="/admin/components" component={ InputTile }/>
-                <Route path="/admin" component={ Messages }/>
+                <Route exact path="/admin" component={ Messages }/>
+                <Route path="/admin/components" component={ InputTile }/>
             </Switch>
         </div>
     )

@@ -13,7 +13,6 @@ import AddButton from 'material-ui/svg-icons/action/note-add';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 //EXPORTED FUNCTIONS
-import { setInputs, getInputs } from '../../ducks/inputDuck'
 import { updateComps } from '../../ducks/compDuck'
 //CSS
 import './webPages.css'

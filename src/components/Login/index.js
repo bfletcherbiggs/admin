@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 //CSS
 import './Login.css';
-import { Grid, Row, Col, Box } from 'react-flexbox-grid';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const renderTextField = ( { input, label, meta: { touched, error }, ...custom } ) => (
     <TextField

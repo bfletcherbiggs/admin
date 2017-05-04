@@ -69,8 +69,8 @@ class Search extends Component{
                   <Field
                       label="Search Users"
                       name="searchstring"
-                      fullWidth = { true }
-                      underlineShow = { false }
+                      fullWidth={ true }
+                      underlineShow={ false }
                       style={ inputdivStyle }
                       component={ renderTextField }
                       onChange={ this.handleChange.bind( this, 'searchstring' ) }

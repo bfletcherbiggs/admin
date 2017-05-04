@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 //EXPORTED FUNCTIONS
 import { logout } from '../../ducks/authDuck';
 //MATERIAL UI
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import Badge from 'material-ui/Badge';
-import NotificationsIcon from 'material-ui/svg-icons/communication/message';
-import Profile from 'material-ui/svg-icons/action/account-circle';
-import WatsonIcon from 'material-ui/svg-icons/action/fingerprint';
 import AddUser from 'material-ui/svg-icons/social/person-add';
 import { grey50, grey600 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 //CSS
 import IntakeLogo from "../../assets/intakenewlogo.png";
+
 import "./nav.css";
 
 
@@ -33,11 +28,6 @@ class NavBarTop extends Component{
     }
 
     render(){
-        const {
-            count_messages
-        }
-        = this.props
-
         const toolbarStyle = {
             backgroundColor: "#003044",
             height: 100,
@@ -79,13 +69,13 @@ class NavBarTop extends Component{
             <ToolbarGroup lastChild={true} style={ toolbarGroupRight }>
                 <Link to="/admin/adduser">
                     <IconButton>
-                        <AddUser color={grey50} iconStyle={istyles.mediumIcon}/>
+                        <AddUser color={grey50} style={istyles.mediumIcon}/>
                     </IconButton>
                 </Link>
                 <Link to="/" onClick={ this.handleClick }>
                     <FlatButton
                         label="LOGOUT"
-                        hoverColor = { grey600 }
+                        hoverColor={ grey600 }
                         primary={ true }
                         labelStyle={ logoutButtonContent }
                         style={ logoutButton }

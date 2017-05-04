@@ -71,12 +71,12 @@ class Messages extends Component{
                                     &&
                                     arr[ index-1 ].type !== message.type
                                     &&
-                                    <img src={ userImg }/>
+                                    <img src={ userImg } alt="User Avatar"/>
                                 }
                                 {
                                     index === 0
                                     &&
-                                    <img src={ userImg }/>
+                                    <img src={ userImg } alt="User Avatar"/>
                                 }
                             </Col>
                             <Col xs={ 11 } className="message-name">
@@ -125,12 +125,12 @@ class Messages extends Component{
                                 &&
                                 arr[ index-1 ].type !== message.type
                                 &&
-                                <img src={ adminImg }/>
+                                <img src={ adminImg } alt="Admin Avatar"/>
                             }
                             {
                                 index === 0
                                 &&
-                                <img src={ adminImg }/>
+                                <img src={ adminImg } alt="Admin Avatar"/>
                             }
                         </Col>
                         <Col xs={ 11 } className="message-name">
