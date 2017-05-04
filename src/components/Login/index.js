@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 //EXPORTED FUNCTIONS
 import { login } from '../../ducks/authDuck';
 //MATERIAL UI
@@ -10,7 +11,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 //CSS
 import './Login.css';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const renderTextField = ( { input, label, meta: { touched, error }, ...custom } ) => (
     <TextField

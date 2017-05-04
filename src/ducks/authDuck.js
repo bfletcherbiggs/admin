@@ -150,6 +150,7 @@ export function logout() {
 
 export function signup( data, adminid ) {
     return dispatch => {
+        // console.log(location)
         axios.post( BASE_API_URL + '/user', data )
         .then( response => {
             dispatch( swal( {
@@ -159,7 +160,8 @@ export function signup( data, adminid ) {
                 showCancelButton: true,
                 showConfirmButton: true,
                 confirmButtonText: 'Create Another',
-                cancelButtonText: 'Setup Components?'
+                cancelButtonText: 'Setup Components?',
+                onCancel: ()=>{this.transitionTo('/admin')}
             } ) )
             dispatch( fetchMessages( adminid ) )
         })

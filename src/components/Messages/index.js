@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 //LIBRARIES
 import moment from 'moment';
-import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton'
-import {Row, Col} from 'react-flexbox-grid'
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import { Row, Col } from 'react-flexbox-grid';
 //EXPORTED FUNCTIONS
 import { sendMessage } from '../../ducks/messageDuck'
 //CSS AND ASSETS

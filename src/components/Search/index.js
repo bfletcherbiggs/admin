@@ -53,8 +53,6 @@ class Search extends Component{
     }
 
     render() {
-        const{ room_titles } = this.props
-        const{ searchstring } = this.state
 
         const inputdivStyle = {
             display: 'flex',

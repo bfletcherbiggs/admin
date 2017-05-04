@@ -7,11 +7,10 @@ import { logout } from '../../ducks/authDuck';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import AddUser from 'material-ui/svg-icons/social/person-add';
-import { grey50, grey600 } from 'material-ui/styles/colors';
-import FlatButton from 'material-ui/FlatButton';
+import { grey50 } from 'material-ui/styles/colors';
+import RaisedButton from 'material-ui/RaisedButton';
 //CSS
 import IntakeLogo from "../../assets/intakenewlogo.png";
-
 import "./nav.css";
 
 
@@ -42,21 +41,17 @@ class NavBarTop extends Component{
             marginRight: 20
         }
         const logoutButton = {
-            color: grey50,
-            border: '1px solid grey50'
+            color: '#003044',
+            borderColor: grey50,
+            borderWidth: 2,
+            borderStyle: 'solid',
+
         }
         const logoutButtonContent = {
             fontSize: 18,
-            fontWeight: 400
-        }
-        const istyles ={
-            marginRight: 25,
-            mediumIcon: {
-                width: 48,
-                height: 48,
-                padding: 30
-          },
-
+            fontWeight: 400,
+            color: grey50,
+            padding: '15px'
         }
 
         return(
@@ -68,17 +63,18 @@ class NavBarTop extends Component{
             </ToolbarGroup>
             <ToolbarGroup lastChild={true} style={ toolbarGroupRight }>
                 <Link to="/admin/adduser">
-                    <IconButton>
-                        <AddUser color={grey50} style={istyles.mediumIcon}/>
+                    <IconButton className="nav-bar-create-user">
+                        <AddUser
+                            color={ grey50 }
+                        />
                     </IconButton>
                 </Link>
                 <Link to="/" onClick={ this.handleClick }>
-                    <FlatButton
+                    <RaisedButton
                         label="LOGOUT"
-                        hoverColor={ grey600 }
-                        primary={ true }
                         labelStyle={ logoutButtonContent }
-                        style={ logoutButton }
+                        buttonStyle={ logoutButton }
+                        backgroundColor={ '#003044' }
                     />
                 </Link>
             </ToolbarGroup>

@@ -1,26 +1,42 @@
+@import "../../containers/App/App.scss";
+
 .compSelect-main {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  align-items: center;
-  border-bottom: 1.5px dashed #d1d4d4;
-  padding: 20px;
+    width: 95%;
+    flex-flow: row wrap;
+    margin: 2px auto;
+    padding: 5px 10px;
+    border: 2px solid $lightgrey;
+    @include border-radius(4px)
 }
+
 .compSelect-status-point {
-    width: 25%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    margin: 15px;
-}
-.FloatingActionButton1 {
-  margin-right: 5px;
-}
-.compSelect-floating {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: center;
-  width: 175px;
+    .compSelect-floating {
+        width: 100%;
+        margin: 0 0 5px;
+
+        button {
+            width: 100%;
+
+            div {
+                div {
+                    width: 100%;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+
+                    svg {
+                        width:10%;
+                        float:left;
+                        height: 100%;
+                        margin-left:0;
+                        left:0;
+                    }
+                }
+            }
+        }
+    }
 }

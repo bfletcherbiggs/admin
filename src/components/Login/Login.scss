@@ -13,7 +13,7 @@
             opacity:.9;
             text-align: center;
             background: white;
-            @include border-radius(3px);
+            @include border-radius( 3px );
 
             .row:nth-child(1) {
                 div {

@@ -5,6 +5,7 @@ $accent: #D67428;
 $darkblue: #032434;
 $sidebar: rgba(204, 240, 255, 0.15);
 $sidebar2: #39B0E3;
+$lightgrey: #c0c0c0;
 
 $loginlanding:"../../assets/loginbackground.png";
 $logopath:'../../assets/intakenewlogo.png';
@@ -82,7 +83,7 @@ body {
 }
 
 .input-tile {
-    width: 50%;
+    width: 100%;
     padding-left: 4px;
     padding-bottom: 50px;
 }
