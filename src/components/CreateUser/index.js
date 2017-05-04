@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 //EXPORTED FUNCTIONS
 import { signup } from '../../ducks/authDuck'
 //MATERIAL UI
 import ReduxSweetAlert from 'react-redux-sweetalert';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 //CSS
 import './CreateUser.css';
@@ -39,7 +41,7 @@ class CreateUserForm extends Component {
 
     handleSubmit( event ) {
         event.preventDefault();
-        this.props.signup( this.state,this.props.user.id )
+        this.props.signup( this.state,this.props.user.id, this )
     }
 
     handleChange( field, e ) {
@@ -52,52 +54,74 @@ class CreateUserForm extends Component {
         const { password } = this.state
 
         return (
-            <div>
-                <form onSubmit={ this.handleSubmit } className="login-landing">
-                    <div className="login-container">
-                        <div className="login-form-inputs">
-                            <Field
-                                label="First Name"
-                                component={ renderTextField }
-                                name="firstname"
-                                onChange={ this.handleChange.bind( this, 'firstname' ) }/>
-                            <br/>
-                            <Field
-                                label="Last Name"
-                                component={ renderTextField }
-                                name="lastname"
-                                onChange={ this.handleChange.bind( this, 'lastname' ) }/>
-                            <br/>
-                            <Field
-                                label="Company"
-                                component={ renderTextField }
-                                name="company"
-                                onChange={ this.handleChange.bind( this, 'company' ) }/>
-                            <br/>
-                            <Field
-                                label="Email"
-                                component={ renderTextField }
-                                name="email"
-                                onChange={ this.handleChange.bind( this, 'email' ) }/>
-                            <br/>
-                            <Field
-                                label="Password"
-                                type="password"
-                                name="password"
-                                component={ renderTextField }
-                                onChange={this.handleChange.bind( this, 'password' ) }/>
-                            <br/>
-                            <FlatButton
-                                type="submit"
-                                label="Submit"
-                                disabled={ pristine || !password }
-                                primary={ true }
-                            />
+
+                <form onSubmit={ this.handleSubmit } className="createuser-landing">
+                    <Grid fluid>
+                        <div className="createuser-container">
+                            <Row>
+                                <Col type="row" sm={ 12 } md={ 6 } className="createuser-form-inputs">
+                                    <h2>Create New User</h2>
+                                    <Field
+                                        label="First Name"
+                                        component={ renderTextField }
+                                        fullWidth={ true }
+                                        name="firstname"
+                                        onChange={ this.handleChange.bind( this, 'firstname' ) }/>
+                                    <br/>
+                                    <Field
+                                        label="Last Name"
+                                        component={ renderTextField }
+                                        fullWidth={ true }
+                                        name="lastname"
+                                        onChange={ this.handleChange.bind( this, 'lastname' ) }/>
+                                    <br/>
+                                    <Field
+                                        label="Company"
+                                        component={ renderTextField }
+                                        fullWidth={ true }
+                                        name="company"
+                                        onChange={ this.handleChange.bind( this, 'company' ) }/>
+                                    <br/>
+                                    <Field
+                                        label="Email"
+                                        component={ renderTextField }
+                                        fullWidth={ true }
+                                        name="email"
+                                        onChange={ this.handleChange.bind( this, 'email' ) }/>
+                                    <br/>
+                                    <Field
+                                        label="Password"
+                                        type="password"
+                                        name="password"
+                                        component={ renderTextField }
+                                        fullWidth={ true }
+                                        onChange={this.handleChange.bind( this, 'password' ) }/>
+                                    <br/>
+                                    <Row>
+                                        <Col xs={ 6 }>
+                                            <Link to="/admin">
+                                                <RaisedButton
+                                                    label="Cancel"
+                                                    fullWidth={ true }
+                                                />
+                                            </Link>
+                                        </Col>
+                                        <Col xs={ 6 }>
+                                            <RaisedButton
+                                                type="submit"
+                                                label="Submit"
+                                                disabled={ pristine || !password }
+                                                primary={ true }
+                                                fullWidth={ true }
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
                         </div>
-                    </div>
+                    </Grid>
+                    <ReduxSweetAlert />
                 </form>
-                <ReduxSweetAlert />
-            </div>
         );
     }
 }

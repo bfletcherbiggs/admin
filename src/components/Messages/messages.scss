@@ -22,7 +22,7 @@
             img {
                 width: 40px;
                 height: 40px;
-                border: 1px solid #c0c0c0;
+                border: 1px solid $lightgrey;
                 border-radius: 3px;
             }
 
@@ -51,9 +51,9 @@
         position:fixed;
         width:50%;
         margin-left: 5px;
-        border: 2px solid #c0c0c0;
         padding-left:5px;
         background-color: white;
+        border: 2px solid $lightgrey;
         @include border-radius(4px)
     }
     form {

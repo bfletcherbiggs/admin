@@ -3,11 +3,12 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
+    margin:20px 0;
+    height: 100%;
 
-}
-.compDisplay-main {
-    // height: calc(100vh - 300px);
-    margin-top: 20px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    .compDisplay-main {
+        width:100%;
+
+    }
+
 }

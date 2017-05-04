@@ -8,13 +8,13 @@ import BizInfo from '../BizInfo/index';
 import BillInfo from '../BillInfo/index';
 import WebPages from '../WebPages/index';
 import Design from '../Design/index';
+import {Row, Col} from 'react-flexbox-grid';
 //CSS AND DESIGN
 import './compSelect.css';
-import { teal600 } from 'material-ui/styles/colors';
+import { grey50 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
+import NoteAdd from 'material-ui/svg-icons/action/note-add';
+import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
 //API CALLS
 import { addComps, removeComps } from '../../ducks/compDuck'
 
@@ -59,14 +59,8 @@ class CompSelect extends Component{
     render(){
         const style = {
             button: {
-                margin: 12,
-                fontWeight: 100
-            }
-        }
-        const floatingStyle = {
-            button: {
-                margin: 12,
-                fontWeight: 100
+                margin: 2,
+                fontWeight: 300
             }
         }
 
@@ -83,43 +77,50 @@ class CompSelect extends Component{
             }
             if ( compIncluded ) {
                 return (
-                    <div key={ type.key } className='compSelect-status-point sPComplete'>
-                        <div className="compSelect-floating">
-                            <FloatingActionButton
-                                style={ floatingStyle }
-                                onClick={ this.removeComponent.bind( this, [ type.key ] ) }
-                                backgroundColor={ teal600 }
-                                mini={ true }
-                                className="FloatingActionButton1">
-                                <ContentRemove/>
-                            </FloatingActionButton>
-                            <RaisedButton label={ type.name } primary={ false } style={ style }/>
+                    <Col xs={ 4 } key={ type.key }>
+                        <div className='compSelect-status-point sPComplete'>
+                            <div className="compSelect-floating">
+                                <RaisedButton
+                                    fullWidth={ true }
+                                    label={ type.name }
+                                    onClick={ this.removeComponent
+                                        .bind( this, [ type.key ] ) }
+                                    labelPosition="after"
+                                    style={ style.button }
+                                    icon={ <DeleteForever color={ "#003044" }/> }
+                                ></RaisedButton>
+                            </div>
                         </div>
-                    </div>
+                    </Col>
                 )
             }
             else {
                 return (
-                    <div key={type.key} className='compSelect-status-point sPIncomplete'>
-                        <div className="compSelect-floating">
-                            <FloatingActionButton
-                                 style={ floatingStyle }
-                                 onClick={ this.addComponent.bind( this, [ type.key ] ) }
-                                 backgroundColor={ teal600 }
-                                 mini={ true }
-                                 className="FloatingActionButton1">
-                                <ContentAdd/>
-                            </FloatingActionButton>
-                            <RaisedButton label={ type.name } primary={ false } style={ style }/>
+                    <Col xs={ 4 } key={type.key}>
+                        <div className='compSelect-status-point sPIncomplete'>
+                            <div className="compSelect-floating">
+                                <RaisedButton
+                                    fullWidth={ true }
+                                    onClick={ this.addComponent
+                                        .bind( this, [ type.key ] ) }
+                                    label={ type.name }
+                                    labelPosition="after"
+                                    primary={ true }
+                                    style={ style.button }
+                                    icon={ <NoteAdd color={ grey50 }/> }
+                                ></RaisedButton>
+                            </div>
                         </div>
-                    </div>
+                    </Col>
                 )
             }
         })
 
         return (
             <div className="compSelect-main">
-                { componentMap }
+                <Row>
+                    { componentMap }
+                </Row>
             </div>
         )
     }
