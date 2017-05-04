@@ -1,6 +1,6 @@
 //PACKAGES
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 //COMPONENTS
 import NavBarTop from '../../components/Nav/index';
 import AdminMain from '../AdminMain/index';
@@ -13,8 +13,9 @@ export default function AdminPage () {
         <div className="AdminPage-main">
             <NavBarTop/>
             <Switch>
-              <Route exact path="/admin" component={ AdminMain }/>
               <Route path="/admin/adduser" component={ CreateUser }/>
+              <Route path="/admin" component={ AdminMain }/>
+
             </Switch>
         </div>
     )

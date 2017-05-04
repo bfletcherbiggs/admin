@@ -13,7 +13,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import SaveButton from 'material-ui/svg-icons/file/cloud-upload';
 //EXPORTED FUNCTIONS
-import { uploadFile, getFiles } from '../../ducks/uploadDuck'
 import { updateComps } from '../../ducks/compDuck'
 //CSS
 import './logoUpload.css'

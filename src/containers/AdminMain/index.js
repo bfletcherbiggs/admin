@@ -8,7 +8,7 @@ import Users from '../../components/Users/index';
 import AdminWorking from '../../components/AdminWorking/index';
 //CSS
 import './adminMain.css';
-import { Grid, Row, Col, Box } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
 
 class AdminMain extends Component{
 

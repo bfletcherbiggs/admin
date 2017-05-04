@@ -12,7 +12,6 @@ import SaveButton from 'material-ui/svg-icons/file/cloud-upload';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 //EXPORTED FUNCTIONS
-import { setInputs, getInputs } from '../../ducks/inputDuck';
 import { updateComps } from '../../ducks/compDuck';
 //CSS
 import './design.css';

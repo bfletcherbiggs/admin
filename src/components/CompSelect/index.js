@@ -1,10 +1,6 @@
 //PACKAGES
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axiosLibrary from 'axios';
-import { APISERVERPATH } from '../../config.json';
-const axios = axiosLibrary.create( { withCredentials: true } );
-const BASE_URL = APISERVERPATH;
 //COMPONENTS
 import SocialInputs from '../SocialInputs/index';
 import LogoUpload from '../LogoUpload/index';
