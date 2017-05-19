@@ -40,22 +40,21 @@ class Search extends Component{
             _.forEach( this.props.room_titles, room => {
                 let inUser = 0;
                 _.forEach( room[ 0 ], key => {
-                    //TODO fix search
-                    // if(typeof key == String){
-                    //     if( _.includes( key.toLowerCase(),this.state.searchstring.toLowerCase() ) ){
-                    //         inUser ++;
-                    //     }
-                    // }
-                    if ( _.includes( key,this.state.searchstring ) ){
+                    if( typeof key === 'string' ) {
+                        if( _.includes( key.toLowerCase(), this.state.searchstring.toLowerCase() ) ) {
+                            inUser ++;
+                        }
+                    }
+                    if ( _.includes( key,this.state.searchstring ) ) {
                         inUser ++;
                     }
-                })
+                } )
                 if( inUser > 0 ){
                     filterArr.push( room )
                 }
-            })
+            } )
             this.props.filterUsers( filterArr )
-        })
+        } )
     }
 
     render() {
